@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from './header/Header'
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Row, Container, Col, Table } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
+// import Header from './header/Header'
+// import { NavLink, useNavigate } from 'react-router-dom';
+// import { Row, Container, Col, Table } from "react-bootstrap";
+// import { FaSearch } from "react-icons/fa";
+import { FaEdit, } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import Sidenavbar from  './Sidenavbar'
+import Topnavbar from './Topnavbar';
 import { UserContext } from '../App';
+import Footer from './Footer';
 
 
-const Users = () => {
+const ShowUsers = () => {
     let [searchQuery, setSearchQuery] = useState("");
     let [usersdata, setUserdata] = useState([]);
     const { state, dispatch } = useContext(UserContext);
@@ -49,173 +54,130 @@ const Users = () => {
     if (searchQuery) {
         usersdata = usersdata.filter(
             (m) =>
-                m.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+                m.name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+                m.work.toLowerCase().startsWith(searchQuery.toLowerCase())
         );
     }
 
     return (
         <>
-            <Header />
-            <div id="layoutSidenav">
-                <div id="layoutSidenav_nav" >
-                    <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                        <div className="sb-sidenav-menu">
-                            <div className="nav">
-                                <div className="sb-sidenav-menu-heading">Core</div>
-                                <NavLink className="nav-link" to="/dashboard">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                                    Dashboard
-                                </NavLink>
-                                <div className="sb-sidenav-menu-heading">Interface</div>
+      <div id="wrapper">
+           <Sidenavbar />
 
-                                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-                                    Pages
-                                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                                </a>
-                                <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                    <NavLink className="nav-link " to="/about"> About </NavLink>
-                                    <NavLink className="nav-link " to="/contact"> Contact </NavLink>
-                                    <NavLink className="nav-link " to="/users"> Users </NavLink>
+          <div id="content-wrapper" className="d-flex flex-column">
 
-                                </div>
-                                <div className="sb-sidenav-menu-heading">Addons</div>
-                                <a className="nav-link" href="#">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
-                                    Charts
-                                </a>
-                                <a className="nav-link" href="#">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
-                                    Tables
-                                </a>
-                            </div>
+
+            <div id="content">
+
+              <Topnavbar />
+         
+                <div className="container-fluid">
+                                      <div className="card shadow mb-4">
+                        <div className="card-header py-3">
+                            <h6 className="m-0 font-weight-bold text-primary">Users Table</h6>
                         </div>
-                        <div className="sb-sidenav-footer">
-                            <div className="small">Logged in as:</div>
-                            Wowz United
-                        </div>
-                    </nav>
-                </div>
-                <div id="layoutSidenav_content">
-                    <main>
-                        <div className="container-fluid px-4">
-                            {/* <h1 className="mt-4">Dashboard</h1> */}
-                            {/* <ol className="breadcrumb mb-4">
-                                <li className="breadcrumb-item active">Dashboard</li>
-                            </ol> */}
-                            <div className="card mb-4 mt-4">
-                                <div className="card-header">
-                                    {/* <div className="fas fa-table me-1">
-                                DataTable Example
-                            </div> */}
-                                    <div className="card-body">
-                                        <Table  hover variant="light-grey">
-                                            <thead>
-                                                <tr>
-                                                    <th colSpan="12" className="text-left">
+                        <div className="card-body">
+                            <div className="table-responsive">
+                            <div id="dataTable_wrapper" className="dataTables_wrapper dt-bootstrap4">
+                            <div className="row">
+<div className="col-sm-12 col-md-6">
+<div className="dataTables_length" id="dataTable_length">
+<label>Show entries
+<select name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm">
+<option value="10">10</option>
+<option value="25">25</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select> 
+</label>
+</div>
+</div>
 
-
-                                                        <div className="input-group">
-                                                            <input
-                                                                type="text"
-                                                                name="name"
-                                                                id="name"
-                                                                placeholder={"Search by Name"}
-                                                                value={searchQuery}
-                                                                onChange={(e) =>
-                                                                    setSearchQuery(e.target.value)
-                                                                }
-                                                            />
-
-                                                            <div className="input-group-append ">
-                                                                <button
-                                                                    className="input-group-text"
-                                                                    style={{ height: "47px" }}
-                                                                >
-                                                                    <FaSearch />
-                                                                </button>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Work</th>
-                                                </tr>
-                                            </thead>
-                                            {usersdata.map((usersdata, i) => (
+{/* text-right */}
+<div className="col-sm-12 col-md-6 justify-content-end">
+<div id="dataTable_filter" className="dataTables_filter">
+       <label>Search:
+       <div>
+                <input
+                type="text"
+                className="form-control form-control-sm"
+                name="name"
+                id="name"
+                placeholder={"Search by Name"}
+                value={searchQuery}
+                onChange={(e) =>setSearchQuery(e.target.value)}
+           />
+           </div>
+           </label>
+</div>
+</div>
+</div>
+<div className="row">
+         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Work</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    {/* <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Work</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                            
+                                        </tr>
+                                    </tfoot>           */}
+                                    {usersdata.map((usersdata, i) => (
                                                 <tbody key={usersdata._id}>
                                                     <tr>
                                                         <td>{usersdata.name}</td>
                                                         <td>{usersdata.email}</td>
                                                         <td>{usersdata.phone}</td>
                                                         <td>{usersdata.work}</td>
+                                                        <td>
+                                                <button className="btn text-success btn-lg"><FaEdit />                           
+                                                        </button>
+                                                        </td>
+
+                                                        <td>
+                                                <button className="btn text-danger btn-lg"><MdDelete />                           
+                                                        </button>
+                                                        </td>
                                                     </tr>
 
                                                 </tbody>
                                             ))}
-                                            {/* </table> */}
-                                        </Table>
-
-                                        {/* <table id="datatablesSimple1">
-                                        <thead>
-                                                <tr>
-                                                    <th>User_Id</th> 
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Work</th>
-
-                                                </tr>
-                                            </thead>
-                                            {usersdata.map((usersdata, i) => (
-                                                <tbody key={usersdata._id}>
-                                                    <tr>
-                                                       <td>{usersdata._id}</td> 
-                                                        <td>{usersdata.name}</td>
-                                                        <td>{usersdata.email}</td>
-                                                        <td>{usersdata.phone}</td>
-                                                        <td>{usersdata.work}</td>
-
-                                                    </tr>
-
-                                                </tbody>
-                                            ))}
-                                        </table>  */}
-                                    </div>
+                                       
+                                </table>
                                 </div>
                             </div>
-
-
-
-
-                        </div>
-                    </main>
-                    <footer className="py-4 bg-light mt-auto">
-                        <div className="container-fluid px-4">
-                            <div className="d-flex align-items-center justify-content-between small">
-                                <div className="text-muted">Copyright &copy; Your Website 2022</div>
-                                <div>
-                                    <a href="#">Privacy Policy</a>
-                                    &middot;
-                                    <a href="#">Terms &amp; Conditions</a>
-                                </div>
                             </div>
                         </div>
-                    </footer>
+                    </div>
+
                 </div>
 
 
-            </div>
+             </div>
+
+
+          <Footer />
+     
+         </div>
+
+
+        </div>
 
         </>
     )
 }
 
-export default Users;
+export default ShowUsers;
