@@ -48,8 +48,7 @@ const Sidenavbar = () => {
             <h6 className="collapse-header">Functionality:</h6>
             <NavLink className="collapse-item" to="/users"><i className="fas fa-fw fa-table"></i> Show</NavLink>
             <NavLink className="collapse-item" to="/adduser"><HiUserAdd />  Add User</NavLink>
-            <a className="collapse-item" href="#">Edit User</a>
-            <a className="collapse-item" href="#">Delete User</a>
+            
         </div>
     </div>
 </li>

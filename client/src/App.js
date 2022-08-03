@@ -19,9 +19,9 @@ const App = () => {
     
     <UserContext.Provider value={{state, dispatch}}>
     <Router>
-    <Routes>
-    <Route path="/" element={<Signup />}></Route>
-    <Route path="/login" element={<Login />}></Route>
+    <Routes>    
+    <Route path="/" element={<Login />}></Route>
+    <Route path="/register" element={<Signup />}></Route>
 
     <Route path="/dashboard" element={<Dashboard />}></Route>    
     <Route path="/users" element={<Users />}></Route>

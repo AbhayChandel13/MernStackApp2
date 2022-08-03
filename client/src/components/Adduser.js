@@ -2,7 +2,7 @@ import React from 'react';
 import Sidenavbar from './Sidenavbar';
 import Topnavbar from './Topnavbar';
 import Footer from './Footer';
-
+import { HiUserAdd } from 'react-icons/hi';
 
 
 const Adduser = () => {
@@ -22,32 +22,46 @@ const Adduser = () => {
         <Topnavbar />
 
         <div className="container-fluid">
-        <form className="user">
-                        <div className="form-group row">
-                            <div className="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" className="form-control form-control-user" id="exampleFirstName"
-                                    placeholder="First Name" />
-                            </div>
-                            <div className="col-sm-6">
-                                <input type="text" className="form-control form-control-user" id="exampleLastName"
-                                    placeholder="Last Name" />
-                            </div>
+        <div className="card shadow mb-4"> 
+        <div className="card-header py-3 ">
+                            <h6 className="m-0 font-weight-bold text-primary"><HiUserAdd />  Add User</h6>
                         </div>
-                        <div className="form-group">
-                            <input type="email" className="form-control form-control-user" id="exampleInputEmail"
+                        <div className="card-body">
+        <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
+                        
+                      
+                        <div className="form-group col-sm-8 ">
+                                <input type="text" className="form-control  form-control-user" id="FirstName"
+                                    placeholder="First Name" />                        
+                        </div>                     
+                        
+                         <div className="form-group col-sm-8">
+                                <input type="text" className="form-control form-control-user" id="LastName"
+                                    placeholder="Last Name" />
+                        </div>
+                      
+                        
+                        <div className="form-group col-sm-8">
+                            <input type="email" className="form-control form-control-user" id="Email"
                                 placeholder="Email Address" />
                         </div>
-                        <div className="form-group row">
-                            <div className="col-sm-6 mb-3 mb-sm-0">
-                                <input type="password" className="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="Password" />
+                 
+                        <div className="form-group col-sm-8">
+                                <input type="text" className="form-control form-control-user"
+                                    id="employeeId" placeholder="Employee Id " />
                             </div>
-                            
-                        </div>
+
+                        <div className="form-group col-sm-8">
+                                <input type="text" className="form-control form-control-user"
+                                    id="Designation" placeholder="Designation" />
+                        </div> 
+                       
                        
                         
                         
-                 </form>
+         </form>
+         </div>
+         </div>
         </div>
 
 

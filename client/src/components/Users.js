@@ -5,10 +5,13 @@ import React, { useState, useEffect, useContext } from 'react';
 // import { FaSearch } from "react-icons/fa";
 import { FaEdit, } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Sidenavbar from  './Sidenavbar'
+import Sidenavbar from  './Sidenavbar';
+import { HiUserAdd } from 'react-icons/hi';
 import Topnavbar from './Topnavbar';
 import { UserContext } from '../App';
 import Footer from './Footer';
+import { NavLink } from 'react-router-dom';
+
 
 
 const ShowUsers = () => {
@@ -74,7 +77,12 @@ const ShowUsers = () => {
                 <div className="container-fluid">
                                       <div className="card shadow mb-4">
                         <div className="card-header py-3">
-                            <h6 className="m-0 font-weight-bold text-primary">Users Table</h6>
+                     
+                        <h6 className="font-weight-bold text-primary">Users Table</h6>
+                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add User  </NavLink>
+                        
+                        
+                           
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
@@ -94,7 +102,7 @@ const ShowUsers = () => {
 </div>
 
 {/* text-right */}
-<div className="col-sm-12 col-md-6 justify-content-end">
+<div className="col-sm-12 col-md-6 d-flex flex-column justify-content-end align-items-end">
 <div id="dataTable_filter" className="dataTables_filter">
        <label>Search:
        <div>
