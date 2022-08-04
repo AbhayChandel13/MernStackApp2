@@ -78,8 +78,8 @@ const Showadmins = () => {
                                       <div className="card shadow mb-4">
                         <div className="card-header py-3">
                      
-                        <h6 className="font-weight-bold text-primary">Users Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add User  </NavLink>
+                        <h6 className="font-weight-bold text-primary">Admins Table</h6>
+                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add Admin  </NavLink>
                         
                         
                            

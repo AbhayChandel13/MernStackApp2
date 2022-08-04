@@ -58,7 +58,7 @@ const AddEmployee = () => {
             console.log("Employee Added Successful");
 
             // history.push("/login");
-            navigate("/dashboard", { replace: true });
+            navigate("/showemployee", { replace: true });
         }
 
     }

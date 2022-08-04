@@ -9,9 +9,14 @@ import Footer from './Footer';
 import { NavLink } from 'react-router-dom';
 
 const ShowEmployee = () => {
+    const getInitialState = () => {
+        const value = "5";
+        return value;
+      };
 
     let [searchQuery, setSearchQuery] = useState("");
     let [employeedata, setEmployeedata] = useState([]);
+    const [value, setValue] = useState(getInitialState);
     //const { state, dispatch } = useContext(UserContext);
 
     const getEmployees = async (e) => {
@@ -47,10 +52,22 @@ const ShowEmployee = () => {
         employeedata = employeedata.filter(
             (m) =>
                 m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-                m.designation.toLowerCase().startsWith(searchQuery.toLowerCase())
+                m.designation.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+                m.empid.toString().startsWith(searchQuery.toString()) 
         );
     }
 
+ 
+const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  console.log(value);
+//   setFilterdata(employeedata.slice(0,value)); 
+//   console.log(filterdata);
+
+//const size = 3;
+const data = employeedata.slice(0,value);
+console.log(" selected data :",data);
   return (
     <>
       <div id="wrapper">
@@ -67,7 +84,7 @@ const ShowEmployee = () => {
                                       <div className="card shadow mb-4">
                         <div className="card-header py-3">
                      
-                        <h6 className="font-weight-bold text-primary">Users Table</h6>
+                        <h6 className="font-weight-bold text-primary">Employees Table</h6>
                   <NavLink className="float-right font-weight-bold text-success" to="/addemployee"><HiUserAdd /> Add Employee  </NavLink>
                         
                         
@@ -80,9 +97,9 @@ const ShowEmployee = () => {
 <div className="col-sm-12 col-md-6">
 <div className="dataTables_length" id="dataTable_length">
 <label>Show entries
-<select name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm">
+<select id="currvalue" name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm" value={value} onChange={handleChange} >
+<option value="5">5</option>
 <option value="10">10</option>
-<option value="25">25</option>
 <option value="50">50</option>
 <option value="100">100</option>
 </select> 
@@ -133,7 +150,7 @@ const ShowEmployee = () => {
                                             
                                         </tr>
                                     </tfoot>           */}
-                                    {employeedata.map((employeedata, i) => (
+                                    {data.map((employeedata, i) => (
                                                 <tbody key={employeedata._id}>
                                                     <tr>
                                                         <td>{employeedata.firstname}</td>
