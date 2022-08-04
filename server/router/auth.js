@@ -7,6 +7,8 @@ const authenticate = require("../middleware/authenticate");
 
 require('../db/conn');
 const User = require('../model/userSchema');
+const Employee = require('../model/empSchema');
+
 
 router.get('/', (req, res) => {
     res.send(`Hello Form the server Router js`);
@@ -43,6 +45,38 @@ router.post('/register', async (req, res) => {
     }
 
 })
+
+//Creating new employee
+
+router.post('/employee', async (req, res) => {
+    const {firstname, lastname, email, empid, designation} = req.body;
+
+    // if (!firstname || !lastname || !email || !empid || !designation) {
+    //     return res.status(422).json({ error: "Please Fill  correct data " })
+    // }
+
+    try {
+        // const employeeExist = await Employee.findOne({ email: email })
+        // if (employeeExist) {
+        //     return res.status(422).json({ error: "email already Exist" });
+        // }
+       
+        // else {
+        //     const user = new User({ name, email, phone, work, password, cpassword });
+        //     await user.save()
+        //     res.status(201).json({ message: "User Registered Successfully " });
+        // }
+        const employee = new Employee({ firstname, lastname, email, empid, designation});
+          await employee.save();
+          res.status(201).json({ message: "Employee Created Successfully " });
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+})
+
 
 //login route:--
 router.post('/signin', async (req, res) => {

@@ -35,19 +35,35 @@ const Sidenavbar = () => {
     Members
 </div>
 
-
 <li className="nav-item">
     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
         <FaUsers />
 
-        <span>  Users</span>
+        <span>  Admins</span>
     </a>
     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Functionality:</h6>
-            <NavLink className="collapse-item" to="/users"><i className="fas fa-fw fa-table"></i> Show Users</NavLink>
-            <NavLink className="collapse-item" to="/adduser"><HiUserAdd />  Add User</NavLink>
+            <NavLink className="collapse-item" to="/users"><i className="fas fa-fw fa-table"></i> Show Admins</NavLink>
+            <NavLink className="collapse-item" to="/adduser"><HiUserAdd />  Add Admin</NavLink>
+            
+        </div>
+    </div>
+</li>
+
+<li className="nav-item">
+    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usercollapseTwo"
+        aria-expanded="true" aria-controls="usercollapseTwo">
+        <FaUsers />
+
+        <span>  Users</span>
+    </a>
+    <div id="usercollapseTwo" className="collapse" aria-labelledby="userheadingTwo" data-parent="#accordionSidebar">
+        <div className="bg-white py-2 collapse-inner rounded">
+            <h6 className="collapse-header">Functionality:</h6>
+            <NavLink className="collapse-item" to=""><i className="fas fa-fw fa-table"></i> Show Users</NavLink>
+            <NavLink className="collapse-item" to=""><HiUserAdd />  Add User</NavLink>
             
         </div>
     </div>
