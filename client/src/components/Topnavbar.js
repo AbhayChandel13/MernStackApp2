@@ -1,7 +1,36 @@
-import React from 'react';
+import React,{ useState,useEffect} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Topnavbar = () => {
+
+
+    const [userName, setUserName] = useState('');
+    const [show, setShow] = useState(false);
+
+    const userHomePage = async () => {
+        try {
+            const res = await fetch('/getdata', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            const data = await res.json();
+            console.log(data);
+            setUserName(data.name);
+            setShow(true);
+
+            // if(!res.status===200){
+            //     const error = new Error(res.error)
+            //     throw error;
+            // }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        userHomePage();
+    }, []);
   return (
     <>
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -175,7 +204,7 @@ const Topnavbar = () => {
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{userName}</span>
             <img class="img-profile rounded-circle"
                 src="img/undraw_profile.svg" />
         </a>
