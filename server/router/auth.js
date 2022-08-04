@@ -170,5 +170,14 @@ router.get("/users", async (req, res) => {
     }
 });
 
+router.get("/employeedata", async (req, res) => {
+    try {
+        const employeedata = await Employee.find();
+        res.send(employeedata);
+    } catch (err) {
+        res.send(err);
+    }
+});
+
 
 module.exports = router;

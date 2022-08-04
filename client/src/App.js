@@ -6,8 +6,9 @@ import Logout from './components/Users/Logout'
 import Login from './components/Users/Login';
 import Signup from './components/Users/Signup';
 import { initialState,reducer } from './reducer/UseReducer';
-import Users from './components/Users';
-import Adduser from './components/Adduser';
+import Showadmins from './components/ShowAdmins';
+import AddEmployee from './components/AddEmployee';
+import ShowEmployee from './components/ShowEmployee';
  
 export const UserContext = createContext();
 
@@ -24,8 +25,9 @@ const App = () => {
     <Route path="/register" element={<Signup />}></Route>
 
     <Route path="/dashboard" element={<Dashboard />}></Route>    
-    <Route path="/users" element={<Users />}></Route>
-    <Route path="/adduser" element={<Adduser />}></Route>
+    <Route path="/admins" element={<Showadmins />}></Route>
+    <Route path="/showemployee" element={<ShowEmployee />}></Route>
+    <Route path="/addemployee" element={<AddEmployee />}></Route>
     <Route path="/logout" element={<Logout />}></Route>
 
 

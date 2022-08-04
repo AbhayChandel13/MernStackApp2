@@ -1,8 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import Header from './header/Header'
-// import { NavLink, useNavigate } from 'react-router-dom';
-// import { Row, Container, Col, Table } from "react-bootstrap";
-// import { FaSearch } from "react-icons/fa";
+import React,{ useState, useEffect} from 'react';
 import { FaEdit, } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Sidenavbar from  './Sidenavbar';
@@ -12,18 +8,17 @@ import { UserContext } from '../App';
 import Footer from './Footer';
 import { NavLink } from 'react-router-dom';
 
+const ShowEmployee = () => {
 
-
-const ShowUsers = () => {
     let [searchQuery, setSearchQuery] = useState("");
-    let [usersdata, setUserdata] = useState([]);
-    const { state, dispatch } = useContext(UserContext);
+    let [employeedata, setEmployeedata] = useState([]);
+    //const { state, dispatch } = useContext(UserContext);
 
-    const getUsers = async (e) => {
+    const getEmployees = async (e) => {
 
         try {
 
-            const res = await fetch('/users', {
+            const res = await fetch('/employeedata', {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
@@ -32,7 +27,7 @@ const ShowUsers = () => {
                 credentials: "include"
             });
             const data = await res.json();
-            setUserdata(data);
+            setEmployeedata(data);
             console.log(data);
 
             if (!res.status === 200) {
@@ -45,25 +40,19 @@ const ShowUsers = () => {
         }
     }
     useEffect(() => {
-        getUsers();
-    }, []);
-
-    useEffect(() => {
-        // const data = window.localStorage.getItem('MY_APP_STATE');       
-        // if ( data !== null ) state(JSON.parse(data));
-        dispatch({ type: "USER", payload: true })
+        getEmployees();
     }, []);
 
     if (searchQuery) {
-        usersdata = usersdata.filter(
+        employeedata = employeedata.filter(
             (m) =>
-                m.name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-                m.work.toLowerCase().startsWith(searchQuery.toLowerCase())
+                m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+                m.designation.toLowerCase().startsWith(searchQuery.toLowerCase())
         );
     }
 
-    return (
-        <>
+  return (
+    <>
       <div id="wrapper">
            <Sidenavbar />
 
@@ -79,7 +68,7 @@ const ShowUsers = () => {
                         <div className="card-header py-3">
                      
                         <h6 className="font-weight-bold text-primary">Users Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add User  </NavLink>
+                  <NavLink className="float-right font-weight-bold text-success" to="/addemployee"><HiUserAdd /> Add Employee  </NavLink>
                         
                         
                            
@@ -124,10 +113,11 @@ const ShowUsers = () => {
          <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>FirstName</th>
+                                            <th>LastName</th>
                                             <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Work</th>
+                                            <th>EmployeeId</th>
+                                            <th>Designation</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -143,13 +133,14 @@ const ShowUsers = () => {
                                             
                                         </tr>
                                     </tfoot>           */}
-                                    {usersdata.map((usersdata, i) => (
-                                                <tbody key={usersdata._id}>
+                                    {employeedata.map((employeedata, i) => (
+                                                <tbody key={employeedata._id}>
                                                     <tr>
-                                                        <td>{usersdata.name}</td>
-                                                        <td>{usersdata.email}</td>
-                                                        <td>{usersdata.phone}</td>
-                                                        <td>{usersdata.work}</td>
+                                                        <td>{employeedata.firstname}</td>
+                                                        <td>{employeedata.lastname}</td>
+                                                        <td>{employeedata.email}</td>
+                                                        <td>{employeedata.empid}</td>
+                                                        <td>{employeedata.designation}</td>
                                                         <td>
                                                 <button className="btn text-success btn-lg"><FaEdit />                           
                                                         </button>
@@ -183,9 +174,9 @@ const ShowUsers = () => {
 
 
         </div>
-
-        </>
-    )
+    
+    </>
+  )
 }
 
-export default ShowUsers;
+export default ShowEmployee
