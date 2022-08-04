@@ -22,9 +22,9 @@ const Sidenavbar = () => {
 
 
 <li className="nav-item active">
-    <a className="nav-link" href="#">
+    <NavLink className="nav-link" to="/dashboard">
         <i className="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <span>Dashboard</span></NavLink>
 </li>
 
 
@@ -46,7 +46,7 @@ const Sidenavbar = () => {
     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Functionality:</h6>
-            <NavLink className="collapse-item" to="/users"><i className="fas fa-fw fa-table"></i> Show</NavLink>
+            <NavLink className="collapse-item" to="/users"><i className="fas fa-fw fa-table"></i> Show Users</NavLink>
             <NavLink className="collapse-item" to="/adduser"><HiUserAdd />  Add User</NavLink>
             
         </div>

@@ -24,7 +24,7 @@ const Logout = () => {
                 throw error;
             }
             else {
-                navigate('/login', { replace: true });
+                navigate('/', { replace: true });
             }
         }).catch((err) => {
             console.log(err);

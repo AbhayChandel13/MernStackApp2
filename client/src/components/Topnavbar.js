@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Topnavbar = () => {
   return (
@@ -194,10 +195,12 @@ const Topnavbar = () => {
                 Activity Log
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+            {/* <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
-            </a>
+            </a> */}
+            {/* <NavLink className="dropdown-item btn btn-primary btn-block" to="/logout">Logout</NavLink> */}
+            <NavLink className="dropdown-item" data-toggle="modal" data-target="#logoutModal" to="/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</NavLink>
         </div>
     </li>
 

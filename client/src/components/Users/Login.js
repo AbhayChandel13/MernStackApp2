@@ -52,15 +52,15 @@ const Login = () => {
             {/* <div id="layoutAuthentication">
                 <div id="layoutAuthentication_content">
                     <main>
-                        <div className="container">
-                            <div className="row justify-content-center">
-                                <div className="col-lg-5">
-                                    <div className="card shadow-lg border-0 rounded-lg mt-5">
-                                        <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
-                                        <div className="card-body">
+                        <div classNameName="container">
+                            <div classNameName="row justify-content-center">
+                                <div classNameName="col-lg-5">
+                                    <div classNameName="card shadow-lg border-0 rounded-lg mt-5">
+                                        <div classNameName="card-header"><h3 classNameName="text-center font-weight-light my-4">Login</h3></div>
+                                        <div classNameName="card-body">
                                             <form method='POST'>
-                                                <div className="form-floating mb-3">
-                                                    <input className="form-control"
+                                                <div classNameName="form-floating mb-3">
+                                                    <input classNameName="form-control"
                                                         name="email"
                                                         id="inputEmail"
                                                         type="email"
@@ -69,8 +69,8 @@ const Login = () => {
                                                         onChange={(e) => setEmail(e.target.value)} />
                                                     <label htmlFor="inputEmail">Email address</label>
                                                 </div>
-                                                <div className="form-floating mb-3">
-                                                    <input className="form-control"
+                                                <div classNameName="form-floating mb-3">
+                                                    <input classNameName="form-control"
                                                         id="inputPassword"
                                                         name='password'
                                                         type="password"
@@ -81,13 +81,13 @@ const Login = () => {
                                                 </div>
 
                                                
-                                                <div className="form-group form-button mt-4 mb-0">
-                                                    <div className="d-grid"><NavLink className="btn btn-primary btn-block" to="" name="login" id="login" value="login" onClick={loginUser}>Login</NavLink></div>
+                                                <div classNameName="form-group form-button mt-4 mb-0">
+                                                    <div classNameName="d-grid"><NavLink classNameName="btn btn-primary btn-block" to="" name="login" id="login" value="login" onClick={loginUser}>Login</NavLink></div>
                                                 </div>
                                             </form>
                                         </div>
-                                        <div className="card-footer text-center py-3">
-                                            <div className="small"> <NavLink className="nav-link " to="/">Need an account? Sign up!</NavLink></div>
+                                        <div classNameName="card-footer text-center py-3">
+                                            <div classNameName="small"> <NavLink classNameName="nav-link " to="/">Need an account? Sign up!</NavLink></div>
                                         </div>
                                     </div>
                                 </div>
@@ -96,10 +96,10 @@ const Login = () => {
                     </main>
                 </div>
                 <div id="layoutAuthentication_footer">
-                    <footer className="py-4 bg-light mt-auto">
-                        <div className="container-fluid px-4">
-                            <div className="d-flex align-items-center justify-content-between small">
-                                <div className="text-muted">Copyright &copy; Your Website 2022</div>
+                    <footer classNameName="py-4 bg-light mt-auto">
+                        <div classNameName="container-fluid px-4">
+                            <div classNameName="d-flex align-items-center justify-content-between small">
+                                <div classNameName="text-muted">Copyright &copy; Your Website 2022</div>
                                 <div>
                                     <a href="#">Privacy Policy</a>
                                     &middot;
@@ -112,58 +112,76 @@ const Login = () => {
             </div> */}
 
 
-<div class="container">
+<div className="container">
 
 
-<div class="row justify-content-center">
+<div className="row justify-content-center">
 
-    <div class="col-xl-10 col-lg-12 col-md-9">
+    <div className="col-xl-10 col-lg-12 col-md-9">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
+        <div className="card o-hidden border-0 shadow-lg my-5">
+            <div className="card-body p-0">
                
-                <div class="row">
-                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                <div className="row">
+                    <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                    <div className="col-lg-6">
+                        <div className="p-5">
+                            <div className="text-center">
+                                <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user"
-                                        id="exampleInputEmail" aria-describedby="emailHelp"
-                                        placeholder="Enter Email Address..." />
+                            <form className="user" method='POST' >
+                                <div className="form-group">
+                                    <input 
+                                    className="form-control form-control-user"
+                                    name='email'
+                                    type="email"                                    
+                                    id="inputEmail"                                    
+                                    placeholder="Enter Email Address..."
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    />
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-user"
-                                        id="exampleInputPassword" placeholder="Password" />
+                                <div className="form-group">
+                                    <input
+                                    name='password'
+                                    type="password" 
+                                    className="form-control form-control-user"                                    
+                                    id="inputPassword"
+                                    placeholder="Password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    />
                                 </div>
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox small">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck" />
-                                        <label class="custom-control-label" for="customCheck">Remember
-                                            Me</label>
+                                <div className="form-group">
+                                    <div className="custom-control custom-checkbox small">
+                                        <input
+                                        type="checkbox" 
+                                        className="custom-control-input" 
+                                        id="customCheck" />
+                                        <label 
+                                        className="custom-control-label" 
+                                        for="customCheck">Remember
+                                        Me</label>
                                     </div>
                                 </div>
-                                <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                <NavLink to="/dashboard" className="btn btn-primary btn-user btn-block" name="login" id="login" value="login" onClick={loginUser}>
                                     Login
-                                </a>
+                                </NavLink>
+                               
+                               
                                 <hr />
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Login with Google
+                                <a href="index.html" className="btn btn-google btn-user btn-block">
+                                    <i className="fab fa-google fa-fw"></i> Login with Google
                                 </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                <a href="index.html" className="btn btn-facebook btn-user btn-block">
+                                    <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                 </a>
                             </form>
                             <hr />
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            <div className="text-center">
+                                <a className="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
-                            <div class="text-center">
-                                <a class="small" href="register.html">Create an Account!</a>
-                            </div>
+                            {/* <div className="text-center">
+                                <a className="small" href="register.html">Create an Account!</a>
+                            </div> */}
                         </div>
                     </div>
                 </div>
