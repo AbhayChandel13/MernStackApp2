@@ -60,14 +60,9 @@ const AddEmployee = () => {
             body: JSON.stringify({firstname,lastname, email, empid, phone,designation}),
         });
 
-        // let res2 = await fetch("/employee", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json", },
-        //     body: JSON.stringify({designation}),
-        // });
+     
 
-        const data = await res.json();
-       // const data2 = await res2.json();
+        const data = await res.json();       
 
         if (res.status === 422 || !data) {
             //window.alert("Invalid Registration");
@@ -102,10 +97,11 @@ const AddEmployee = () => {
 
 
     <div id="content">
+    <ToastContainer />
 
         <Topnavbar />
 
-        <div className="container-fluid">
+        <div className="container-fluid">        
         <div className="card shadow mb-4"> 
         <div className="card-header py-3 ">
                             <h6 className="m-0 font-weight-bold text-primary"><HiUserAdd />  Add User</h6>

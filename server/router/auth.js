@@ -51,9 +51,9 @@ router.post('/register', async (req, res) => {
 router.post('/employee', async (req, res) => {
     const {firstname, lastname, email, empid,phone, designation} = req.body;
 
-    // if (!firstname || !lastname || !email || !empid || !designation) {
-    //     return res.status(422).json({ error: "Please Fill  correct data " })
-    // }
+    if (!firstname || !lastname || !email || !empid || !phone || !designation) {
+        return res.status(422).json({ error: "Please Fill  correct data " })
+    }
 
     try {
         // const employeeExist = await Employee.findOne({ email: email })
