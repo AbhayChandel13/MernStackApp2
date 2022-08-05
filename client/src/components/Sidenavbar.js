@@ -7,7 +7,7 @@ import {HiUserAdd} from "react-icons/hi"
 const Sidenavbar = () => {
   return (
     <>
-    <div>
+   
      <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 
@@ -114,7 +114,7 @@ const Sidenavbar = () => {
 
 
 </ul>
-</div>
+
     </>
   )
 }

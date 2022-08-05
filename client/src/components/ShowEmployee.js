@@ -52,6 +52,7 @@ const ShowEmployee = () => {
         employeedata = employeedata.filter(
             (m) =>
                 m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+                m.lastname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
                 m.designation.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
                 m.empid.toString().startsWith(searchQuery.toString()) 
         );
@@ -151,9 +152,10 @@ console.log(" selected data :",data);
                                             
                                         </tr>
                                     </tfoot>           */}
+                                    <tbody>
                                     {data.map((employeedata, i) => (
-                                                <tbody key={employeedata._id}>
-                                                    <tr>
+                                                
+                                                    <tr key={employeedata._id}>
                                                         <td>{employeedata.empid}</td>
                                                         <td>{employeedata.firstname}</td>
                                                         <td>{employeedata.lastname}</td>
@@ -172,8 +174,9 @@ console.log(" selected data :",data);
                                                         </td>
                                                     </tr>
 
-                                                </tbody>
+                                               
                                             ))}
+                                    </tbody>
                                        
                                 </table>
                                 </div>
