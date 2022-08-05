@@ -129,12 +129,13 @@ console.log(" selected data :",data);
 <div className="row">
          <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
                                     <thead>
-                                        <tr>
+                                        <tr> 
+                                            <th>EmployeeId</th>
                                             <th>FirstName</th>
                                             <th>LastName</th>
-                                            <th>Email</th>
-                                            <th>EmployeeId</th>
                                             <th>Designation</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>                                       
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -153,11 +154,13 @@ console.log(" selected data :",data);
                                     {data.map((employeedata, i) => (
                                                 <tbody key={employeedata._id}>
                                                     <tr>
+                                                        <td>{employeedata.empid}</td>
                                                         <td>{employeedata.firstname}</td>
                                                         <td>{employeedata.lastname}</td>
-                                                        <td>{employeedata.email}</td>
-                                                        <td>{employeedata.empid}</td>
                                                         <td>{employeedata.designation}</td>
+                                                        <td>{employeedata.email}</td>
+                                                        <td>{employeedata.phone}</td>
+                                                                                                               
                                                         <td>
                                                 <button className="btn text-success btn-lg"><FaEdit />                           
                                                         </button>

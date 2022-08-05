@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
 //Creating new employee
 
 router.post('/employee', async (req, res) => {
-    const {firstname, lastname, email, empid, designation} = req.body;
+    const {firstname, lastname, email, empid,phone, designation} = req.body;
 
     // if (!firstname || !lastname || !email || !empid || !designation) {
     //     return res.status(422).json({ error: "Please Fill  correct data " })
@@ -66,7 +66,7 @@ router.post('/employee', async (req, res) => {
         //     await user.save()
         //     res.status(201).json({ message: "User Registered Successfully " });
         // }
-        const employee = new Employee({ firstname, lastname, email, empid, designation});
+        const employee = new Employee({ firstname, lastname, email, empid,phone, designation});
           await employee.save();
           res.status(201).json({ message: "Employee Created Successfully " });
 

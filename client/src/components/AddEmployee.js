@@ -12,14 +12,21 @@ import "react-toastify/dist/ReactToastify.css";
 const AddEmployee = () => {
     let navigate = useNavigate();
 
+    // const getInitialState = () => {
+    //     const value = "";
+    //     return value;
+    //   };
+
     const [employee, setEmployee] = useState({
         firstname: "",
         lastname: "",
         email: "",
         empid: "",
-        designation: ""
+        phone:"",
+        //designation: ""
         
     });
+    const [role, setRole] = useState("");
 
     let name, value;
     const handleInputs = (e) => {
@@ -30,18 +37,37 @@ const AddEmployee = () => {
         setEmployee({ ...employee, [name]: value })
     }
 
+    const handleChange = (e) => {
+        // e.target.value
+       //setDesignation({...designation,[name]: value});
+      // setRole(e.target.value);
+      name = e.target.name;
+      value = e.target.value;
+
+      setRole({...role,[name]: value});
+      };
+      console.log(role);
+
     const PostData = async (e) => {
         e.preventDefault();
 
-        const {firstname,lastname, email, empid, designation} = employee;
-
+        const {firstname,lastname, email, empid, phone} = employee;
+        const {designation} = role;
+        
         let res = await fetch("/employee", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({firstname,lastname, email, empid, designation }),
+            body: JSON.stringify({firstname,lastname, email, empid, phone,designation}),
         });
 
+        // let res2 = await fetch("/employee", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json", },
+        //     body: JSON.stringify({designation}),
+        // });
+
         const data = await res.json();
+       // const data2 = await res2.json();
 
         if (res.status === 422 || !data) {
             //window.alert("Invalid Registration");
@@ -62,6 +88,8 @@ const AddEmployee = () => {
         }
 
     }
+
+   
 
   return (
     <>
@@ -84,15 +112,39 @@ const AddEmployee = () => {
                         </div>
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
+
+        <div className="form-group col-sm-8" id="designation">
+                        <label>Designation
+                        <select id="currvalue"
+                          name="designation"  
+                          style={{ borderRadius: '30px'}}
+                        //   style={{border-radius:"20px"}}                        
+                          className="custom-select custom-select-lg col-lg-12"
+                          value={role.designation} 
+                          onChange={handleChange} 
+                          >
+                        <option value="">--Designation--</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Team Leader">Team Leader</option>
+                        <option value="Sr. frontend Developer">Sr. frontend Developer</option>
+                        <option value="frontend Developer">frontend Developer</option>
+                        <option value="Sr. Backend Developer">Sr. Backend Developer</option>                      
+                        <option value="Backend Developer">Backend Developer</option>
+                        <option value="Designer">Designer</option>
+                        <option value="Traniee">Traniee</option>
+                        <option value="Hr">Hr</option>
+                        </select> 
+                        </label>
+                        </div>
                         
                       
                         <div className="form-group col-sm-8 ">
                                 <input 
                                 type="text"
                                 name="firstname"
-                                className="form-control  form-control-user"
+                                className="form-control input-lg  form-control-user "
                                 id="FirstName"
-                                placeholder="First Name"
+                                placeholder="Enter First Name"
                                 value={employee.firstname}
                                 onChange={handleInputs}
                                 />                        
@@ -104,7 +156,7 @@ const AddEmployee = () => {
                                   name="lastname"
                                   className="form-control form-control-user"
                                   id="LastName"
-                                  placeholder="Last Name" 
+                                  placeholder="Enter Last Name" 
                                   value={employee.lastname}
                                   onChange={handleInputs} 
                                   />
@@ -117,7 +169,7 @@ const AddEmployee = () => {
                             name="email" 
                             className="form-control form-control-user" 
                             id="Email"
-                            placeholder="Email Address"
+                            placeholder="Enter Email Address"
                             value={employee.email}
                             onChange={handleInputs} 
                             />
@@ -129,23 +181,36 @@ const AddEmployee = () => {
                                 name="empid"
                                 className="form-control form-control-user"
                                 id="employeeId" 
-                                placeholder="Employee Id "
+                                placeholder="Enter Employee Id "
                                 value={employee.empid}
                                 onChange={handleInputs} 
                                 />
                             </div>
+                            <div className="form-group col-sm-8">
+                                <input 
+                                type="text" 
+                                name="phone"
+                                className="form-control form-control-user"
+                                id="phone" 
+                                maxLength={10}
+                                placeholder="Enter Phone Number"
+                                value={employee.phone}
+                                onChange={handleInputs} 
+                                />
+                            </div>
 
-                        <div className="form-group col-sm-8">
+                        {/* <div className="form-group col-sm-8">
                                 <input 
                                 type="text" 
                                 name="designation"
                                 className="form-control form-control-user"
                                 id="Designation" 
-                                placeholder="Designation"
+                                placeholder="Enter Designation"
                                 value={employee.designation}
                                 onChange={handleInputs}  
                                 />
-                        </div> 
+                        </div>  */}
+                        
 
                 <div className="mt-4 mb-0">
                 <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup" value="register" onClick={PostData}>Add Employee</NavLink></div>
