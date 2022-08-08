@@ -15,7 +15,7 @@ const ShowEmployee = () => {
       };
 
     let [searchQuery, setSearchQuery] = useState("");
-    let [employeedata, setEmployeedata] = useState([]);
+    let [employeedata, setEmployeedata] = useState([]);  
     const [value, setValue] = useState(getInitialState);
     //const { state, dispatch } = useContext(UserContext);
 
@@ -31,10 +31,11 @@ const ShowEmployee = () => {
                 },
                 credentials: "include"
             });
-            const data = await res.json();
+            const data = await res.json();        
+           
             setEmployeedata(data);
-            console.log(data);
-
+            console.log("ye hai request vala data",data);
+         
             if (!res.status === 200) {
                 const error = new Error(res.error);
                 throw error;
@@ -69,6 +70,9 @@ const handleChange = (e) => {
 //const size = 3;
 const data = employeedata.slice(0,value);
 console.log(" selected data :",data);
+
+ 
+
   return (
     <>
       <div id="wrapper">
@@ -118,7 +122,7 @@ console.log(" selected data :",data);
                 className="form-control form-control-sm"
                 name="name"
                 id="name"
-                placeholder={"Search by Name"}
+                placeholder={"Search Here...."}
                 value={searchQuery}
                 onChange={(e) =>setSearchQuery(e.target.value)}
            />
@@ -152,14 +156,15 @@ console.log(" selected data :",data);
                                             
                                         </tr>
                                     </tfoot>           */}
-                                    <tbody>
-                                    {data.map((employeedata, i) => (
+                                    <tbody>   
+                                                                        
+                                    {data.map((employeedata,i) => (
                                                 
                                                     <tr key={employeedata._id}>
                                                         <td>{employeedata.empid}</td>
                                                         <td>{employeedata.firstname}</td>
-                                                        <td>{employeedata.lastname}</td>
-                                                        <td>{employeedata.designation}</td>
+                                                        <td>{employeedata.lastname}</td>  
+                                                        <td>{employeedata.Role}</td>
                                                         <td>{employeedata.email}</td>
                                                         <td>{employeedata.phone}</td>
                                                                                                                

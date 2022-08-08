@@ -8,6 +8,7 @@ const authenticate = require("../middleware/authenticate");
 require('../db/conn');
 const User = require('../model/userSchema');
 const Employee = require('../model/empSchema');
+const { db } = require('../model/userSchema');
 
 
 router.get('/', (req, res) => {
@@ -49,9 +50,9 @@ router.post('/register', async (req, res) => {
 //Creating new employee
 
 router.post('/employee', async (req, res) => {
-    const {firstname, lastname, email, empid,phone, designation} = req.body;
+    const {firstname, lastname, email, empid,phone, roleid} = req.body;
 
-    if (!firstname || !lastname || !email || !empid || !phone || !designation) {
+    if (!firstname || !lastname || !email || !empid || !phone || !roleid) {
         return res.status(422).json({ error: "Please Fill  correct data " })
     }
 
@@ -66,7 +67,7 @@ router.post('/employee', async (req, res) => {
         //     await user.save()
         //     res.status(201).json({ message: "User Registered Successfully " });
         // }
-        const employee = new Employee({ firstname, lastname, email, empid,phone, designation});
+        const employee = new Employee({ firstname, lastname, email, empid, phone, roleid});
           await employee.save();
           res.status(201).json({ message: "Employee Created Successfully " });
 
@@ -172,7 +173,30 @@ router.get("/users", async (req, res) => {
 
 router.get("/employeedata", async (req, res) => {
     try {
-        const employeedata = await Employee.find();
+
+        const employeedata = await Employee.aggregate([{
+
+                    // $lookup :{
+                    //             from :"designation",
+                    //             localField :"roleid",
+                    //             foreignField:"Role_id ",
+                    //             as :"designation"
+                    // }
+                    '$lookup': {
+                        'from': 'designation', 
+                        'localField': 'roleid', 
+                        'foreignField': 'Role_id', 
+                        'as': 'designation'
+                    }
+                },
+                {
+                    $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$designation", 0 ] }, "$$ROOT" ] } }
+                 },
+                 { $project: { designation: 0 } }
+            ])
+
+
+       //const employeedata = await Employee.find();
         res.send(employeedata);
     } catch (err) {
         res.send(err);

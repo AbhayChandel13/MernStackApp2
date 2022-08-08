@@ -21,8 +21,8 @@ const employeeSchema = new mongoose.Schema({
         type: Number,
         required: true
     },     
-    designation: {
-        type: String,
+    roleid: {
+        type: Number,
         required: true
     }
      

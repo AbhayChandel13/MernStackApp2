@@ -52,12 +52,12 @@ const AddEmployee = () => {
         e.preventDefault();
 
         const {firstname,lastname, email, empid, phone} = employee;
-        const {designation} = role;
+        const {roleid} = role;
         
         let res = await fetch("/employee", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({firstname,lastname, email, empid, phone,designation}),
+            body: JSON.stringify({firstname,lastname, email, empid, phone, roleid}),
         });
 
      
@@ -109,26 +109,26 @@ const AddEmployee = () => {
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
 
-        <div className="form-group col-sm-8" id="designation">
-                        <label>Designation
+        <div className="form-group col-sm-8" id="roleid">
+                        <label>roleid
                         <select id="currvalue"
-                          name="designation"  
+                          name="roleid"  
                           style={{ borderRadius: '30px'}}
                         //   style={{border-radius:"20px"}}                        
                           className="custom-select custom-select-lg col-lg-12"
-                          value={role.designation} 
+                          value={role.roleid} 
                           onChange={handleChange} 
                           >
                         <option value="">--Designation--</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Team Leader">Team Leader</option>
-                        <option value="Sr. frontend Developer">Sr. frontend Developer</option>
-                        <option value="frontend Developer">frontend Developer</option>
-                        <option value="Sr. Backend Developer">Sr. Backend Developer</option>                      
-                        <option value="Backend Developer">Backend Developer</option>
-                        <option value="Designer">Designer</option>
-                        <option value="Traniee">Traniee</option>
-                        <option value="Hr">Hr</option>
+                        <option value="101">Manager</option>
+                        <option value="102">Team Leader</option>
+                        <option value="103">Sr. frontend Developer</option>
+                        <option value="104">Sr. Backend Developer</option>
+                        <option value="105">Designer</option>                      
+                        <option value="106">Traniee</option>
+                        <option value="107">Hr</option>
+                        <option value="108">Backend Developer</option>
+                        <option value="109">frontend Developer</option>
                         </select> 
                         </label>
                         </div>
