@@ -34,7 +34,7 @@ const ShowEmployee = () => {
             const data = await res.json();        
            
             setEmployeedata(data);
-            console.log("ye hai request vala data",data);
+            // console.log("ye hai request vala data",data);
          
             if (!res.status === 200) {
                 const error = new Error(res.error);
@@ -63,13 +63,12 @@ const ShowEmployee = () => {
 const handleChange = (e) => {
     setValue(e.target.value);
   };
-  console.log(value);
-//   setFilterdata(employeedata.slice(0,value)); 
-//   console.log(filterdata);
+//   console.log(value);
+
 
 //const size = 3;
 const data = employeedata.slice(0,value);
-console.log(" selected data :",data);
+// console.log(" selected data :",data);
 
  
 
@@ -91,9 +90,7 @@ console.log(" selected data :",data);
                      
                         <h6 className="font-weight-bold text-primary">Employees Table</h6>
                   <NavLink className="float-right font-weight-bold text-success" to="/addemployee"><HiUserAdd /> Add Employee  </NavLink>
-                        
-                        
-                           
+                  
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
@@ -168,14 +165,25 @@ console.log(" selected data :",data);
                                                         <td>{employeedata.email}</td>
                                                         <td>{employeedata.phone}</td>
                                                                                                                
-                                                        <td>
-                                                <button className="btn text-success btn-lg"><FaEdit />                           
-                                                        </button>
+                                                      <td>
+                                               <NavLink className="text-success btn-lg" to={`/editemployee/${employeedata._id}`} ><FaEdit />  </NavLink>                        
+                                               {/* onClick={() => editRow(id)}
+                                               {/* <button>
+                                        <NavLink
+                                          to="/editemployee"
+                                          className="btn text-primary"
+
+                                        >
+                                          <FaEdit className="text-green-500 font-bold text-4xl p-1" />
+                                        </NavLink>
+                                      </button> */}
+                                                        
                                                         </td>
 
                                                         <td>
-                                                <button className="btn text-danger btn-lg"><MdDelete />                           
-                                                        </button>
+                                             <NavLink className="text-danger btn-lg" to=""><MdDelete />
+                                             </NavLink>                     
+                                                        
                                                         </td>
                                                     </tr>
 

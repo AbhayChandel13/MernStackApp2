@@ -8,6 +8,7 @@ import Signup from './components/Users/Signup';
 import { initialState,reducer } from './reducer/UseReducer';
 import Showadmins from './components/ShowAdmins';
 import AddEmployee from './components/AddEmployee';
+import EditEmployee from './components/EditEmployee';
 import ShowEmployee from './components/ShowEmployee';
  
 export const UserContext = createContext();
@@ -28,6 +29,7 @@ const App = () => {
     <Route path="/admins" element={<Showadmins />}></Route>
     <Route path="/showemployee" element={<ShowEmployee />}></Route>
     <Route path="/addemployee" element={<AddEmployee />}></Route>
+    <Route path="/editemployee/:id" element={<EditEmployee />}></Route>
     <Route path="/logout" element={<Logout />}></Route>
 
 

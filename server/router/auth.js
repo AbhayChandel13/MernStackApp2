@@ -146,6 +146,40 @@ router.post('/signin', async (req, res) => {
     });
 
 
+
+
+    //get Single Employee For update :
+    
+    router.get('/editemployee/:id', authenticate,async (req, res) => {
+        // console.log("Hello ");
+        // res.send(req.rootUser);
+        try {
+            const _id = req.params.id;
+            const employeedata = await Employee.findById(_id);
+            if (!employeedata) {
+              return res.status(404).send();
+            } else {
+              res.send(employeedata);
+            }
+          } catch (e) {
+            res.status(500).send(e);
+          }
+    });
+   
+    //Update the Employee data :
+    router.put("/editemployee/:id",async(req,res)=>{
+        try{
+            const _id =req.params.id;
+            const updateEmployee = await Employee.findByIdAndUpdate(_id,req.body,{
+              new:true
+            });
+      
+            res.send(updateEmployee);
+        }catch(e){
+          res.status(404).send(e);
+        }
+      })
+
     //LOGOUT PAGE 
 
     router.get('/logout', async (req, res) => {

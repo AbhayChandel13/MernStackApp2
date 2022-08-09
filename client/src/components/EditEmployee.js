@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Sidenavbar from './Sidenavbar';
 import Topnavbar from './Topnavbar';
 import Footer from './Footer';
@@ -9,80 +9,89 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-const AddEmployee = () => {
+
+const EditEmployee = () => {
+    let id = window.location.pathname.split("/editemployee/")[1];
+    // console.log("ID :",id);
+
     let navigate = useNavigate();
-
-    // const getInitialState = () => {
-    //     const value = "";
-    //     return value;
-    //   };
-
-    const [employee, setEmployee] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        empid: "",
-        phone:"",
-        //designation: ""
-        
-    });
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [email, setEmail] = useState("");
+    const [empid, setEmpid] = useState("");
+    const [phone, setPhone] = useState("");
     const [role, setRole] = useState("");
-
+    
     let name, value;
-    const handleInputs = (e) => {
-        console.log(e);
-        name = e.target.name;
-        value = e.target.value;
-
-        setEmployee({ ...employee, [name]: value })
-    }
-
     const handleChange = (e) => {
-        // e.target.value
-       //setDesignation({...designation,[name]: value});
-      // setRole(e.target.value);
-      name = e.target.name;
-      value = e.target.value;
+      
+    name = e.target.name;
+    value = e.target.value;
 
-      setRole({...role,[name]: value});
-      };
-      console.log(role);
+    setRole({...role,[name]: value});
+    };
 
-    const PostData = async (e) => {
-        e.preventDefault();
-
-        const {firstname,lastname, email, empid, phone} = employee;
-        const {roleid} = role;
+    const getSingleEmployee = async () => {
+      try {
+        const response = await fetch(
+          `/editemployee/${id}`
+        );
+        const jsonData = await response.json();
+        console.log(jsonData);
         
-        let res = await fetch("/employee", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({firstname,lastname, email, empid, phone, roleid}),
-        });
-
-     
-
-        const data = await res.json();       
-
-        if (res.status === 422 || !data) {
-            //window.alert("Invalid Registration");
-            toast.error(" Invalid Employee Data", {
-                position: "top-center",
-            });
-            console.log("Invalid Employee Data");
-        }
-        else {
-            toast.success("Employee Added Successfully!", {
-                position: "top-center",
-            });
-            //window.alert("Registration Successful");
-            console.log("Employee Added Successful");
-
-            // history.push("/login");
-            navigate("/showemployee", { replace: true });
-        }
-
+        setFirstname(jsonData.firstname);
+        setLastname(jsonData.lastname);
+        setEmail(jsonData.email);
+        setEmpid(jsonData.empid);
+        setPhone(jsonData.phone);
+        //setRoleid(jsonData.role)
+      } catch (err) {
+        console.error(err.message);
+      }
     }
+
+
+
+   const  onSubmit= async(e)=>{
+    e.preventDefault();
+
+    setTimeout(function () {
+      //window.location.replace("/ordertable");
+     navigate("/showemployee", { replace: true });
+    }, 1000);
+
+    try {     
+      let body = {
+        firstname,
+        lastname,
+        email,
+        empid,
+        phone,
+        role
+
+      };
+ 
+      const response = await fetch(`/editemployee/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
+      console.log(response);
+
+      //window.location = "/ordertable";
+      // const jsonData = await response.json();
+      // console.log(jsonData);
+    } catch (err) {
+      console.error(err.message);
+    }
+   }
+   
+
+   useEffect(() => {
+    getSingleEmployee();
+  }, []);
 
    
 
@@ -104,7 +113,7 @@ const AddEmployee = () => {
         <div className="container-fluid">        
         <div className="card shadow mb-4"> 
         <div className="card-header py-3 ">
-                            <h6 className="m-0 font-weight-bold text-primary"><HiUserAdd />  Add User</h6>
+                            <h6 className="m-0 font-weight-bold text-primary"><HiUserAdd />Update User</h6>
                         </div>
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
@@ -116,8 +125,8 @@ const AddEmployee = () => {
                           style={{ borderRadius: '30px'}}
                         //   style={{border-radius:"20px"}}                        
                           className="custom-select custom-select-lg col-lg-12"
-                          value={role.roleid} 
-                          onChange={handleChange} 
+                         value={role.roleid} 
+                         onChange={handleChange} 
                           >
                         <option value="">--Select Designation--</option>
                         <option value="101">Manager</option>
@@ -141,8 +150,9 @@ const AddEmployee = () => {
                                 className="form-control input-lg  form-control-user "
                                 id="FirstName"
                                 placeholder="Enter First Name"
-                                value={employee.firstname}
-                                onChange={handleInputs}
+                                value={firstname}
+                                // onChange={handleInputs}
+                                onChange={(e) => setFirstname(e.target.value)}
                                 />                        
                         </div>                     
                         
@@ -153,8 +163,9 @@ const AddEmployee = () => {
                                   className="form-control form-control-user"
                                   id="LastName"
                                   placeholder="Enter Last Name" 
-                                  value={employee.lastname}
-                                  onChange={handleInputs} 
+                                  value={lastname}
+                                //   onChange={handleInputs} 
+                                onChange={(e) => setLastname(e.target.value)}
                                   />
                         </div>
                       
@@ -166,8 +177,9 @@ const AddEmployee = () => {
                             className="form-control form-control-user" 
                             id="Email"
                             placeholder="Enter Email Address"
-                            value={employee.email}
-                            onChange={handleInputs} 
+                            value={email}
+                            // onChange={handleInputs}
+                            onChange={(e) => setEmail(e.target.value)} 
                             />
                         </div>
                  
@@ -178,8 +190,9 @@ const AddEmployee = () => {
                                 className="form-control form-control-user"
                                 id="employeeId" 
                                 placeholder="Enter Employee Id "
-                                value={employee.empid}
-                                onChange={handleInputs} 
+                                value={empid}
+                                // onChange={handleInputs} 
+                                onChange={(e) => setEmpid(e.target.value)}
                                 />
                             </div>
                             <div className="form-group col-sm-8">
@@ -190,8 +203,9 @@ const AddEmployee = () => {
                                 id="phone" 
                                 maxLength={10}
                                 placeholder="Enter Phone Number"
-                                value={employee.phone}
-                                onChange={handleInputs} 
+                                value={phone}
+                                // onChange={handleInputs} 
+                                onChange={(e) => setPhone(e.target.value)}
                                 />
                             </div>
 
@@ -203,13 +217,20 @@ const AddEmployee = () => {
                                 id="Designation" 
                                 placeholder="Enter Designation"
                                 value={employee.designation}
-                                onChange={handleInputs}  
+                                // onChange={handleInputs}  
                                 />
                         </div>  */}
                         
 
                 <div className="mt-4 mb-0">
-                <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup" value="register" onClick={PostData}>Add Employee</NavLink></div>
+                <div className="d-grid">
+                  <button  onClick={onSubmit}>
+                  <NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup"
+                 value="register"
+                
+                  >
+                    Update Employee</NavLink> </button></div>
+                   
                  </div>
                        
                        
@@ -236,4 +257,4 @@ const AddEmployee = () => {
   )
 }
 
-export default AddEmployee;
+export default EditEmployee;

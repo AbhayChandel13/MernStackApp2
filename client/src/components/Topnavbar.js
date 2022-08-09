@@ -16,7 +16,7 @@ const Topnavbar = () => {
                 },
             })
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             setUserName(data.name);
             setShow(true);
 

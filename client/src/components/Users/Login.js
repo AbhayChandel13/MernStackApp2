@@ -158,7 +158,7 @@ const Login = () => {
                                         id="customCheck" />
                                         <label 
                                         className="custom-control-label" 
-                                        for="customCheck">Remember
+                                        htmlFor="customCheck">Remember
                                         Me</label>
                                     </div>
                                 </div>
