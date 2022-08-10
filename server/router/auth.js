@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-//Using Async and Await :--
+//Add User (Admin) Using Async and Await :--
 
 router.post('/adduser', async (req, res) => {
     const { name, email, phone, password, cpassword } = req.body;
@@ -45,7 +45,22 @@ router.post('/adduser', async (req, res) => {
         console.log(err);
     }
 
-})
+});
+
+//Delete User :
+router.delete("/user/:id", async (req, res) => {
+    try {
+      const _id = req.params.id;
+      const deleteUser = await User.findByIdAndDelete(_id);
+      if (!req.params.id) {
+        return res.status(404).send();
+      }
+      res.send(deleteUser);
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  });
+
 
 //Creating new employee
 

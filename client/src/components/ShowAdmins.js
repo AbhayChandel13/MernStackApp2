@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import Header from './header/Header'
 // import { NavLink, useNavigate } from 'react-router-dom';
-// import { Row, Container, Col, Table } from "react-bootstrap";
-// import { FaSearch } from "react-icons/fa";
 import { FaEdit, } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Sidenavbar from  './Sidenavbar';
@@ -11,6 +8,8 @@ import Topnavbar from './Topnavbar';
 import { UserContext } from '../App';
 import Footer from './Footer';
 import { NavLink } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -61,6 +60,29 @@ const Showadmins = () => {
                 
         );
     }
+
+    const deleteEmployee = async (id) => {
+        if (window.confirm("Are You Sure, You want to delete?")) {
+          try {
+            const response = await fetch(`/user/${id}`,
+              {
+                method: "DELETE",
+              }
+            );
+            const jsonData = await response.json();
+            console.log(jsonData);
+    
+            toast.success("User Deleted Successfully!", {
+              position: "top-center",
+            });
+    
+          } catch (err) {
+            console.error(err.message);
+          }
+    
+          getUsers();
+        }
+      };
 
     return (
         <>
@@ -156,8 +178,12 @@ const Showadmins = () => {
                                                         </td>
 
                                                         <td>
-                                                <button className="btn text-danger btn-lg"><MdDelete />                           
-                                                        </button>
+                                                {/* <button className="btn text-danger btn-lg"><MdDelete />                           
+                                                        </button> */}
+                                                         <NavLink onClick={() =>
+                                    deleteEmployee(usersdata._id)
+                                  } className="text-danger btn-lg" to=""><MdDelete />
+                                  </NavLink>
                                                         </td>
                                                     </tr>
 
