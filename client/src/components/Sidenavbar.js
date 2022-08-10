@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FaUsers } from 'react-icons/fa';
 import { BsInfoLg } from 'react-icons/bs';
 import {HiUserAdd} from "react-icons/hi"
-
+import { AiFillProject } from 'react-icons/ai';
 const Sidenavbar = () => {
   return (
     <>
@@ -97,7 +97,8 @@ const Sidenavbar = () => {
     <div id="collapsePages" className="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Functionality</h6>
-            <a className="collapse-item" href="#">Add Project</a>
+            <NavLink className="collapse-item" to="/showproject"><i className="fas fa-fw fa-table"></i> Show Projects</NavLink>
+            <NavLink className="collapse-item" to="/addproject"><AiFillProject /> Add Project</NavLink>
 
         </div>
     </div>

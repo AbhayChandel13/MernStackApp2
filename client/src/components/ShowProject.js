@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaEdit, } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Sidenavbar from './Sidenavbar';
-import { HiUserAdd } from 'react-icons/hi';
+import { AiFillProject } from 'react-icons/ai';
 import Topnavbar from './Topnavbar';
 import { UserContext } from '../App';
 import Footer from './Footer';
@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ShowEmployee = () => {
+const ShowProject = () => {
   const getInitialState = () => {
     const value = "5";
     return value;
@@ -21,71 +21,70 @@ const ShowEmployee = () => {
   const [value, setValue] = useState(getInitialState);
   //const { state, dispatch } = useContext(UserContext);
 
-  const getEmployees = async (e) => {
+//   const getEmployees = async (e) => {
 
-    try {
+//     try {
 
-      const res = await fetch('/employeedata');
-      // , {
-      //   method: "GET",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json"
-      //   },
-      //   credentials: "include"
-      // }
-      const data = await res.json();
+//       const res = await fetch('/employeedata');
+//       // , {
+//       //   method: "GET",
+//       //   headers: {
+//       //     Accept: "application/json",
+//       //     "Content-Type": "application/json"
+//       //   },
+//       //   credentials: "include"
+//       // }
+//       const data = await res.json();
 
-      setEmployeedata(data);
-      console.log("tableshowEmloyeeData :",data);
+//       setEmployeedata(data);
+//       console.log("tableshowEmloyeeData :",data);
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
+//       if (!res.status === 200) {
+//         const error = new Error(res.error);
+//         throw error;
+//       }
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(() => {
-    getEmployees();
-  }, []);
-
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+//   useEffect(() => {
+//     getEmployees();
+//   }, []);
 
   const deleteEmployee = async (id) => {
-    if (window.confirm("Are You Sure, You want to delete?")) {
-      try {
-        const response = await fetch(`/employee/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
-        const jsonData = await response.json();
-        console.log(jsonData);
+//     if (window.confirm("Are You Sure, You want to delete?")) {
+//       try {
+//         const response = await fetch(`/employee/${id}`,
+//           {
+//             method: "DELETE",
+//           }
+//         );
+//         const jsonData = await response.json();
+//         console.log(jsonData);
 
-        toast.success("Employee Deleted Successfully!", {
-          position: "top-center",
-        });
+//         toast.success("Employee Deleted Successfully!", {
+//           position: "top-center",
+//         });
 
-      } catch (err) {
-        console.error(err.message);
-      }
+//       } catch (err) {
+//         console.error(err.message);
+//       }
 
-      getEmployees();
-    }
+//       getEmployees();
+//     }
   };
 
 
-  if (searchQuery) {
-    employeedata = employeedata.filter(
-      (m) =>
-        m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-        m.lastname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-        m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-        m.empid.toString().startsWith(searchQuery.toString())
-    );
-  }
+//   if (searchQuery) {
+//     employeedata = employeedata.filter(
+//       (m) =>
+//         m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+//         m.lastname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+//         m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+//         m.empid.toString().startsWith(searchQuery.toString())
+//     );
+//   }
 
 
   const handleChange = (e) => {
@@ -95,7 +94,7 @@ const ShowEmployee = () => {
 
 
   //const size = 3;
-  const data = employeedata.slice(0, value);
+ // const data = employeedata.slice(0, value);
   // console.log(" selected data :",data);
 
 
@@ -117,8 +116,8 @@ const ShowEmployee = () => {
               <div className="card shadow mb-4">
                 <div className="card-header py-3">
 
-                  <h6 className="font-weight-bold text-primary">Employees Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/addemployee"><HiUserAdd /> Add Employee  </NavLink>
+                  <h6 className="font-weight-bold text-primary">Projects Table</h6>
+                  <NavLink className="float-right font-weight-bold text-success" to="/addproject"><AiFillProject /> Add Project  </NavLink>
 
                 </div>
                 <div className="card-body">
@@ -161,12 +160,14 @@ const ShowEmployee = () => {
                         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
                           <thead>
                             <tr>
-                              <th>EmployeeId</th>
-                              <th>FirstName</th>
-                              <th>LastName</th>
-                              <th>Designation</th>
-                              <th>Email</th>
-                              <th>Phone</th>
+                              <th>Project Name</th>
+                              <th>Industry Segment </th>
+                              <th>TechStack</th>
+                              <th>ThirdParty API</th>
+                              <th>Payment Gateway</th>
+                              <th>Github URL</th>
+                              <th>Project Scope</th>
+                              <th>Solution</th>
                               <th>Edit</th>
                               <th>Delete</th>
                             </tr>
@@ -184,15 +185,17 @@ const ShowEmployee = () => {
                                     </tfoot>           */}
                           <tbody>
 
-                            {data.map((employeedata, i) => (
+                            {/* {data.map((employeedata, i) => ( */}
 
-                              <tr key={employeedata._id}>
-                                <td>{employeedata.empid}</td>
-                                <td>{employeedata.firstname}</td>
-                                <td>{employeedata.lastname}</td>
-                                <td>{employeedata.Role}</td>
-                                <td>{employeedata.email}</td>
-                                <td>{employeedata.phone}</td>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
 
                                 <td>
                                   <NavLink className="text-success btn-lg" to={`/editemployee/${employeedata._id}`} ><FaEdit />  </NavLink>
@@ -200,7 +203,7 @@ const ShowEmployee = () => {
 
                                 <td>
                                   <NavLink onClick={() =>
-                                    deleteEmployee(employeedata._id)
+                                     deleteEmployee(employeedata._id)
                                   } className="text-danger btn-lg" to=""><MdDelete />
                                   </NavLink>
 
@@ -208,7 +211,7 @@ const ShowEmployee = () => {
                               </tr>
 
 
-                            ))}
+                            {/* ))} */}
                           </tbody>
 
                         </table>
@@ -235,4 +238,4 @@ const ShowEmployee = () => {
   )
 }
 
-export default ShowEmployee
+export default ShowProject

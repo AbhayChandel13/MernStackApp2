@@ -81,11 +81,14 @@ const EditEmployee = () => {
       );
       console.log(response);
 
+      toast.success("Employee Updated Successfully!", {
+        position: "top-center",
+      });
+
       
       setTimeout(function () {       
        navigate("/showemployee", { replace: true });
       }, 1000);
-
 
     } catch (err) {
       console.error(err.message);

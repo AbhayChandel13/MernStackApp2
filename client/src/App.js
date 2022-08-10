@@ -10,6 +10,8 @@ import Showadmins from './components/ShowAdmins';
 import AddEmployee from './components/AddEmployee';
 import EditEmployee from './components/EditEmployee';
 import ShowEmployee from './components/ShowEmployee';
+import AddProject from './components/AddProject';
+import ShowProject from './components/ShowProject';
  
 export const UserContext = createContext();
 
@@ -28,7 +30,9 @@ const App = () => {
     <Route path="/dashboard" element={<Dashboard />}></Route>    
     <Route path="/admins" element={<Showadmins />}></Route>
     <Route path="/showemployee" element={<ShowEmployee />}></Route>
+    <Route path="/showproject" element={<ShowProject />}></Route>
     <Route path="/addemployee" element={<AddEmployee />}></Route>
+    <Route path="/addproject" element={<AddProject />}></Route>
     <Route path="/editemployee/:id" element={<EditEmployee />}></Route>
     <Route path="/logout" element={<Logout />}></Route>
 
