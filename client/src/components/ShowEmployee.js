@@ -19,8 +19,6 @@ const ShowEmployee = () => {
   const [value, setValue] = useState(getInitialState);
   //const { state, dispatch } = useContext(UserContext);
 
-
-  //check comment 
   const getEmployees = async (e) => {
 
     try {
