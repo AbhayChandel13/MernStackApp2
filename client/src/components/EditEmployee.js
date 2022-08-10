@@ -224,12 +224,12 @@ const EditEmployee = () => {
 
                 <div className="mt-4 mb-0">
                 <div className="d-grid">
-                  <button  onClick={onSubmit}>
-                  <NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup"
+               
+                  <NavLink onClick={onSubmit} className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup"
                  value="register"
                 
                   >
-                    Update Employee</NavLink> </button></div>
+                    Update Employee</NavLink></div>
                    
                  </div>
                        

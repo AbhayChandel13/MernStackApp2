@@ -180,6 +180,20 @@ router.post('/signin', async (req, res) => {
         }
       })
 
+//Delete Employee :
+router.delete("/employee/id", async (req, res) => {
+    try {
+      const id = req.params.id;
+      const deleteEmployee = await Employee.findByIdAndDelete(req.params.id);
+      if (!req.params.id) {
+        return res.status(404).send();
+      }
+      res.send(deleteEmployee);
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  });
+
     //LOGOUT PAGE 
 
     router.get('/logout', async (req, res) => {

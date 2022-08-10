@@ -49,6 +49,26 @@ const ShowEmployee = () => {
         getEmployees();
     }, []);
 
+
+    const deleteEmployee = async (_id) => {
+        if (window.confirm("Are You Sure, You want to delete?")) {
+          try {
+            const response = await fetch(`/employee/${_id}`,
+              {
+                method: "DELETE",
+              }
+            );
+            const jsonData = await response.json();
+             console.log(jsonData);
+          } catch (err) {
+            console.error(err.message);
+          }
+         
+          getEmployees();
+        }
+      };
+
+
     if (searchQuery) {
         employeedata = employeedata.filter(
             (m) =>
@@ -167,21 +187,12 @@ const data = employeedata.slice(0,value);
                                                                                                                
                                                       <td>
                                                <NavLink className="text-success btn-lg" to={`/editemployee/${employeedata._id}`} ><FaEdit />  </NavLink>                        
-                                               {/* onClick={() => editRow(id)}
-                                               {/* <button>
-                                        <NavLink
-                                          to="/editemployee"
-                                          className="btn text-primary"
-
-                                        >
-                                          <FaEdit className="text-green-500 font-bold text-4xl p-1" />
-                                        </NavLink>
-                                      </button> */}
-                                                        
-                                                        </td>
+                                                </td>
 
                                                         <td>
-                                             <NavLink className="text-danger btn-lg" to=""><MdDelete />
+                                             <NavLink onClick={() =>
+                                          deleteEmployee(employeedata._id)
+                                        } className="text-danger btn-lg" to=""><MdDelete />
                                              </NavLink>                     
                                                         
                                                         </td>
