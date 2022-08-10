@@ -23,14 +23,15 @@ const ShowEmployee = () => {
 
     try {
 
-      const res = await fetch('/employeedata', {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "include"
-      });
+      const res = await fetch('/employeedata');
+      // , {
+      //   method: "GET",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json"
+      //   },
+      //   credentials: "include"
+      // }
       const data = await res.json();
 
       setEmployeedata(data);
@@ -50,10 +51,10 @@ const ShowEmployee = () => {
   }, []);
 
 
-  const deleteEmployee = async (_id) => {
+  const deleteEmployee = async (id) => {
     if (window.confirm("Are You Sure, You want to delete?")) {
       try {
-        const response = await fetch(`/employee/${_id}`,
+        const response = await fetch(`/employee/${id}`,
           {
             method: "DELETE",
           }

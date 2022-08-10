@@ -126,19 +126,20 @@ router.post('/signin', async (req, res) => {
 
     //about Page 
 
-    router.get('/about', authenticate, (req, res) => {
-        console.log("Hello from About");
-        res.send(req.rootUser);
-    });
+    // router.get('/about', authenticate, (req, res) => {
+    //     console.log("Hello from About");
+    //     res.send(req.rootUser);
+    // });
 
     //Contact  Page 
 
-    router.get('/contact', authenticate, (req, res) => {
-        console.log("Hello from Contact ");
-        res.send(req.rootUser);
-    });
+    // router.get('/contact', authenticate, (req, res) => {
+    //     console.log("Hello from Contact ");
+    //     res.send(req.rootUser);
+    // });
 
-    //get User data for homepage and contact page
+    
+    // get User data for homepage and contact page
 
     router.get('/getdata', authenticate, (req, res) => {
         console.log("Hello ");
@@ -150,7 +151,7 @@ router.post('/signin', async (req, res) => {
 
     //get Single Employee For update :
     
-    router.get('/editemployee/:id', authenticate,async (req, res) => {
+    router.get('/getemployee/:id', authenticate,async (req, res) => {
         // console.log("Hello ");
         // res.send(req.rootUser);
         try {
@@ -167,7 +168,7 @@ router.post('/signin', async (req, res) => {
     });
    
     //Update the Employee data :
-    router.put("/editemployee/:id",async(req,res)=>{
+    router.put("/employee/:id",async(req,res)=>{
         try{
             const _id =req.params.id;
             const updateEmployee = await Employee.findByIdAndUpdate(_id,req.body,{
@@ -181,10 +182,10 @@ router.post('/signin', async (req, res) => {
       })
 
 //Delete Employee :
-router.delete("/employee/id", async (req, res) => {
+  router.delete("/employee/:id", async (req, res) => {
     try {
-      const id = req.params.id;
-      const deleteEmployee = await Employee.findByIdAndDelete(req.params.id);
+      const _id = req.params.id;
+      const deleteEmployee = await Employee.findByIdAndDelete(_id);
       if (!req.params.id) {
         return res.status(404).send();
       }

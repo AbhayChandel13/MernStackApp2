@@ -238,7 +238,7 @@ const Signup = () => {
                     </div>
                     <div className="text-center">
                         {/* <a className="small" href="login.html">Already have an account? Login!</a> */}
-                        <NavLink classNameName="nav-link " to="/login">Already have an account? Login!</NavLink>
+                        <NavLink className="nav-link " to="/login">Already have an account? Login!</NavLink>
                     </div>
                 </div>
             </div>

@@ -9,14 +9,15 @@ const Topnavbar = () => {
 
     const userHomePage = async () => {
         try {
-            const res = await fetch('/getdata', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
+            const res = await fetch('/getdata')
+            // , {
+            //     method: "GET",
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     },
+            // }
             const data = await res.json();
-            // console.log(data);
+             console.log(data);
             setUserName(data.name);
             setShow(true);
 

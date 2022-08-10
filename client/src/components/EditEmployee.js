@@ -8,8 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-
-
 const EditEmployee = () => {
     let id = window.location.pathname.split("/editemployee/")[1];
     // console.log("ID :",id);
@@ -33,8 +31,16 @@ const EditEmployee = () => {
 
     const getSingleEmployee = async () => {
       try {
-        const response = await fetch(
-          `/editemployee/${id}`
+        const response = await fetch(`/getemployee/${id}`,{
+          method: "GET",
+          headers: {            
+            Accept: "application/json",
+            "Content-Type": "application/json",
+
+          },
+          credentials: "include",
+         
+        }
         );
         const jsonData = await response.json();
         console.log(jsonData);
@@ -55,11 +61,6 @@ const EditEmployee = () => {
    const  onSubmit= async(e)=>{
     e.preventDefault();
 
-    setTimeout(function () {
-      //window.location.replace("/ordertable");
-     navigate("/showemployee", { replace: true });
-    }, 1000);
-
     try {     
       let body = {
         firstname,
@@ -71,7 +72,7 @@ const EditEmployee = () => {
 
       };
  
-      const response = await fetch(`/editemployee/${id}`,
+      const response = await fetch(`/employee/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -80,9 +81,12 @@ const EditEmployee = () => {
       );
       console.log(response);
 
-      //window.location = "/ordertable";
-      // const jsonData = await response.json();
-      // console.log(jsonData);
+      
+      setTimeout(function () {       
+       navigate("/showemployee", { replace: true });
+      }, 1000);
+
+
     } catch (err) {
       console.error(err.message);
     }

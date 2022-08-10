@@ -83,7 +83,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-Name 
+
 
                                 <div className="col-xl-3 col-md-6 mb-4">
                                     <div className="card border-left-success shadow h-100 py-2">
@@ -123,8 +123,8 @@ Name
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div classNameName ="col-auto">
-                                                    <i classNameName ="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                <div className ="col-auto">
+                                                    <i className ="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
