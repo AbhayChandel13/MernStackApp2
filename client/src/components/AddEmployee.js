@@ -75,11 +75,12 @@ const AddEmployee = () => {
             toast.success("Employee Added Successfully!", {
                 position: "top-center",
             });
-            //window.alert("Registration Successful");
             console.log("Employee Added Successful");
 
-            // history.push("/login");
-            navigate("/showemployee", { replace: true });
+            setTimeout(function () {
+                navigate("/showemployee", { replace: true });
+              }, 2000);
+            
         }
 
     }

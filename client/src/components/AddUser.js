@@ -44,37 +44,40 @@ const AddUser = () => {
 
     const PostData = async (e) => {
         e.preventDefault();
+        try {
+            const {name, email, phone,password,cpassword} = user;
+            // const {roleid} = role;
+            
+            let res = await fetch("/adduser", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", },
+                body: JSON.stringify({name, email, phone,password,cpassword}),
+            });
+    
+            const data = await res.json(); 
 
-        const {name, email, phone,password,cpassword} = user;
-        // const {roleid} = role;
+            if (res.status === 422 || !data) {              
+                toast.error("Invalid User Data", {
+                    position: "top-center",
+                });
+                console.log("Invalid User Data");
+            }
+            else {
+                toast.success("User Added Successfully!", {
+                    position: "top-center",
+                });                
+                console.log("User Added Successful");
+    
+                   setTimeout(function () {
+                    navigate("/admins", { replace: true });
+                  }, 1000);
+            
+            }
+    
+        } catch (error) {
+            console.log(error);
+        }
         
-        let res = await fetch("/adduser", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({name, email, phone,password,cpassword}),
-        });
-
-     
-
-        const data = await res.json();       
-
-        if (res.status === 422 || !data) {
-            //window.alert("Invalid Registration");
-            toast.error("Invalid User Data", {
-                position: "top-center",
-            });
-            console.log("Invalid User Data");
-        }
-        else {
-            toast.success("User Added Successfully!", {
-                position: "top-center",
-            });
-            //window.alert("Registration Successful");
-            console.log("User Added Successful");
-
-            // history.push("/login");
-            navigate("/admins", { replace: true });
-        }
 
     }
 

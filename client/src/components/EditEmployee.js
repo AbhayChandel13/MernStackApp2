@@ -85,7 +85,6 @@ const EditEmployee = () => {
         position: "top-center",
       });
 
-      
       setTimeout(function () {       
        navigate("/showemployee", { replace: true });
       }, 1000);

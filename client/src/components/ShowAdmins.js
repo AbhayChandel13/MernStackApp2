@@ -71,10 +71,13 @@ const Showadmins = () => {
             );
             const jsonData = await response.json();
             console.log(jsonData);
-    
-            toast.success("User Deleted Successfully!", {
-              position: "top-center",
-            });
+
+            setTimeout(function () {    
+            // navigate("/admins", { replace: true });
+               toast.success("User Deleted Successfully!", {
+                position: "top-center",
+              });
+              }, 2000);
     
           } catch (err) {
             console.error(err.message);
@@ -93,6 +96,7 @@ const Showadmins = () => {
 
 
             <div id="content">
+                <ToastContainer />
 
               <Topnavbar />
          
