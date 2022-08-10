@@ -47,7 +47,7 @@ const Sidenavbar = () => {
         <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Functionality:</h6>
             <NavLink className="collapse-item" to="/admins"><i className="fas fa-fw fa-table"></i> Show Admins</NavLink>
-            <NavLink className="collapse-item" to=""><HiUserAdd />  Add Admin</NavLink>
+            <NavLink className="collapse-item" to="/adduser"><HiUserAdd />  Add Admin</NavLink>
             
         </div>
     </div>

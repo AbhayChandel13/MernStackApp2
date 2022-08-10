@@ -57,8 +57,8 @@ const Showadmins = () => {
     if (searchQuery) {
         usersdata = usersdata.filter(
             (m) =>
-                m.name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-                m.work.toLowerCase().startsWith(searchQuery.toLowerCase())
+                m.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+                
         );
     }
 
@@ -127,7 +127,7 @@ const Showadmins = () => {
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Work</th>
+                                            <th>Password</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -149,7 +149,7 @@ const Showadmins = () => {
                                                         <td>{usersdata.name}</td>
                                                         <td>{usersdata.email}</td>
                                                         <td>{usersdata.phone}</td>
-                                                        <td>{usersdata.work}</td>
+                                                        <td>{usersdata.password}</td>
                                                         <td>
                                                 <button className="btn text-success btn-lg"><FaEdit />                           
                                                         </button>

@@ -18,10 +18,10 @@ router.get('/', (req, res) => {
 
 //Using Async and Await :--
 
-router.post('/register', async (req, res) => {
-    const { name, email, phone, work, password, cpassword } = req.body;
+router.post('/adduser', async (req, res) => {
+    const { name, email, phone, password, cpassword } = req.body;
 
-    if (!name || !email || !phone || !work || !password || !cpassword) {
+    if (!name || !email || !phone || !password || !cpassword) {
         return res.status(422).json({ error: "Please Filled the correct data " })
     }
 
@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
             return res.status(422).json({ error: "Password are not matching" });
         }
         else {
-            const user = new User({ name, email, phone, work, password, cpassword });
+            const user = new User({ name, email, phone, password, cpassword });
             await user.save()
             res.status(201).json({ message: "User Registered Successfully " });
         }
@@ -94,7 +94,7 @@ router.post('/signin', async (req, res) => {
         // console.log(userLogin);
 
         if (userLogin) {
-            const isMatch = await bcrypt.compare(password, userLogin.password);
+           // const isMatch = await bcrypt.compare(password, userLogin.password);
 
             token = await userLogin.generateAuthToken();
             console.log(token);
@@ -104,7 +104,7 @@ router.post('/signin', async (req, res) => {
                 httpOnly: true
             })
 
-            if (!isMatch) {
+            if (!userLogin) {
                 res.status(400).json({ error: "Invalid Credentials pass" });
             } else {
                 res.json({ message: "User Signin Successfully" });
@@ -138,7 +138,7 @@ router.post('/signin', async (req, res) => {
     //     res.send(req.rootUser);
     // });
 
-    
+
     // get User data for homepage and contact page
 
     router.get('/getdata', authenticate, (req, res) => {

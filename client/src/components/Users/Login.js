@@ -25,7 +25,7 @@ const Login = () => {
 
         const data = res.json();
         if (res.status === 400 || !data) {
-            toast.error(" Invalid Invalid Credentials", {
+            toast.error(" Invalid  Credentials", {
                 position: "top-center",
             });
 

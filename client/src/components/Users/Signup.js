@@ -159,8 +159,8 @@ const Signup = () => {
                                                 </div>
                                             </form>
                                         </div>
-                                        <div classNameName="card-footer text-center py-3">
-                                            <div classNameName="small"> <NavLink classNameName="nav-link " to="/login">Login Have an account? Go to login </NavLink></div>
+                                        <div className="card-footer text-center py-3">
+                                            <div className="small"> <NavLink className="nav-link " to="/login">Login Have an account? Go to login </NavLink></div>
                                         </div>
                                     </div>
                                 </div>
@@ -169,10 +169,10 @@ const Signup = () => {
                     </main>
                 </div>
                 <div id="layoutAuthentication_footer">
-                    <footer classNameName="py-4 bg-light mt-auto">
-                        <div classNameName="container-fluid px-4">
-                            <div classNameName="d-flex align-items-center justify-content-between small">
-                                <div classNameName="text-muted">Copyright &copy; Your Website 2022</div>
+                    <footer className="py-4 bg-light mt-auto">
+                        <div className="container-fluid px-4">
+                            <div className="d-flex align-items-center justify-content-between small">
+                                <div className="text-muted">Copyright &copy; Your Website 2022</div>
                                 <div>
                                     <a href="#">Privacy Policy</a>
                                     &middot;

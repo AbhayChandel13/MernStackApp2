@@ -104,7 +104,7 @@ const AddEmployee = () => {
         <div className="container-fluid">        
         <div className="card shadow mb-4"> 
         <div className="card-header py-3 ">
-                            <h6 className="m-0 font-weight-bold text-primary"><HiUserAdd />  Add User</h6>
+                            <h6 className="m-0 font-weight-bold text-primary"><HiUserAdd />  Add Employee</h6>
                         </div>
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
