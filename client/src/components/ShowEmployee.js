@@ -35,7 +35,7 @@ const ShowEmployee = () => {
       const data = await res.json();
 
       setEmployeedata(data);
-      // console.log("ye hai request vala data",data);
+      console.log("tableshowEmloyeeData :",data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -75,7 +75,7 @@ const ShowEmployee = () => {
       (m) =>
         m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
         m.lastname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-        m.designation.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+        m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
         m.empid.toString().startsWith(searchQuery.toString())
     );
   }
