@@ -152,6 +152,7 @@ const Showadmins = () => {
                                         <tr>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Role</th>
                                             <th>Phone</th>
                                             <th>Password</th>
                                             {/* <th>Edit</th> */}
@@ -163,6 +164,7 @@ const Showadmins = () => {
                                                     <tr>
                                                         <td>{usersdata.name}</td>
                                                         <td>{usersdata.email}</td>
+                                                        <td>{usersdata.role}</td>
                                                         <td>{usersdata.phone}</td>
                                                         <td>{usersdata.password}</td>
                                                         {/* <td>

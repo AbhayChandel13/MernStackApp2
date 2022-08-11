@@ -23,7 +23,7 @@ const AddUser = () => {
     });
         
     
-    // const [role, setRole] = useState("");
+     const [userrole, setRole] = useState({role:""});
 
     let name, value;
     const handleInputs = (e) => {
@@ -34,24 +34,25 @@ const AddUser = () => {
         setUser({ ...user, [name]: value })
     }
 
-    // const handleChange = (e) => {
-    //   name = e.target.name;
-    //   value = e.target.value;
+    const handleChange = (e) => {
+      name = e.target.name;
+      value = e.target.value;
 
-    //   setRole({...role,[name]: value});
-    //   };
-    //   console.log(role);
+      setRole({...userrole,[name]: value});
+      };
+
+      console.log(userrole);
 
     const PostData = async (e) => {
         e.preventDefault();
         try {
             const {name, email, phone,password,cpassword} = user;
-            // const {roleid} = role;
+            const {role} = userrole;
             
-            let res = await fetch("/adduser", {
+            let res = await fetch("/adduser", { 
                 method: "POST",
                 headers: { "Content-Type": "application/json", },
-                body: JSON.stringify({name, email, phone,password,cpassword}),
+                body: JSON.stringify({name,email,phone,password,cpassword,role }),
             });
     
             const data = await res.json(); 
@@ -105,6 +106,25 @@ const AddUser = () => {
                         </div>
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
+
+        <div className="form-group col-sm-8" id="role">
+                        {/* <label>roleid */}
+                        <select id="currvalue"
+                          name="role"  
+                          style={{ borderRadius: '30px'}}
+                        //   style={{border-radius:"20px"}}                        
+                          className="custom-select custom-select-lg col-lg-12"
+                          value={userrole.role} 
+                          onChange={handleChange} 
+                          >
+                        <option value="">--Select Role--</option>
+                        <option value="super_admin">Super Admin</option>
+                        <option value="admin">Admin</option>
+                        <option value="User">User</option>
+                       
+                        </select> 
+                        {/* </label> */}
+                        </div>
 
                         <div className="form-group col-sm-8 ">
                                 <input 

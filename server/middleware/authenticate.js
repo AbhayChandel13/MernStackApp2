@@ -23,4 +23,9 @@ const Authenticate = async (req,res,next) =>{
 
 }
 
+// const checkRole = roles => (req, res, next) =>
+//   !roles.includes(req.User.role)
+//     ? res.status(401).json("Unauthorized")
+//     : next();
+
 module.exports = Authenticate;
