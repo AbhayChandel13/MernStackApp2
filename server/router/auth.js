@@ -157,7 +157,7 @@ router.post('/signin', async (req, res) => {
     // get User data for homepage and contact page
 
     router.get('/getdata', authenticate, (req, res) => {
-        console.log("Hello ");
+        // console.log("Hello ");
         res.send(req.rootUser);
     });
 
@@ -213,7 +213,7 @@ router.post('/signin', async (req, res) => {
     //LOGOUT PAGE 
 
     router.get('/logout', async (req, res) => {
-        console.log("Hello logout");
+       //console.log("Hello logout");
         // res.clearCookie('jwtoken');     
         // req.user.tokens = req.user.tokens.filter((currElement)=>{
         //     return currElement.token != req.token

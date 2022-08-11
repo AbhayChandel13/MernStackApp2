@@ -6,7 +6,7 @@ import { HiUserAdd } from 'react-icons/hi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+ 
 
 
 const AddUser = () => {
@@ -17,7 +17,7 @@ const AddUser = () => {
     const [user, setUser] = useState({
         name: "",
         email: "",
-        phone: "",       
+        phone: "",
         password: "",
         cpassword: ""
     });

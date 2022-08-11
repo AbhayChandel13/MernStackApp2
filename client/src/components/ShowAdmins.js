@@ -104,8 +104,8 @@ const Showadmins = () => {
                                       <div className="card shadow mb-4">
                         <div className="card-header py-3">
                      
-                        <h6 className="font-weight-bold text-primary">Admins Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add Admin  </NavLink>
+                        <h6 className="font-weight-bold text-primary">Users Table</h6>
+                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add Users  </NavLink>
                         
                         
                            
@@ -154,21 +154,10 @@ const Showadmins = () => {
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Password</th>
-                                            <th>Edit</th>
+                                            {/* <th>Edit</th> */}
                                             <th>Delete</th>
                                         </tr>
-                                    </thead>
-                                    {/* <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Work</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                            
-                                        </tr>
-                                    </tfoot>           */}
+                                    </thead>                                    
                                     {usersdata.map((usersdata, i) => (
                                                 <tbody key={usersdata._id}>
                                                     <tr>
@@ -176,14 +165,11 @@ const Showadmins = () => {
                                                         <td>{usersdata.email}</td>
                                                         <td>{usersdata.phone}</td>
                                                         <td>{usersdata.password}</td>
-                                                        <td>
-                                                <button className="btn text-success btn-lg"><FaEdit />                           
-                                                        </button>
-                                                        </td>
+                                                        {/* <td>
+                                                        <NavLink className="text-success btn-lg" to={`/edituser/${usersdata._id}`} ><FaEdit />  </NavLink>
+                                                        </td> */}
 
-                                                        <td>
-                                                {/* <button className="btn text-danger btn-lg"><MdDelete />                           
-                                                        </button> */}
+                                                        <td>                                               
                                                          <NavLink onClick={() =>
                                     deleteEmployee(usersdata._id)
                                   } className="text-danger btn-lg" to=""><MdDelete />
