@@ -8,13 +8,12 @@ const authenticate = require("../middleware/authenticate");
  require('../db/conn');
  const User = require('../model/userSchema');
  const Employee = require('../model/empSchema');
- const { db } = require('../model/userSchema');
 
 
  router.get('/', (req, res) => {
     res.send(`Hello Form the server Router js`);
 
- })
+ });
 
  //Add User (Admin) Using Async and Await :--
 
@@ -107,7 +106,7 @@ const authenticate = require("../middleware/authenticate");
 
         const userLogin = await User.findOne({ email: email });
        
-
+    //    console.log(userLogin);
         if (userLogin) {
            // const isMatch = await bcrypt.compare(password, userLogin.password);
 

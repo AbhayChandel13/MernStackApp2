@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const express  = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
+//const mernDataRoutes = require("./router/routes");
 
 
 app.use(cookieParser());
@@ -11,19 +12,18 @@ require('./db/conn');
 
 app.use(express.json());
 
-//we link the router files to make our  route easy 
-app.use(require('./router/auth'));
-
 const PORT = process.env.PORT;
 
-// const DB = 'mongodb+srv://AbhayChandel:chandelabhay@cluster0.w752yjc.mongodb.net/mernstack?retryWrites=true&w=majority';
+// we link the router files to make our  route easy 
+// app.get('/', (req, res) => {
+//     res.send(`Hello Form the server `);
+
+//  })
+app.use(require('./router/auth'));
+//app.use("/api/mernstack",  mernDataRoutes);
 
 
 
-app.get('/contact',(req,res)=>{
-    res.cookie("Test",'Abhay');
-   res.send('Hello from the contact page ');
-});
 
 app.listen(PORT,()=>{
     console.log(`server is running at port ${PORT}`);
