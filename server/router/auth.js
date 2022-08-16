@@ -8,6 +8,7 @@ const authenticate = require("../middleware/authenticate");
  require('../db/conn');
  const User = require('../model/userSchema');
  const Employee = require('../model/empSchema');
+ const Projects = require('../model/projectSchema')
 
 
  router.get('/', (req, res) => {
@@ -84,6 +85,38 @@ const authenticate = require("../middleware/authenticate");
         const employee = new Employee({ firstname, lastname, email, empid, phone, roleid});
           await employee.save();
           res.status(201).json({ message: "Employee Created Successfully " });
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+ })
+
+
+ //Creating new project
+
+ router.post('/project', async (req, res) => {
+    const {projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution} = req.body;
+
+    // if (!firstname || !lastname || !email || !empid || !phone || !roleid) {
+    //     return res.status(422).json({ error: "Please Fill  correct data " })
+    // }
+
+    try {
+        // const employeeExist = await Employee.findOne({ email: email })
+        // if (employeeExist) {
+        //     return res.status(422).json({ error: "email already Exist" });
+        // }
+       
+        // else {
+        //     const user = new User({ name, email, phone, work, password, cpassword });
+        //     await user.save()
+        //     res.status(201).json({ message: "User Registered Successfully " });
+        // }
+        const project = new Projects({projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution});
+          await project.save();
+          res.status(201).json({ message: "Project Created Successfully " });
 
     }
     catch (err) {

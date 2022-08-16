@@ -17,7 +17,16 @@ const AddProject = () => {
     //     return value;
     //   };
 
-    const [employee, setEmployee] = useState({ });  
+    const [project, setProject] = useState({
+       projectname:"",
+       industrysegment:"",
+       techstack:"",
+       thirdpartyapi:"",
+       paymentgateway:"",
+       githuburl:"",
+       projectscope:"",
+       solution:"" 
+     });  
     const [role, setRole] = useState("");
 
     let name, value;
@@ -26,7 +35,7 @@ const AddProject = () => {
         name = e.target.name;
         value = e.target.value;
 
-        setEmployee({ ...employee, [name]: value })
+        setProject({ ...project, [name]: value })
     }
 
     const handleChange = (e) => {
@@ -43,13 +52,13 @@ const AddProject = () => {
     const PostData = async (e) => {
         e.preventDefault();
 
-        const {firstname,lastname, email, empid, phone} = employee;
-        const {roleid} = role;
+        const{projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution} = project;
+       //const {roleid} = role;
         
-        let res = await fetch("/employee", {
+        let res = await fetch("/project", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({firstname,lastname, email, empid, phone, roleid}),
+            body: JSON.stringify({projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution}),
         });
 
      
@@ -58,21 +67,22 @@ const AddProject = () => {
 
         if (res.status === 422 || !data) {
             //window.alert("Invalid Registration");
-            toast.error(" Invalid Employee Data", {
+            toast.error(" Invalid Project Data", {
                 position: "top-center",
             });
-            console.log("Invalid Employee Data");
+            console.log("Invalid Project Data");
         }
         else {
-            toast.success("Employee Added Successfully!", {
+            toast.success("Project Added Successfully!", {
                 position: "top-center",
             });
             //window.alert("Registration Successful");
-            console.log("Employee Added Successful");
+            console.log("Project Added Successful");
 
             // history.push("/login");
-            navigate("/showemployee", { replace: true });
+            navigate("/showproject", { replace: true });
         }
+
 
     }
 
@@ -128,24 +138,24 @@ const AddProject = () => {
                         <div className="form-group col-sm-8 ">
                                 <input 
                                 type="text"
-                                name="Projectname"
+                                name="projectname"
                                 className="form-control input-lg  form-control-user "
-                                id="ProjectName"
+                                id="projectname"
                                 placeholder="Enter Project Name"
-                                // value={employee.firstname}
-                                // onChange={handleInputs}
+                                value={project.projectname}
+                                onChange={handleInputs}
                                 />                        
                         </div>                     
                         
                          <div className="form-group col-sm-8">
                                 <input
                                   type="text"
-                                  name="Industrysegment"
+                                  name="industrysegment"
                                   className="form-control form-control-user"
-                                  id="Industrysegment"
+                                  id="industrysegment"
                                   placeholder="Enter Idustry Segment" 
-                                //   value={employee.lastname}
-                                //   onChange={handleInputs} 
+                                  value={project.industrysegment}
+                                  onChange={handleInputs} 
                                   />
                         </div>
                       
@@ -157,53 +167,53 @@ const AddProject = () => {
                             className="form-control form-control-user" 
                             id="techstack"
                             placeholder="Enter Tech Stack"
-                            // value={employee.email}
-                            // onChange={handleInputs} 
+                            value={project.techstack}
+                            onChange={handleInputs} 
                             />
                         </div>
                  
                         <div className="form-group col-sm-8">
                                 <input 
                                 type="text" 
-                                name="api"
+                                name="thirdpartyapi"
                                 className="form-control form-control-user"
-                                id="api" 
+                                id="thirdpartyapi" 
                                 placeholder="Enter Third Party API "
-                                // value={employee.empid}
-                                // onChange={handleInputs} 
+                                value={project.thirdpartyapi}
+                                onChange={handleInputs} 
                                 />
                             </div>
                             <div className="form-group col-sm-8">
                                 <input 
                                 type="text" 
-                                name="payment"
+                                name="paymentgateway"
                                 className="form-control form-control-user"
-                                id="payment"                                 
+                                id="paymentgateway"                                 
                                 placeholder="Enter Payment GateWay"
-                                // value={employee.phone}
-                                // onChange={handleInputs} 
+                                value={project.paymentgateway}
+                                onChange={handleInputs} 
                                 />
                             </div>
                             <div className="form-group col-sm-8">
                                 <input 
                                 type="text" 
-                                name="giturl"
+                                name="githuburl"
                                 className="form-control form-control-user"
-                                id="giturl"                                
+                                id="githuburl"                                
                                 placeholder="Enter Github URL"
-                                // value={employee.phone}
-                                // onChange={handleInputs} 
+                                value={project.githuburl}
+                                onChange={handleInputs} 
                                 />
                             </div>
                             <div className="form-group col-sm-8">
                                 <input 
                                 type="text" 
-                                name="scope"
+                                name="projectscope"
                                 className="form-control form-control-user"
-                                id="scope"                                
+                                id="projectscope"                                
                                 placeholder="Enter Project Scope"
-                                // value={employee.phone}
-                                // onChange={handleInputs} 
+                                value={project.projectscope}
+                                onChange={handleInputs} 
                                 />
                             </div>
                             <div className="form-group col-sm-8">
@@ -213,8 +223,8 @@ const AddProject = () => {
                                 className="form-control form-control-user"
                                 id="solution"                                 
                                 placeholder="Enter Solution"
-                                // value={employee.phone}
-                                // onChange={handleInputs} 
+                                value={project.solution}
+                                onChange={handleInputs} 
                                 />
                             </div>
                         
