@@ -116,31 +116,7 @@ const EditEmployee = () => {
                         </div>
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
-
-        {/* <div className="form-group col-sm-8" id="roleid">
-                       
-                        <select id="currvalue"
-                          name="roleid"  
-                          style={{ borderRadius: '30px'}}                                       
-                          className="custom-select custom-select-lg col-lg-12"
-                          value={role.roleid} 
-                          onChange={handleChange} 
-                          >
-                        <option value="">--Select Designation--</option>
-                        <option value="101">Manager</option>
-                        <option value="102">Team Leader</option>
-                        <option value="103">Sr. frontend Developer</option>
-                        <option value="104">Sr. Backend Developer</option>
-                        <option value="105">Designer</option>                      
-                        <option value="106">Traniee</option>
-                        <option value="107">Hr</option>
-                        <option value="108">Backend Developer</option>
-                        <option value="109">frontend Developer</option>
-                        </select> 
-                  
-                        </div> */}
-                        
-                      
+      
                         <div className="form-group col-sm-8 ">
                                 <input 
                                 type="text"
@@ -239,22 +215,15 @@ const EditEmployee = () => {
                           onClick={onSubmit}
                           className="btn btn-primary btn-user btn-block"
                           to="/"
-                          name="signup"
-                          id="signup"
-                          value="register"
+                        //   name="signup"
+                        //   id="signup"
+                        //   value="register"
                         >
                           Update Project
                         </NavLink>
                       </div>
                     </div>
-                        
-
-                {/* <div className="mt-4 mb-0">
-                <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="addproject" id="addproject" value="addproject" onClick={PostData}>Add Project</NavLink></div>
-                 </div> */}
-                       
-                       
-                        
+                  
                         
          </form>
          </div>
