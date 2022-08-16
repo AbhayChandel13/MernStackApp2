@@ -94,7 +94,7 @@ const ShowProject = () => {
 
 
   //const size = 3;
- // const data = employeedata.slice(0, value);
+  const data = projectdata.slice(0, value);
   // console.log(" selected data :",data);
 
 
@@ -185,17 +185,17 @@ const ShowProject = () => {
                                     </tfoot>           */}
                           <tbody>
 
-                            {/* {data.map((employeedata, i) => ( */}
+                            {data.map((projectdata, i) => (
 
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                              <tr key={projectdata._id}>
+                                <td>{projectdata.projectname}</td>
+                                <td>{projectdata.industrysegment}</td>
+                                <td>{projectdata.techstack}</td>
+                                <td>{projectdata.thirdpartyapi}</td>
+                                <td>{projectdata.paymentgateway}</td>
+                                <td>{projectdata.githuburl}</td>
+                                <td>{projectdata.projectscope}</td>
+                                <td>{projectdata.solution}</td>
 
                                 <td>
                                   <NavLink className="text-success btn-lg" 
@@ -214,7 +214,7 @@ const ShowProject = () => {
                               </tr>
 
 
-                            {/* ))} */}
+                          ))} 
                           </tbody>
 
                         </table>
