@@ -17,40 +17,40 @@ const ShowProject = () => {
   };
 
   let [searchQuery, setSearchQuery] = useState("");
-  let [employeedata, setEmployeedata] = useState([]);
+  let [projectdata, setProjectdata] = useState([]);
   const [value, setValue] = useState(getInitialState);
   //const { state, dispatch } = useContext(UserContext);
 
-//   const getEmployees = async (e) => {
+  const getProjects = async (e) => {
 
-//     try {
+    try {
 
-//       const res = await fetch('/employeedata');
-//       // , {
-//       //   method: "GET",
-//       //   headers: {
-//       //     Accept: "application/json",
-//       //     "Content-Type": "application/json"
-//       //   },
-//       //   credentials: "include"
-//       // }
-//       const data = await res.json();
+      const res = await fetch('/projectsdata');
+      // , {
+      //   method: "GET",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json"
+      //   },
+      //   credentials: "include"
+      // }
+      const data = await res.json();
 
-//       setEmployeedata(data);
-//       console.log("tableshowEmloyeeData :",data);
+      setProjectdata(data);
+      console.log("tableshowProjectsData :",data);
 
-//       if (!res.status === 200) {
-//         const error = new Error(res.error);
-//         throw error;
-//       }
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
 
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-//   useEffect(() => {
-//     getEmployees();
-//   }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   const deleteEmployee = async (id) => {
 //     if (window.confirm("Are You Sure, You want to delete?")) {
@@ -206,7 +206,7 @@ const ShowProject = () => {
 
                                 <td>
                                   <NavLink onClick={() =>
-                                     deleteEmployee(employeedata._id)
+                                     deleteEmployee(projectdata._id)
                                   } className="text-danger btn-lg" to=""><MdDelete />
                                   </NavLink>
 
