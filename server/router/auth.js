@@ -125,6 +125,16 @@ const authenticate = require("../middleware/authenticate");
 
  })
 
+ //Get Project data from project collection
+
+ router.get("/projectsdata", async (req, res) => {
+    try {
+        const projectsdata = await Projects.find();
+        res.send(projectsdata);
+    } catch (err) {
+        res.send(err);
+    }
+});
 
  //login route:--
  router.post('/signin', async (req, res) => {
