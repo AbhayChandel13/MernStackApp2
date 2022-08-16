@@ -120,4 +120,4 @@ const Sidenavbar = () => {
   )
 }
 
-export default Sidenavbar
+export default Sidenavbar;
