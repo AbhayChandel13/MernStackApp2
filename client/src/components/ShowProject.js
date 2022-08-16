@@ -172,17 +172,7 @@ const ShowProject = () => {
                               <th>Delete</th>
                             </tr>
                           </thead>
-                          {/* <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Work</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                            
-                                        </tr>
-                                    </tfoot>           */}
+                          
                           <tbody>
 
                             {data.map((projectdata, i) => (
