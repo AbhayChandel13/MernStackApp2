@@ -76,15 +76,15 @@ const ShowProject = () => {
   };
 
 
-//   if (searchQuery) {
-//     employeedata = employeedata.filter(
-//       (m) =>
-//         m.firstname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-//         m.lastname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-//         m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-//         m.empid.toString().startsWith(searchQuery.toString())
-//     );
-//   }
+  if (searchQuery) {
+    projectdata = projectdata.filter(
+      (m) =>
+        m.projectname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+        m.industrysegment.toLowerCase().startsWith(searchQuery.toLowerCase())
+        // m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+        // m.empid.toString().startsWith(searchQuery.toString())
+    );
+  }
 
 
   const handleChange = (e) => {
