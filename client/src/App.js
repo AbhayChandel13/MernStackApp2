@@ -9,6 +9,7 @@ import { initialState,reducer } from './reducer/UseReducer';
 import Showadmins from './components/ShowAdmins';
 import AddEmployee from './components/AddEmployee';
 import EditEmployee from './components/EditEmployee';
+import EditProject from './components/EditProject';
 import ShowEmployee from './components/ShowEmployee';
 import AddProject from './components/AddProject';
 import ShowProject from './components/ShowProject';
@@ -36,6 +37,7 @@ const App = () => {
     <Route path="/addemployee" element={<AddEmployee />}></Route>
     <Route path="/addproject" element={<AddProject />}></Route>
     <Route path="/editemployee/:id" element={<EditEmployee />}></Route>
+    <Route path="/editproject/:id" element={<EditProject />}></Route>
     <Route path="/logout" element={<Logout />}></Route>
 
 

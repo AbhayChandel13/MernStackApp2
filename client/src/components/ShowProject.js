@@ -198,10 +198,7 @@ const ShowProject = () => {
                                 <td>{projectdata.solution}</td>
 
                                 <td>
-                                  <NavLink className="text-success btn-lg" 
-                                 // to={`/editemployee/${employeedata._id}`}
-                                 to=""
-                                   ><FaEdit />  </NavLink>
+                                  <NavLink className="text-success btn-lg" to={`/editproject/${projectdata._id}`} ><FaEdit />  </NavLink>
                                 </td>
 
                                 <td>

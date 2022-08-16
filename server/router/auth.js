@@ -8,7 +8,7 @@ const authenticate = require("../middleware/authenticate");
  require('../db/conn');
  const User = require('../model/userSchema');
  const Employee = require('../model/empSchema');
- const Projects = require('../model/projectSchema')
+ const Projects = require('../model/projectSchema') 
 
 
  router.get('/', (req, res) => {
@@ -212,16 +212,36 @@ const authenticate = require("../middleware/authenticate");
             res.status(500).send(e);
           }
     });
+
+    
+    //get Single Project For update :
+    
+    router.get('/getproject/:id', authenticate,async (req, res) => {
+        // console.log("Hello ");
+        // res.send(req.rootUser);
+        try {
+            const _id = req.params.id;
+            const projectdata = await Projects.findById(_id);
+            if (!projectdata) {
+              return res.status(404).send();
+            } else {
+              res.send(projectdata);
+            }
+          } catch (e) {
+            res.status(500).send(e);
+          }
+    });
+   
    
     //Update the Employee data :
-    router.put("/employee/:id",async(req,res)=>{
+    router.put("/project/:id",async(req,res)=>{
         try{
             const _id =req.params.id;
-            const updateEmployee = await Employee.findByIdAndUpdate(_id,req.body,{
+            const updateProject = await Projects.findByIdAndUpdate(_id,req.body,{
               new:true
             });
       
-            res.send(updateEmployee);
+            res.send(updateProject);
         }catch(e){
           res.status(404).send(e);
         }
