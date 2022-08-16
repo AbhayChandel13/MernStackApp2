@@ -241,6 +241,20 @@ const authenticate = require("../middleware/authenticate");
     }
   });
 
+  //Delete Project :
+  router.delete("/project/:id", async (req, res) => {
+    try {
+      const _id = req.params.id;
+      const deleteProject = await Projects.findByIdAndDelete(_id);
+      if (!req.params.id) {
+        return res.status(404).send();
+      }
+      res.send(deleteProject);
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  });
+
     //LOGOUT PAGE 
 
     router.get('/logout', async (req, res) => {         

@@ -52,27 +52,27 @@ const ShowProject = () => {
     getProjects();
   }, []);
 
-  const deleteEmployee = async (id) => {
-//     if (window.confirm("Are You Sure, You want to delete?")) {
-//       try {
-//         const response = await fetch(`/employee/${id}`,
-//           {
-//             method: "DELETE",
-//           }
-//         );
-//         const jsonData = await response.json();
-//         console.log(jsonData);
+  const deleteProject = async (id) => {
+    if (window.confirm("Are You Sure, You want to delete?")) {
+      try {
+        const response = await fetch(`/project/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        const jsonData = await response.json();
+        console.log(jsonData);
 
-//         toast.success("Employee Deleted Successfully!", {
-//           position: "top-center",
-//         });
+        toast.success("Project Deleted Successfully!", {
+          position: "top-center",
+        });
 
-//       } catch (err) {
-//         console.error(err.message);
-//       }
+      } catch (err) {
+        console.error(err.message);
+      }
 
-//       getEmployees();
-//     }
+      getProjects();
+    }
   };
 
 
@@ -206,7 +206,7 @@ const ShowProject = () => {
 
                                 <td>
                                   <NavLink onClick={() =>
-                                     deleteEmployee(projectdata._id)
+                                     deleteProject(projectdata._id)
                                   } className="text-danger btn-lg" to=""><MdDelete />
                                   </NavLink>
 
