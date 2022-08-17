@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Sidenavbar from './Sidenavbar';
 import Topnavbar from './Topnavbar';
 import Footer from './Footer';
+import Multiselect from 'multiselect-react-dropdown';
 import { AiFillProject } from 'react-icons/ai';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AssignProject = () => {
     let [projectdata, setProjectdata] = useState([]);
+    let [employeedata, setEmployeedata] = useState([]);
     let navigate = useNavigate();
 
     // const getInitialState = () => {
@@ -16,17 +18,14 @@ const AssignProject = () => {
     //     return value;
     //   };
 
-    const [project, setProject] = useState({
+    const [assignedproject, setAssignedproject] = useState({
        projectname:"",
-       industrysegment:"",
-       techstack:"",
-       thirdpartyapi:"",
-       paymentgateway:"",
-       githuburl:"",
-       projectscope:"",
-       solution:"" 
+       employeename:"",
+       startdate:"",
+       enddate:""
      });  
     const [role, setRole] = useState("");
+    const [empname, setEmpname] = useState("");
 
     let name, value;
     const handleInputs = (e) => {
@@ -34,7 +33,7 @@ const AssignProject = () => {
         name = e.target.name;
         value = e.target.value;
 
-        setProject({ ...project, [name]: value })
+        setAssignedproject({ ...assignedproject, [name]: value })
     }
 
     const handleChange = (e) => {
@@ -79,16 +78,40 @@ const AssignProject = () => {
         getProjects();
       }, []);
 
+      const getEmployees = async (e) => {
+
+        try {
+    
+          const res = await fetch('/employeedata');
+          
+          const data = await res.json();
+    
+          setEmployeedata(data);
+          console.log("tableshowEmloyeeData :",data);
+        
+          if (!res.status === 200) {
+            const error = new Error(res.error);
+            throw error;
+          }
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      useEffect(() => {
+        getEmployees();
+      }, []);
+
     const PostData = async (e) => {
         e.preventDefault();
 
-        const{projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution} = project;
+        const{projectname,employeename,startdate,enddate} = assignedproject;
        //const {projectname} = role;
         
-        let res = await fetch("/project", {
+        let res = await fetch("/assignedproject", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution}),
+            body: JSON.stringify({projectname,employeename,startdate,enddate}),
         });
 
      
@@ -103,21 +126,18 @@ const AssignProject = () => {
             console.log("Invalid Project Data");
         }
         else {
-            toast.success("Project Added Successfully!", {
+            toast.success("Project Assigned Successfully!", {
                 position: "top-center",
             });
             //window.alert("Registration Successful");
-            console.log("Project Added Successful");
+            console.log("Project Assigned Successful");
 
             // history.push("/login");
-            navigate("/showproject", { replace: true });
+            navigate("/showassignedproject", { replace: true });
         }
 
 
     }
-
-
-
 
   return (
     <>
@@ -144,59 +164,68 @@ const AssignProject = () => {
       
       <div className="form-group col-sm-8" id="projectname">
       
-                      <select id="currvalue"
+                      <select id="projectname"
                         name="projectname"                                        
                         style={{ borderRadius: '30px'}}                                       
                         className="custom-select custom-select-lg col-lg-12"
-                        value={role.projectname} 
-                        onChange={handleChange} 
+                       // value={role.projectname}                        
+                        // onChange={handleChange}
+                        value={assignedproject.projectname}  
+                        onChange={handleInputs}
                         >
         
                       <option value="">--Select Project Name--</option>     
-    
+
                       {projectdata.map((projectdataa) => <option key={projectdataa.projectname} value={projectdataa.projectname}>{projectdataa.projectname}</option>)}                    
                      
                       </select> 
       
                       </div>
-                    
-                    
-                      {/* <div className="form-group col-sm-8 ">
-                      <label>Project Name </label>
-                              <input 
-                              type="text"
-                              name="projectname"
-                              className="form-control input-lg  form-control-user "
-                              id="projectname"
-                              placeholder="Enter Project Name"
-                              value={project.projectname}
-                              onChange={handleInputs}
-                              />                        
-                      </div>                      */}
-                      
-                       <div className="form-group col-sm-8">
-                       <label>Employee Name  </label>
-                              <input
-                                type="text"
-                                name="industrysegment"
-                                className="form-control form-control-user"
-                                id="industrysegment"
-                                placeholder="Enter Employee Name " 
-                                value={project.industrysegment}
-                                onChange={handleInputs} 
-                                />
-                      </div>
+
+<div className="form-group col-sm-8" id="empname">
+      
+      <select id="employeename"
+        name="employeename"                                        
+        style={{ borderRadius: '30px'}}                                       
+        className="custom-select custom-select-lg col-lg-12"
+        // value={role.empname} 
+        // onChange={handleChange} 
+        value={assignedproject.employeename}  
+        onChange={handleInputs}
+        >
+
+      <option value="">--Select Employee Name--</option>     
+      
+      {employeedata.map((employeedataa) => <option key={employeedataa.firstname} value={employeedataa.firstname}>{employeedataa.firstname}</option>)}                    
+     
+      </select> 
+
+      </div>    
+ <div className="form-group col-sm-8" id="projectname" >
+
+      {/* <Multiselect
+                            isObject={false}                          
+                            options={[
+                              'Abhay',
+                              'Aman',
+                              'Harsh',
+                              'Sukhwinder',
+                              'Ramesh'
+                            ]}
+                            
+                          />  */}
+
+      </div>
                       
                       <div className='row form-group col-sm-8'>
                       <div className="form-group col-sm-6">
                         <label>Start Date</label>
                           <input 
                           type="date"
-                          name="techstack" 
+                          name="startdate" 
                           className="form-control form-control-user" 
-                          id="techstack"
-                          placeholder="Enter Tech Stack"
-                          value={project.startdate}
+                          id="startdate"                          
+                          value={assignedproject.startdate}
                           onChange={handleInputs} 
                           />
                       </div>
@@ -204,11 +233,10 @@ const AssignProject = () => {
                       <label>End Date</label>
                           <input 
                           type="date"
-                          name="techstack" 
+                          name="enddate" 
                           className="form-control form-control-user" 
-                          id="techstack"
-                          placeholder="Enter Tech Stack"
-                          value={project.startdate}
+                          id="enddate"                          
+                          value={assignedproject.enddate}
                           onChange={handleInputs} 
                           />
                       </div>
@@ -217,7 +245,7 @@ const AssignProject = () => {
                       
 
               <div className="mt-4 mb-0">
-              <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="addproject" id="addproject" value="addproject" onClick={PostData}>Assign Project</NavLink></div>
+              <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="assignproject" id="assignproject" value="assignproject" onClick={PostData}>Assign Project</NavLink></div>
                </div>
                      
                      

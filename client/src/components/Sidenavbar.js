@@ -99,7 +99,7 @@ const Sidenavbar = () => {
             <h6 className="collapse-header">Functionality</h6>
             <NavLink className="collapse-item" to="/showproject"><i className="fas fa-fw fa-table"></i> Projects List</NavLink>
             <NavLink className="collapse-item" to="/addproject"><AiFillProject /> Add New Project</NavLink>
-            <NavLink className="collapse-item" to=""><i className="fas fa-fw fa-table"></i> Assigned Projects List</NavLink>
+            <NavLink className="collapse-item" to="/showassignedproject"><i className="fas fa-fw fa-table"></i> Assigned Projects List</NavLink>
             <NavLink className="collapse-item" to="/assignproject"><AiFillProject /><HiUserAdd />  Assign New  Project</NavLink>
            
         </div>

@@ -15,6 +15,7 @@ import AddProject from './components/AddProject';
 import ShowProject from './components/ShowProject';
 import AddUser from './components/AddUser';
 import AssignProject from './components/AssignProject';
+import ShowAssignedproject from './components/ShowAssignedproject';
  
 export const UserContext = createContext();
 
@@ -34,6 +35,7 @@ const App = () => {
     <Route path="/admins" element={<Showadmins />}></Route>
     <Route path="/showemployee" element={<ShowEmployee />}></Route>
     <Route path="/showproject" element={<ShowProject />}></Route>
+    <Route path="/showassignedproject" element={<ShowAssignedproject />}></Route>
     <Route path="/adduser" element={<AddUser />}></Route>
     <Route path="/addemployee" element={<AddEmployee />}></Route>
     <Route path="/addproject" element={<AddProject />}></Route>

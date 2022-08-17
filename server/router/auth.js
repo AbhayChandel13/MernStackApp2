@@ -9,7 +9,7 @@ const authenticate = require("../middleware/authenticate");
  const User = require('../model/userSchema');
  const Employee = require('../model/empSchema');
  const Projects = require('../model/projectSchema') 
-
+ const AssignedProjects = require('../model/assigndSchema')
 
  router.get('/', (req, res) => {
     res.send(`Hello Form the server Router js`);
@@ -330,6 +330,29 @@ router.get("/employeedata", async (req, res) => {
         res.send(err);
     }
 });
+
+
+//Assigning a New project :
+router.post('/assignedproject', async (req, res) => {
+  const {projectname,employeename,startdate,enddate} = req.body;
+
+  if (!projectname || !employeename || !startdate || !enddate) {
+      return res.status(422).json({ error: "Please Fill  correct data " })
+  }
+
+  try {
+     
+      const employee = new AssignedProjects({ projectname,employeename,startdate,enddate});
+        await employee.save();
+        res.status(201).json({ message: "Project Asssigned Successfully " });
+
+  }
+  catch (err) {
+      console.log(err);
+  }
+
+})
+
 
 
 module.exports = router;
