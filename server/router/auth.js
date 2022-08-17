@@ -299,6 +299,7 @@ router.get("/users", async (req, res) => {
     }
 });
 
+//get Employees table data:
 router.get("/employeedata", async (req, res) => {
     try {
 
@@ -353,6 +354,15 @@ router.post('/assignedproject', async (req, res) => {
 
 })
 
+//Getting the data for assignedProject table :
+router.get("/assignedprojects", async (req, res) => {
+  try {
+      const assignedprojects = await AssignedProjects.find();
+      res.send(assignedprojects);
+  } catch (err) {
+      res.send(err);
+  }
+});
 
 
 module.exports = router;

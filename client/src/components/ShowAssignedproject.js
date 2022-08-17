@@ -17,15 +17,15 @@ const ShowAssignedproject = () => {
   };
 
   let [searchQuery, setSearchQuery] = useState("");
-  let [projectdata, setProjectdata] = useState([]);
+  let [assignedprojectdata, setAssignepProjectdata] = useState([]);
   const [value, setValue] = useState(getInitialState);
   //const { state, dispatch } = useContext(UserContext);
 
-  const getProjects = async (e) => {
+  const getAssignedProjects = async (e) => {
 
     try {
 
-      const res = await fetch('/projectsdata');
+      const res = await fetch('/assignedprojects');
       // , {
       //   method: "GET",
       //   headers: {
@@ -36,8 +36,8 @@ const ShowAssignedproject = () => {
       // }
       const data = await res.json();
 
-      setProjectdata(data);
-      console.log("tableshowProjectsData :",data);
+      setAssignepProjectdata(data);
+      console.log("AssignedProject :",data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -49,7 +49,7 @@ const ShowAssignedproject = () => {
     }
   }
   useEffect(() => {
-    getProjects();
+    getAssignedProjects();
   }, []);
 
   const deleteProject = async (id) => {
@@ -71,16 +71,17 @@ const ShowAssignedproject = () => {
         console.error(err.message);
       }
 
-      getProjects();
+      getAssignedProjects();
     }
   };
 
 
   if (searchQuery) {
-    projectdata = projectdata.filter(
+    assignedprojectdata = assignedprojectdata.filter(
       (m) =>
         m.projectname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-        m.industrysegment.toLowerCase().startsWith(searchQuery.toLowerCase())
+        m.employeename.toLowerCase().startsWith(searchQuery.toLowerCase())
+        //m.industrysegment.toLowerCase().startsWith(searchQuery.toLowerCase())
         // m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
         // m.empid.toString().startsWith(searchQuery.toString())
     );
@@ -94,7 +95,7 @@ const ShowAssignedproject = () => {
 
 
   //const size = 3;
-  const data = projectdata.slice(0, value);
+  const data = assignedprojectdata.slice(0, value);
   // console.log(" selected data :",data);
 
 
@@ -116,7 +117,7 @@ const ShowAssignedproject = () => {
               <div className="card shadow mb-4">
                 <div className="card-header py-3">
 
-                  <h6 className="font-weight-bold text-primary">Projects Table</h6>
+                  <h6 className="font-weight-bold text-primary">Assigned Projects Table</h6>
                   <NavLink className="float-right font-weight-bold text-success" to="/addproject"><AiFillProject /> Add Project  </NavLink>
 
                 </div>
@@ -161,33 +162,27 @@ const ShowAssignedproject = () => {
                           <thead>
                             <tr>
                               <th>Project Name</th>
-                              <th>Industry Segment </th>
-                              <th>TechStack</th>
-                              <th>ThirdParty API</th>
-                              <th>Payment Gateway</th>
-                              <th>Github URL</th>
-                              <th>Project Scope</th>
-                              <th>Solution</th>
-                              <th>Edit</th>
-                              <th>Delete</th>
+                              <th>Employee Name</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              
+                              {/* <th>Edit</th>
+                              <th>Delete</th> */}
                             </tr>
                           </thead>
                           
                           <tbody>
 
-                            {data.map((projectdata, i) => (
+                            {data.map((assignedprojectdata, i) => (
 
-                              <tr key={projectdata._id}>
-                                <td>{projectdata.projectname}</td>
-                                <td>{projectdata.industrysegment}</td>
-                                <td>{projectdata.techstack}</td>
-                                <td>{projectdata.thirdpartyapi}</td>
-                                <td>{projectdata.paymentgateway}</td>
-                                <td>{projectdata.githuburl}</td>
-                                <td>{projectdata.projectscope}</td>
-                                <td>{projectdata.solution}</td>
+                              <tr key={assignedprojectdata._id}>
+                                <td>{assignedprojectdata.projectname}</td>
+                                <td>{assignedprojectdata.employeename}</td>
+                                <td>{assignedprojectdata.startdate.split('T')[0]}</td>
+                                <td>{assignedprojectdata.enddate.split('T')[0]}</td>
+                               
 
-                                <td>
+                                {/* <td>
                                   <NavLink className="text-success btn-lg" to={`/editproject/${projectdata._id}`} ><FaEdit />  </NavLink>
                                 </td>
 
@@ -197,7 +192,7 @@ const ShowAssignedproject = () => {
                                   } className="text-danger btn-lg" to=""><MdDelete />
                                   </NavLink>
 
-                                </td>
+                                </td> */}
                               </tr>
 
 
