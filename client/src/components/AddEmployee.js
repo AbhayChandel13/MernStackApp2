@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AddEmployee = () => {
     let navigate = useNavigate();
-    let [employeedata, setEmployeedata] = useState([]);
+    let [roledata, setRoledata] = useState([]);
 
     // const getInitialState = () => {
     //     const value = "";
@@ -29,16 +29,16 @@ const AddEmployee = () => {
     });
     const [role, setRole] = useState("");
     
-    const getEmployees = async (e) => {
+    const getRoles = async (e) => {
 
         try {
     
-          const res = await fetch('/employeedata');
+          const res = await fetch('/roles');
           
           const data = await res.json();
     
-          setEmployeedata(data);
-          console.log("tableshowEmloyeeData :",data);
+          setRoledata(data);
+          console.log("GetRolestable :",data);
     
           if (!res.status === 200) {
             const error = new Error(res.error);
@@ -50,7 +50,7 @@ const AddEmployee = () => {
         }
       }
       useEffect(() => {
-        getEmployees();
+        getRoles();
       }, []);
 
     let name, value;

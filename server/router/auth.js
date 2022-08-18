@@ -10,7 +10,7 @@ const authenticate = require("../middleware/authenticate");
  const Employee = require('../model/empSchema');
  const Projects = require('../model/projectSchema') 
  const AssignedProjects = require('../model/assigndSchema')
-
+ const Designation = require('../model/rolesSchema')
  router.get('/', (req, res) => {
     res.send(`Hello Form the server Router js`);
 
@@ -312,6 +312,37 @@ router.get("/users", async (req, res) => {
         res.send(err);
     }
 });
+
+//Get data of Roles table :
+
+router.get("/roles", async (req, res) => {
+  try {
+      const usersroles = await Designation.find();
+      res.send(usersroles);
+  } catch (err) {
+      res.send(err);
+  }
+});
+
+router.post('/newrole', async (req, res) => {
+  const {Role_id,Role} = req.body;
+
+  if (!Role_id || !Role ) {
+      return res.status(422).json({ error: "Please Fill  correct data " })
+  }
+
+  try {      
+      const role = new Designation({Role_id,Role});
+        await role.save();
+        res.status(201).json({ message: "Role Created Successfully " });
+
+  }
+  catch (err) {
+      console.log(err);
+  }
+
+})
+
 
 //get Employees table data:
 router.get("/employeedata", async (req, res) => {
