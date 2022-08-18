@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Sidenavbar from './Sidenavbar';
 import Topnavbar from './Topnavbar';
 import Footer from './Footer';
@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AddEmployee = () => {
     let navigate = useNavigate();
+    let [employeedata, setEmployeedata] = useState([]);
 
     // const getInitialState = () => {
     //     const value = "";
@@ -23,10 +24,34 @@ const AddEmployee = () => {
         email: "",
         empid: "",
         phone:"",
-        //designation: ""
+       // designation: ""
         
     });
     const [role, setRole] = useState("");
+    
+    const getEmployees = async (e) => {
+
+        try {
+    
+          const res = await fetch('/employeedata');
+          
+          const data = await res.json();
+    
+          setEmployeedata(data);
+          console.log("tableshowEmloyeeData :",data);
+    
+          if (!res.status === 200) {
+            const error = new Error(res.error);
+            throw error;
+          }
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      useEffect(() => {
+        getEmployees();
+      }, []);
 
     let name, value;
     const handleInputs = (e) => {
@@ -133,6 +158,26 @@ const AddEmployee = () => {
                         </select> 
                         {/* </label> */}
                         </div>
+
+                     {/* <div className="form-group col-sm-8" id="projectname">
+      
+                      <select id="projectname"
+                        name="projectname"                                        
+                        style={{ borderRadius: '30px'}}                                       
+                        className="custom-select custom-select-lg col-lg-12"
+                       // value={role.projectname}                        
+                        // onChange={handleChange}
+                        value={assignedproject.projectname}  
+                        onChange={handleInputs}
+                        >
+        
+                      <option value="">--Select Project Name--</option>     
+
+                      {projectdata.map((projectdataa) => <option key={projectdataa.projectname} value={projectdataa.projectname}>{projectdataa.projectname}</option>)}                    
+                     
+                      </select> 
+      
+                      </div> */}
                         
                       
                         <div className="form-group col-sm-8 ">

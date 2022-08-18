@@ -213,6 +213,20 @@ const authenticate = require("../middleware/authenticate");
           }
     });
 
+    //Update the Employee data :
+    router.put("/employee/:id",async(req,res)=>{
+      try{
+          const _id =req.params.id;
+          const updateEmployee = await Employee.findByIdAndUpdate(_id,req.body,{
+            new:true
+          });
+    
+          res.send(updateEmployee);
+      }catch(e){
+        res.status(404).send(e);
+      }
+    })
+
     
     //get Single Project For update :
     
@@ -233,7 +247,7 @@ const authenticate = require("../middleware/authenticate");
     });
    
    
-    //Update the Employee data :
+    //Update the Project data :
     router.put("/project/:id",async(req,res)=>{
         try{
             const _id =req.params.id;
