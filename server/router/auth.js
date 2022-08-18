@@ -357,7 +357,7 @@ router.get("/employeedata", async (req, res) => {
                     //             as :"designation"
                     // }
                     '$lookup': {
-                        'from': 'designation', 
+                        'from': 'designations', 
                         'localField': 'roleid', 
                         'foreignField': 'Role_id', 
                         'as': 'designation'

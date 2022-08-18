@@ -23,8 +23,8 @@ const AddEmployee = () => {
         lastname: "",
         email: "",
         empid: "",
-        phone:"",
-       // designation: ""
+        phone:""
+        
         
     });
     const [role, setRole] = useState("");
@@ -76,8 +76,8 @@ const AddEmployee = () => {
     const PostData = async (e) => {
         e.preventDefault();
 
-        const {firstname,lastname, email, empid, phone} = employee;
-        const {roleid} = role;
+        const {firstname,lastname, email, empid, phone,roleid} = employee;
+        //const {roleid} = role;
         
         let res = await fetch("/employee", {
             method: "POST",
@@ -135,12 +135,10 @@ const AddEmployee = () => {
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
 
-        <div className="form-group col-sm-8" id="roleid">
-                        {/* <label>roleid */}
+        {/* <div className="form-group col-sm-8" id="roleid">                        
                         <select id="currvalue"
                           name="roleid"  
-                          style={{ borderRadius: '30px'}}
-                        //   style={{border-radius:"20px"}}                        
+                          style={{ borderRadius: '30px'}}                                            
                           className="custom-select custom-select-lg col-lg-12"
                           value={role.roleid} 
                           onChange={handleChange} 
@@ -156,28 +154,28 @@ const AddEmployee = () => {
                         <option value="108">Backend Developer</option>
                         <option value="109">frontend Developer</option>
                         </select> 
-                        {/* </label> */}
-                        </div>
+                       
+                        </div> */}
 
-                     {/* <div className="form-group col-sm-8" id="projectname">
+                     <div className="form-group col-sm-8" id="roleid">
       
-                      <select id="projectname"
-                        name="projectname"                                        
+                      <select id="roleid"
+                        name="roleid"                                        
                         style={{ borderRadius: '30px'}}                                       
                         className="custom-select custom-select-lg col-lg-12"
                        // value={role.projectname}                        
                         // onChange={handleChange}
-                        value={assignedproject.projectname}  
+                        value={employee.roleid}  
                         onChange={handleInputs}
                         >
         
                       <option value="">--Select Project Name--</option>     
 
-                      {projectdata.map((projectdataa) => <option key={projectdataa.projectname} value={projectdataa.projectname}>{projectdataa.projectname}</option>)}                    
+                      {roledata.map((roledataa) => <option key={roledataa.Role_id} value={roledataa.Role_id}>{roledataa.Role}</option>)}                    
                      
                       </select> 
       
-                      </div> */}
+                      </div>
                         
                       
                         <div className="form-group col-sm-8 ">
