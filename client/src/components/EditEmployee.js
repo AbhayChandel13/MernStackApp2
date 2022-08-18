@@ -17,15 +17,40 @@ const EditEmployee = () => {
   const [email, setEmail] = useState("");
   const [empid, setEmpid] = useState("");
   const [phone, setPhone] = useState("");
-  const [role, setRole] = useState("");
+  const [roleid, setRole] = useState("");
 
   let name, value;
-  const handleChange = (e) => {
-    name = e.target.name;
-    value = e.target.value;
+  // const handleChange = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
 
-    setRole({ ...role, [name]: value });
-  };
+  //   setRole({ ...role, [name]: value });
+  // };
+  let [roledata, setRoledata] = useState([]);
+
+  const getRoles = async (e) => {
+
+        try {
+    
+          const res = await fetch('/roles');
+          
+          const data = await res.json();
+    
+          setRoledata(data);
+          console.log("GetRolestable :",data);
+    
+          if (!res.status === 200) {
+            const error = new Error(res.error);
+            throw error;
+          }
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      useEffect(() => {
+        getRoles();
+      }, []);
 
   const getSingleEmployee = async () => {
     try {
@@ -38,14 +63,14 @@ const EditEmployee = () => {
         credentials: "include",
       });
       const jsonData = await response.json();
-      console.log(jsonData);
+      console.log("SingleEmployee_for_update",jsonData);
 
       setFirstname(jsonData.firstname);
       setLastname(jsonData.lastname);
       setEmail(jsonData.email);
       setEmpid(jsonData.empid);
       setPhone(jsonData.phone);
-      //setRoleid(jsonData.role)
+      setRole(jsonData.role)
     } catch (err) {
       console.error(err.message);
     }
@@ -61,7 +86,7 @@ const EditEmployee = () => {
         email,
         empid,
         phone,
-        role,
+        roleid,
       };
 
       const response = await fetch(`/employee/${id}`, {
@@ -108,16 +133,16 @@ const EditEmployee = () => {
                 </div>
                 <div className="card-body">
                   <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
-                    <div className="form-group col-sm-8" id="roleid">
-                      {/* <label>roleid */}
+                    {/* <div className="form-group col-sm-8" id="role">                     
                       <select
-                        id="currvalue"
-                        name="roleid"
-                        style={{ borderRadius: "30px" }}
-                        //   style={{border-radius:"20px"}}
+                        id="role"
+                        name="role"
+                        style={{ borderRadius: "30px" }}                       
                         className="custom-select custom-select-lg col-lg-12"
-                        value={role.roleid}
-                        onChange={handleChange}
+                        // value={role.roleid}
+                        // onChange={handleChange}
+                        value={roleid}
+                        onChange={(e) => setRole(e.target.value)}
                       >
                         <option value="">--Select Designation--</option>
                         <option value="101" >Manager</option>
@@ -130,8 +155,25 @@ const EditEmployee = () => {
                         <option value="108">Backend Developer</option>
                         <option value="109">frontend Developer</option>
                       </select>
-                      {/* </label> */}
-                    </div>
+                     
+                    </div> */}
+                    <div className="form-group col-sm-8" id="roleid">
+      
+      <select id="roleid"
+        name="roleid"                                        
+        style={{ borderRadius: '30px'}}                                       
+        className="custom-select custom-select-lg col-lg-12"                       
+        value={roleid}
+        onChange={(e) => setRole(e.target.value)}
+        >
+
+      <option value="">--Select Designation--</option>     
+
+      {roledata.map((roledataa) => <option key={roledataa.Role_id} value={roledataa.Role_id}>{roledataa.Role}</option>)}                    
+     
+      </select> 
+
+      </div>
 
                     <div className="form-group col-sm-8 ">
                       <input

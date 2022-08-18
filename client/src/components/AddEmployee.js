@@ -27,7 +27,7 @@ const AddEmployee = () => {
         
         
     });
-    const [role, setRole] = useState("");
+ //   const [role, setRole] = useState("");
     
     const getRoles = async (e) => {
 
@@ -62,16 +62,16 @@ const AddEmployee = () => {
         setEmployee({ ...employee, [name]: value })
     }
 
-    const handleChange = (e) => {
-        // e.target.value
-       //setDesignation({...designation,[name]: value});
-      // setRole(e.target.value);
-      name = e.target.name;
-      value = e.target.value;
+    // const handleChange = (e) => {
+    //     // e.target.value
+    //    //setDesignation({...designation,[name]: value});
+    //   // setRole(e.target.value);
+    //   name = e.target.name;
+    //   value = e.target.value;
 
-      setRole({...role,[name]: value});
-      };
-      console.log(role);
+    //   setRole({...role,[name]: value});
+    //   };
+    //   console.log(role);
 
     const PostData = async (e) => {
         e.preventDefault();
@@ -162,14 +162,12 @@ const AddEmployee = () => {
                       <select id="roleid"
                         name="roleid"                                        
                         style={{ borderRadius: '30px'}}                                       
-                        className="custom-select custom-select-lg col-lg-12"
-                       // value={role.projectname}                        
-                        // onChange={handleChange}
+                        className="custom-select custom-select-lg col-lg-12"                       
                         value={employee.roleid}  
                         onChange={handleInputs}
                         >
         
-                      <option value="">--Select Project Name--</option>     
+                      <option value="">--Select Designation--</option>     
 
                       {roledata.map((roledataa) => <option key={roledataa.Role_id} value={roledataa.Role_id}>{roledataa.Role}</option>)}                    
                      
@@ -239,18 +237,6 @@ const AddEmployee = () => {
                                 />
                             </div>
 
-                        {/* <div className="form-group col-sm-8">
-                                <input 
-                                type="text" 
-                                name="designation"
-                                className="form-control form-control-user"
-                                id="Designation" 
-                                placeholder="Enter Designation"
-                                value={employee.designation}
-                                onChange={handleInputs}  
-                                />
-                        </div>  */}
-                        
 
                 <div className="mt-4 mb-0">
                 <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup" value="register" onClick={PostData}>Add Employee</NavLink></div>
