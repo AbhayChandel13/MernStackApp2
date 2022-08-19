@@ -20,8 +20,7 @@ const AssignProject = () => {
 
     const [assignedproject, setAssignedproject] = useState({
        projectname:"",
-       employeename:"",
-       email:"",
+       Empid:"",       
        startdate:"",
        enddate:""
      });  
@@ -106,13 +105,13 @@ const AssignProject = () => {
     const PostData = async (e) => {
         e.preventDefault();
 
-        const{projectname,employeename,startdate,enddate} = assignedproject;
+        const{projectname,Empid,startdate,enddate} = assignedproject;
        //const {projectname} = role;
         
         let res = await fetch("/assignedproject", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({projectname,employeename,startdate,enddate}),
+            body: JSON.stringify({projectname,Empid,startdate,enddate}),
         });
 
      
@@ -185,19 +184,19 @@ const AssignProject = () => {
 
 <div className="form-group col-sm-8" id="empname">
       
-      <select id="employeename"
-        name="employeename"                                        
+      <select id="Empid"
+        name="Empid"                                        
         style={{ borderRadius: '30px'}}                                       
         className="custom-select custom-select-lg col-lg-12"
         // value={role.empname} 
         // onChange={handleChange} 
-        value={assignedproject.employeename}  
+        value={assignedproject.Empid}  
         onChange={handleInputs}
         >
 
       <option value="">--Select Employee Name--</option>     
       
-      {employeedata.map((employeedataa) => <option key={employeedataa.firstname} value={employeedataa.empid}>{employeedataa.firstname}  {employeedataa.lastname}</option>)}                    
+      {employeedata.map((employeedataa) => <option key={employeedataa.firstname} value={employeedataa.empid}>{employeedataa.firstname}  {employeedataa.lastname}  ({employeedataa.Role})</option>)}                    
      
       </select> 
 

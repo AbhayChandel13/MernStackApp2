@@ -163,6 +163,7 @@ const ShowAssignedproject = () => {
                             <tr>
                               <th>Project Name</th>
                               <th>Employee Id</th>
+                              <th>Employee Name</th>
                               <th>Start Date</th>
                               <th>End Date</th>
                               
@@ -177,7 +178,8 @@ const ShowAssignedproject = () => {
 
                               <tr key={assignedprojectdata._id}>
                                 <td>{assignedprojectdata.projectname}</td>
-                                <td>{assignedprojectdata.employeename}</td>
+                                <td>{assignedprojectdata.empid}</td>
+                                <td>{assignedprojectdata.firstname}  {assignedprojectdata.lastname}</td>
                                 <td>{assignedprojectdata.startdate.split('T')[0]}</td>
                                 <td>{assignedprojectdata.enddate.split('T')[0]}</td>
                                

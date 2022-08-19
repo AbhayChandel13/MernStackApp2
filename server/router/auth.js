@@ -374,15 +374,15 @@ router.get("/employeedata", async (req, res) => {
 
 //Assigning a New project :
 router.post('/assignedproject', async (req, res) => {
-  const {projectname,employeename,startdate,enddate} = req.body;
+  const {projectname,Empid,startdate,enddate} = req.body;
 
-  if (!projectname || !employeename || !startdate || !enddate) {
+  if (!projectname || !Empid || !startdate || !enddate) {
       return res.status(422).json({ error: "Please Fill  correct data " })
   }
 
   try {
      
-      const employee = new AssignedProjects({ projectname,employeename,startdate,enddate});
+      const employee = new AssignedProjects({ projectname,Empid,startdate,enddate});
         await employee.save();
         res.status(201).json({ message: "Project Asssigned Successfully " });
 
@@ -403,8 +403,8 @@ router.get("/assignedprojects", async (req, res) => {
 
         '$lookup': {
             'from': 'employees', 
-            'localField': 'empid', 
-            'foreignField': 'firstname,lastname', 
+            'localField': 'Empid', 
+            'foreignField': 'empid', 
             'as': 'employee'
         }
     },

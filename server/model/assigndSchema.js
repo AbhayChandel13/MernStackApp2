@@ -5,8 +5,8 @@ const assigndSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    employeename: {
-        type: String,
+    Empid: {
+        type: Number,
         required: true
     },
     startdate: {
