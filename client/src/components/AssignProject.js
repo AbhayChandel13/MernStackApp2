@@ -21,6 +21,7 @@ const AssignProject = () => {
     const [assignedproject, setAssignedproject] = useState({
        projectname:"",
        employeename:"",
+       email:"",
        startdate:"",
        enddate:""
      });  
@@ -196,27 +197,30 @@ const AssignProject = () => {
 
       <option value="">--Select Employee Name--</option>     
       
-      {employeedata.map((employeedataa) => <option key={employeedataa.firstname} value={employeedataa.firstname}>{employeedataa.firstname}</option>)}                    
+      {employeedata.map((employeedataa) => <option key={employeedataa.firstname} value={employeedataa.empid}>{employeedataa.firstname}  {employeedataa.lastname}</option>)}                    
      
       </select> 
 
       </div>    
  <div className="form-group col-sm-8" id="projectname" >
 
-      {/* <Multiselect
-                            isObject={false}                          
-                            options={[
-                              'Abhay',
-                              'Aman',
-                              'Harsh',
-                              'Sukhwinder',
-                              'Ramesh'
-                            ]}
-                            
-                          />  */}
-
       </div>
-                      
+          {/* <div className='row form-group col-sm-8'>
+                      <div className="form-group col-sm-12">
+                        <label>Email</label>
+                          <input 
+                          type="email"
+                          name="email" 
+                          className="form-control form-control-user" 
+                          id="email"    
+                          placeholder='Enter Email Address'                      
+                          value={assignedproject.email}
+                          onChange={handleInputs} 
+                          />
+                      </div>
+                      </div> */}
+
+
                       <div className='row form-group col-sm-8'>
                       <div className="form-group col-sm-6">
                         <label>Start Date</label>

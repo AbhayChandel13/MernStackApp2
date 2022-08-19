@@ -323,7 +323,7 @@ router.get("/roles", async (req, res) => {
       res.send(err);
   }
 });
-
+//POST ROUTE ONLY FOR TEST STILL
 router.post('/newrole', async (req, res) => {
   const {Role_id,Role} = req.body;
 
@@ -350,12 +350,6 @@ router.get("/employeedata", async (req, res) => {
 
         const employeedata = await Employee.aggregate([{
 
-                    // $lookup :{
-                    //             from :"designation",
-                    //             localField :"roleid",
-                    //             foreignField:"Role_id ",
-                    //             as :"designation"
-                    // }
                     '$lookup': {
                         'from': 'designations', 
                         'localField': 'roleid', 
@@ -402,8 +396,25 @@ router.post('/assignedproject', async (req, res) => {
 //Getting the data for assignedProject table :
 router.get("/assignedprojects", async (req, res) => {
   try {
-      const assignedprojects = await AssignedProjects.find();
-      res.send(assignedprojects);
+      // const assignedprojects = await AssignedProjects.find();
+      // res.send(assignedprojects);
+
+      const assignedprojects = await AssignedProjects.aggregate([{
+
+        '$lookup': {
+            'from': 'employees', 
+            'localField': 'empid', 
+            'foreignField': 'firstname,lastname', 
+            'as': 'employee'
+        }
+    },
+    {
+        $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$employee", 0 ] }, "$$ROOT" ] } }
+     },
+     { $project: { employee: 0 } }
+])
+
+   res.send(assignedprojects);
   } catch (err) {
       res.send(err);
   }

@@ -240,17 +240,18 @@ const EditEmployee = () => {
                       />
                     </div>
 
-                    {/* <div className="form-group col-sm-8">
+                    <div className="form-group col-sm-8">
                                 <input 
-                                type="text" 
-                                name="designation"
+                                type="file" 
+                                name="file"
                                 className="form-control form-control-user"
-                                id="Designation" 
-                                placeholder="Enter Designation"
-                                value={employee.designation}
+                                id="file" 
+                                accept=".pdf"
+                                placeholder="Upload File"
+                                //value={employee.designation}
                                 // onChange={handleInputs}  
                                 />
-                        </div>  */}
+                        </div> 
 
                     <div className="mt-4 mb-0">
                       <div className="d-grid">

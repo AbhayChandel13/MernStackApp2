@@ -162,7 +162,7 @@ const ShowAssignedproject = () => {
                           <thead>
                             <tr>
                               <th>Project Name</th>
-                              <th>Employee Name</th>
+                              <th>Employee Id</th>
                               <th>Start Date</th>
                               <th>End Date</th>
                               
