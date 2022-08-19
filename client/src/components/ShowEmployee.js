@@ -195,7 +195,7 @@ const ShowEmployee = () => {
                                 <td>{employeedata.phone}</td>
 
                                 <td>
-                                  <NavLink className="text-success btn-lg" to={`/editemployee/${employeedata._id}`} ><FaEdit />  </NavLink>
+                                  <NavLink className="text-success btn-lg" to={`/editemployee/${employeedata._id}`} ><FaEdit /></NavLink>
                                 </td>
 
                                 <td>
