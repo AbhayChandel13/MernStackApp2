@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import Sidenavbar from './Sidenavbar';
 import Topnavbar from './Topnavbar';
 import Footer from './Footer';
-import Multiselect from 'multiselect-react-dropdown';
 import { AiFillProject } from 'react-icons/ai';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
