@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { FaEdit, } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Sidenavbar from './Sidenavbar';
-import { AiFillProject } from 'react-icons/ai';
-import Topnavbar from './Topnavbar';
-import { UserContext } from '../App';
-import Footer from './Footer';
-import { NavLink } from 'react-router-dom';
+import Sidenavbar from "./Sidenavbar";
+import { AiFillProject } from "react-icons/ai";
+import Topnavbar from "./Topnavbar";
+import { UserContext } from "../App";
+import Footer from "./Footer";
+import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,10 +22,8 @@ const ShowProject = () => {
   //const { state, dispatch } = useContext(UserContext);
 
   const getProjects = async (e) => {
-
     try {
-
-      const res = await fetch('/projectsdata');
+      const res = await fetch("/projectsdata");
       // , {
       //   method: "GET",
       //   headers: {
@@ -37,17 +35,16 @@ const ShowProject = () => {
       const data = await res.json();
 
       setProjectdata(data);
-      console.log("tableshowProjectsData :",data);
+      console.log("tableshowProjectsData :", data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
       }
-
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   useEffect(() => {
     getProjects();
   }, []);
@@ -55,18 +52,15 @@ const ShowProject = () => {
   const deleteProject = async (id) => {
     if (window.confirm("Are You Sure, You want to delete?")) {
       try {
-        const response = await fetch(`/project/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`/project/${id}`, {
+          method: "DELETE",
+        });
         const jsonData = await response.json();
         console.log(jsonData);
 
         toast.success("Project Deleted Successfully!", {
           position: "top-center",
         });
-
       } catch (err) {
         console.error(err.message);
       }
@@ -75,29 +69,24 @@ const ShowProject = () => {
     }
   };
 
-
   if (searchQuery) {
     projectdata = projectdata.filter(
       (m) =>
         m.projectname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
         m.industrysegment.toLowerCase().startsWith(searchQuery.toLowerCase())
-        // m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-        // m.empid.toString().startsWith(searchQuery.toString())
+      // m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+      // m.empid.toString().startsWith(searchQuery.toString())
     );
   }
-
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
   //   console.log(value);
 
-
   //const size = 3;
   const data = projectdata.slice(0, value);
   // console.log(" selected data :",data);
-
-
 
   return (
     <>
@@ -105,29 +94,46 @@ const ShowProject = () => {
         <Sidenavbar />
 
         <div id="content-wrapper" className="d-flex flex-column">
-
-
           <div id="content">
-          <ToastContainer />
+            <ToastContainer />
 
             <Topnavbar />
 
             <div className="container-fluid">
               <div className="card shadow mb-4">
                 <div className="card-header py-3">
-
-                  <h6 className="font-weight-bold text-primary">Projects Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/addproject"><AiFillProject /> Add Project  </NavLink>
-
+                  <h6 className="font-weight-bold text-primary">
+                    Projects Table
+                  </h6>
+                  <NavLink
+                    className="float-right font-weight-bold text-success"
+                    to="/addproject"
+                  >
+                    <AiFillProject /> Add Project{" "}
+                  </NavLink>
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
-                    <div id="dataTable_wrapper" className="dataTables_wrapper dt-bootstrap4">
+                    <div
+                      id="dataTable_wrapper"
+                      className="dataTables_wrapper dt-bootstrap4"
+                    >
                       <div className="row">
                         <div className="col-sm-12 col-md-6">
-                          <div className="dataTables_length" id="dataTable_length">
-                            <label>Show entries
-                              <select id="currvalue" name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm" value={value} onChange={handleChange} >
+                          <div
+                            className="dataTables_length"
+                            id="dataTable_length"
+                          >
+                            <label>
+                              Show entries
+                              <select
+                                id="currvalue"
+                                name="dataTable_length"
+                                aria-controls="dataTable"
+                                className="custom-select custom-select-sm form-control form-control-sm"
+                                value={value}
+                                onChange={handleChange}
+                              >
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="50">50</option>
@@ -139,8 +145,12 @@ const ShowProject = () => {
 
                         {/* text-right */}
                         <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-end align-items-end">
-                          <div id="dataTable_filter" className="dataTables_filter">
-                            <label>Search:
+                          <div
+                            id="dataTable_filter"
+                            className="dataTables_filter"
+                          >
+                            <label>
+                              Search:
                               <div>
                                 <input
                                   type="text"
@@ -149,7 +159,9 @@ const ShowProject = () => {
                                   id="name"
                                   placeholder={"Search Here...."}
                                   value={searchQuery}
-                                  onChange={(e) => setSearchQuery(e.target.value)}
+                                  onChange={(e) =>
+                                    setSearchQuery(e.target.value)
+                                  }
                                 />
                               </div>
                             </label>
@@ -157,7 +169,12 @@ const ShowProject = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
+                        <table
+                          className="table table-bordered"
+                          id="dataTable"
+                          width="100%"
+                          cellSpacing="5%"
+                        >
                           <thead>
                             <tr>
                               <th>Project Name</th>
@@ -172,11 +189,9 @@ const ShowProject = () => {
                               <th>Delete</th>
                             </tr>
                           </thead>
-                          
+
                           <tbody>
-
                             {data.map((projectdata, i) => (
-
                               <tr key={projectdata._id}>
                                 <td>{projectdata.projectname}</td>
                                 <td>{projectdata.industrysegment}</td>
@@ -188,44 +203,42 @@ const ShowProject = () => {
                                 <td>{projectdata.solution}</td>
 
                                 <td>
-                                  <NavLink className="text-success btn-lg" to={`/editproject/${projectdata._id}`} ><FaEdit />  </NavLink>
+                                  <NavLink
+                                    className="text-success btn-lg"
+                                    to={`/editproject/${projectdata._id}`}
+                                  >
+                                    <FaEdit />{" "}
+                                  </NavLink>
                                 </td>
 
                                 <td>
-                                  <NavLink onClick={() =>
-                                     deleteProject(projectdata._id)
-                                  } className="text-danger btn-lg" to=""><MdDelete />
+                                  <NavLink
+                                    onClick={() =>
+                                      deleteProject(projectdata._id)
+                                    }
+                                    className="text-danger btn-lg"
+                                    to=""
+                                  >
+                                    <MdDelete />
                                   </NavLink>
-
                                 </td>
                               </tr>
-
-
-                          ))} 
+                            ))}
                           </tbody>
-
                         </table>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
-
-
           </div>
 
-
           <Footer />
-
         </div>
-
-
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default ShowProject
+export default ShowProject;

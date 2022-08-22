@@ -18,73 +18,86 @@ const AddProject = () => {
     //   };
 
     const [project, setProject] = useState({
-       projectname:"",
-       industrysegment:"",
-       techstack:"",
-       thirdpartyapi:"",
-       paymentgateway:"",
-       githuburl:"",
-       projectscope:"",
-       solution:"" 
-     });  
+      projectname: "",
+      industrysegment: "",
+      techstack: "",
+      thirdpartyapi: "",
+      paymentgateway: "",
+      githuburl: "",
+      projectscope: "",
+      solution: "",
+    });
     const [role, setRole] = useState("");
 
     let name, value;
     const handleInputs = (e) => {
-        console.log(e);
-        name = e.target.name;
-        value = e.target.value;
+      console.log(e);
+      name = e.target.name;
+      value = e.target.value;
 
-        setProject({ ...project, [name]: value })
-    }
+      setProject({ ...project, [name]: value });
+    };
 
     const handleChange = (e) => {
-        // e.target.value
-       //setDesignation({...designation,[name]: value});
+      // e.target.value
+      //setDesignation({...designation,[name]: value});
       // setRole(e.target.value);
       name = e.target.name;
       value = e.target.value;
 
-      setRole({...role,[name]: value});
-      };
-      console.log(role);
+      setRole({ ...role, [name]: value });
+    };
+    console.log(role);
 
     const PostData = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        const{projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution} = project;
-       //const {roleid} = role;
-        
-        let res = await fetch("/project", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({projectname,industrysegment,techstack,thirdpartyapi,paymentgateway,githuburl,projectscope,solution}),
+      const {
+        projectname,
+        industrysegment,
+        techstack,
+        thirdpartyapi,
+        paymentgateway,
+        githuburl,
+        projectscope,
+        solution,
+      } = project;
+      //const {roleid} = role;
+
+      let res = await fetch("/project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectname,
+          industrysegment,
+          techstack,
+          thirdpartyapi,
+          paymentgateway,
+          githuburl,
+          projectscope,
+          solution,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 422 || !data) {
+        //window.alert("Invalid Registration");
+        toast.error(" Invalid Project Data", {
+          position: "top-center",
         });
+        console.log("Invalid Project Data");
+      } else {
+        toast.success("Project Added Successfully!", {
+          position: "top-center",
+        });
+        //window.alert("Registration Successful");
+        console.log("Project Added Successful");
 
-     
-
-        const data = await res.json();       
-
-        if (res.status === 422 || !data) {
-            //window.alert("Invalid Registration");
-            toast.error(" Invalid Project Data", {
-                position: "top-center",
-            });
-            console.log("Invalid Project Data");
-        }
-        else {
-            toast.success("Project Added Successfully!", {
-                position: "top-center",
-            });
-            //window.alert("Registration Successful");
-            console.log("Project Added Successful");
-
-            // history.push("/login");
-            navigate("/showproject", { replace: true });
-        }
-
-
-    }
+        // history.push("/login");
+        navigate("/showproject", { replace: true });
+      }
+    };
 
    
 
