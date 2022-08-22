@@ -97,10 +97,10 @@ const Sidenavbar = () => {
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <NavLink className="nav-link" to="/employeeinfo">
             <BsInfoLg />
             <span> Employee Info</span>
-          </a>
+          </NavLink>
         </li>
 
         <hr className="sidebar-divider" />
