@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { FaEdit, } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Sidenavbar from './Sidenavbar';
-import { HiUserAdd } from 'react-icons/hi';
-import Topnavbar from './Topnavbar';
-import { UserContext } from '../App';
-import Footer from './Footer';
-import { NavLink } from 'react-router-dom';
+import Sidenavbar from "./Sidenavbar";
+import { HiUserAdd } from "react-icons/hi";
+import Topnavbar from "./Topnavbar";
+import { UserContext } from "../App";
+import Footer from "./Footer";
+import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,10 +22,8 @@ const ShowEmployee = () => {
   //const { state, dispatch } = useContext(UserContext);
 
   const getEmployees = async (e) => {
-
     try {
-
-      const res = await fetch('/employeedata');
+      const res = await fetch("/employeedata");
       // , {
       //   method: "GET",
       //   headers: {
@@ -37,37 +35,32 @@ const ShowEmployee = () => {
       const data = await res.json();
 
       setEmployeedata(data);
-      console.log("tableshowEmloyeeData :",data);
+      console.log("tableshowEmloyeeData :", data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
       }
-
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   useEffect(() => {
     getEmployees();
   }, []);
 
-
   const deleteEmployee = async (id) => {
     if (window.confirm("Are You Sure, You want to delete?")) {
       try {
-        const response = await fetch(`/employee/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`/employee/${id}`, {
+          method: "DELETE",
+        });
         const jsonData = await response.json();
         console.log(jsonData);
 
         toast.success("Employee Deleted Successfully!", {
           position: "top-center",
         });
-
       } catch (err) {
         console.error(err.message);
       }
@@ -75,7 +68,6 @@ const ShowEmployee = () => {
       getEmployees();
     }
   };
-
 
   if (searchQuery) {
     employeedata = employeedata.filter(
@@ -87,18 +79,14 @@ const ShowEmployee = () => {
     );
   }
 
-
   const handleChange = (e) => {
     setValue(e.target.value);
   };
   //   console.log(value);
 
-
   //const size = 3;
   const data = employeedata.slice(0, value);
   // console.log(" selected data :",data);
-
-
 
   return (
     <>
@@ -106,29 +94,46 @@ const ShowEmployee = () => {
         <Sidenavbar />
 
         <div id="content-wrapper" className="d-flex flex-column">
-
-
           <div id="content">
-          <ToastContainer />
+            <ToastContainer />
 
             <Topnavbar />
 
             <div className="container-fluid">
               <div className="card shadow mb-4">
                 <div className="card-header py-3">
-
-                  <h6 className="font-weight-bold text-primary">Employees Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/addemployee"><HiUserAdd /> Add Employee  </NavLink>
-
+                  <h6 className="font-weight-bold text-primary">
+                    Employees Table
+                  </h6>
+                  <NavLink
+                    className="float-right font-weight-bold text-success"
+                    to="/addemployee"
+                  >
+                    <HiUserAdd /> Add Employee{" "}
+                  </NavLink>
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
-                    <div id="dataTable_wrapper" className="dataTables_wrapper dt-bootstrap4">
+                    <div
+                      id="dataTable_wrapper"
+                      className="dataTables_wrapper dt-bootstrap4"
+                    >
                       <div className="row">
                         <div className="col-sm-12 col-md-6">
-                          <div className="dataTables_length" id="dataTable_length">
-                            <label>Show entries
-                              <select id="currvalue" name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm" value={value} onChange={handleChange} >
+                          <div
+                            className="dataTables_length"
+                            id="dataTable_length"
+                          >
+                            <label>
+                              Show entries
+                              <select
+                                id="currvalue"
+                                name="dataTable_length"
+                                aria-controls="dataTable"
+                                className="custom-select custom-select-sm form-control form-control-sm"
+                                value={value}
+                                onChange={handleChange}
+                              >
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="50">50</option>
@@ -140,8 +145,12 @@ const ShowEmployee = () => {
 
                         {/* text-right */}
                         <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-end align-items-end">
-                          <div id="dataTable_filter" className="dataTables_filter">
-                            <label>Search:
+                          <div
+                            id="dataTable_filter"
+                            className="dataTables_filter"
+                          >
+                            <label>
+                              Search:
                               <div>
                                 <input
                                   type="text"
@@ -150,7 +159,9 @@ const ShowEmployee = () => {
                                   id="name"
                                   placeholder={"Search Here...."}
                                   value={searchQuery}
-                                  onChange={(e) => setSearchQuery(e.target.value)}
+                                  onChange={(e) =>
+                                    setSearchQuery(e.target.value)
+                                  }
                                 />
                               </div>
                             </label>
@@ -158,7 +169,12 @@ const ShowEmployee = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
+                        <table
+                          className="table table-bordered"
+                          id="dataTable"
+                          width="100%"
+                          cellSpacing="5%"
+                        >
                           <thead>
                             <tr>
                               <th>EmployeeId</th>
@@ -183,9 +199,7 @@ const ShowEmployee = () => {
                                         </tr>
                                     </tfoot>           */}
                           <tbody>
-
                             {data.map((employeedata, i) => (
-
                               <tr key={employeedata._id}>
                                 <td>{employeedata.empid}</td>
                                 <td>{employeedata.firstname}</td>
@@ -195,44 +209,42 @@ const ShowEmployee = () => {
                                 <td>{employeedata.phone}</td>
 
                                 <td>
-                                  <NavLink className="text-success btn-lg" to={`/editemployee/${employeedata._id}`} ><FaEdit /></NavLink>
+                                  <NavLink
+                                    className="text-success btn-lg"
+                                    to={`/editemployee/${employeedata._id}`}
+                                  >
+                                    <FaEdit />
+                                  </NavLink>
                                 </td>
 
                                 <td>
-                                  <NavLink onClick={() =>
-                                    deleteEmployee(employeedata._id)
-                                  } className="text-danger btn-lg" to=""><MdDelete />
+                                  <NavLink
+                                    onClick={() =>
+                                      deleteEmployee(employeedata._id)
+                                    }
+                                    className="text-danger btn-lg"
+                                    to=""
+                                  >
+                                    <MdDelete />
                                   </NavLink>
-
                                 </td>
                               </tr>
-
-
                             ))}
                           </tbody>
-
                         </table>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
-
-
           </div>
 
-
           <Footer />
-
         </div>
-
-
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default ShowEmployee
+export default ShowEmployee;

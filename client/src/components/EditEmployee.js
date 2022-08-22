@@ -29,28 +29,25 @@ const EditEmployee = () => {
   let [roledata, setRoledata] = useState([]);
 
   const getRoles = async (e) => {
+    try {
+      const res = await fetch("/roles");
 
-        try {
-    
-          const res = await fetch('/roles');
-          
-          const data = await res.json();
-    
-          setRoledata(data);
-          console.log("GetRolestable :",data);
-    
-          if (!res.status === 200) {
-            const error = new Error(res.error);
-            throw error;
-          }
-    
-        } catch (error) {
-          console.log(error);
-        }
+      const data = await res.json();
+
+      setRoledata(data);
+      console.log("GetRolestable :", data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
       }
-      useEffect(() => {
-        getRoles();
-      }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   const getSingleEmployee = async () => {
     try {
@@ -63,14 +60,14 @@ const EditEmployee = () => {
         credentials: "include",
       });
       const jsonData = await response.json();
-      console.log("SingleEmployee_for_update",jsonData);
+      console.log("SingleEmployee_for_update", jsonData);
 
       setFirstname(jsonData.firstname);
       setLastname(jsonData.lastname);
       setEmail(jsonData.email);
       setEmpid(jsonData.empid);
       setPhone(jsonData.phone);
-      setRole(jsonData.role)
+      setRole(jsonData.role);
     } catch (err) {
       console.error(err.message);
     }
@@ -158,22 +155,26 @@ const EditEmployee = () => {
                      
                     </div> */}
                     <div className="form-group col-sm-8" id="roleid">
-      
-      <select id="roleid"
-        name="roleid"                                        
-        style={{ borderRadius: '30px'}}                                       
-        className="custom-select custom-select-lg col-lg-12"                       
-        value={roleid}
-        onChange={(e) => setRole(e.target.value)}
-        >
+                      <select
+                        id="roleid"
+                        name="roleid"
+                        style={{ borderRadius: "30px" }}
+                        className="custom-select custom-select-lg col-lg-12"
+                        value={roleid}
+                        onChange={(e) => setRole(e.target.value)}
+                      >
+                        <option value="">--Select Designation--</option>
 
-      <option value="">--Select Designation--</option>     
-
-      {roledata.map((roledataa) => <option key={roledataa.Role_id} value={roledataa.Role_id}>{roledataa.Role}</option>)}                    
-     
-      </select> 
-
-      </div>
+                        {roledata.map((roledataa) => (
+                          <option
+                            key={roledataa.Role_id}
+                            value={roledataa.Role_id}
+                          >
+                            {roledataa.Role}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
                     <div className="form-group col-sm-8 ">
                       <input
@@ -241,17 +242,17 @@ const EditEmployee = () => {
                     </div>
 
                     <div className="form-group col-sm-8">
-                                <input 
-                                type="file" 
-                                name="file"
-                                className="form-control form-control-user"
-                                id="file" 
-                                accept=".pdf"
-                                placeholder="Upload File"
-                                //value={employee.designation}
-                                // onChange={handleInputs}  
-                                />
-                        </div> 
+                      <input
+                        type="file"
+                        name="file"
+                        className="form-control form-control-user"
+                        id="file"
+                        accept=".pdf"
+                        placeholder="Upload File"
+                        //value={employee.designation}
+                        // onChange={handleInputs}
+                      />
+                    </div>
 
                     <div className="mt-4 mb-0">
                       <div className="d-grid">
