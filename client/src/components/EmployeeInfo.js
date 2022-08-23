@@ -13,41 +13,16 @@ const EmployeeInfo = () => {
     let navigate = useNavigate();
     let [employeedata, setEmployeedata] = useState([]);
    
-    const [employee, setEmployee] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        empid: "",
-        phone:""
-        
+    const [employeeinfo, setEmployeeinfo] = useState({
+       empid: "",
+        file1: "",
+        file2: "",
+        file3: ""       
         
     });
  //   const [role, setRole] = useState("");
 
-//  const getSingleEmployee = async () => {
-//     try {
-//       const response = await fetch(`/getemployee/${id}`, {
-//         method: "GET",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//         },
-//         credentials: "include",
-//       });
-//       const jsonData = await response.json();
-//       console.log("SingleEmployee_for_update", jsonData);
 
-//       setEmployee(jsonData.employee.firstname);
-//     //   setLastname(jsonData.lastname);
-//     //   setEmail(jsonData.email);
-//     //   setEmpid(jsonData.empid);
-//     //   setPhone(jsonData.phone);
-//     //   setRole(jsonData.role);
-//     } catch (err) {
-//       console.error(err.message);
-//     }
-//   };
-    
  const getEmployees = async (e) => {
     try {
       const res = await fetch("/employeedata");
@@ -75,7 +50,7 @@ const EmployeeInfo = () => {
         name = e.target.name;
         value = e.target.value;
 
-        setEmployee({ ...employee, [name]: value })
+        setEmployeeinfo({ ...employeeinfo, [name]: value })
     }
 
     // const handleChange = (e) => {
@@ -92,13 +67,13 @@ const EmployeeInfo = () => {
     const PostData = async (e) => {
         e.preventDefault();
 
-        const {firstname,lastname, email, empid, phone,roleid} = employee;
+        const {empid,file1,file2,file3} = employeeinfo;
         //const {roleid} = role;
         
         let res = await fetch("/employee", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
-            body: JSON.stringify({firstname,lastname, email, empid, phone, roleid}),
+            body: JSON.stringify({empid,file1,file2,file3}),
         });
 
      
@@ -153,11 +128,11 @@ const EmployeeInfo = () => {
       
         <div className="form-group col-sm-8" id="empname">
                       <select
-                        id="Empid"
-                        name="Empid"
+                        id="empid"
+                        name="empid"
                         style={{ borderRadius: "30px" }}
                         className="custom-select custom-select-lg col-lg-12"                        
-                        //value={assignedproject.Empid}
+                        value={employeeinfo.empid}
                         onChange={handleInputs}
                       >
                         <option value="">--Select Employee Name--</option>
@@ -177,69 +152,45 @@ const EmployeeInfo = () => {
                       
                         <div className="form-group col-sm-8 ">
                                 <input 
-                                type="text"
-                                name="firstname"
+                                type="file"
+                                name="file1"
                                 className="form-control input-lg  form-control-user "
-                                id="FirstName"
-                                placeholder="Enter First Name"
-                                // value={employee.firstname}
-                                // onChange={handleInputs}
+                                id="File1"
+                                placeholder="Upload File "
+                                value={employeeinfo.file1}
+                                onChange={handleInputs}
                                 />                        
                         </div>                     
                         
-                         <div className="form-group col-sm-8">
-                                <input
-                                  type="text"
-                                  name="lastname"
-                                  className="form-control form-control-user"
-                                  id="LastName"
-                                  placeholder="Enter Last Name" 
-                                //   value={employee.lastname}
-                                //   onChange={handleInputs} 
-                                  />
-                        </div>
+                        <div className="form-group col-sm-8 ">
+                                <input 
+                                type="file"
+                                name="file2"
+                                className="form-control input-lg  form-control-user "
+                                id="File2"
+                                placeholder="Upload File "
+                                value={employeeinfo.file2}
+                                onChange={handleInputs}
+                                />                        
+                        </div>   
                       
                         
-                        <div className="form-group col-sm-8">
-                            <input 
-                            type="email"
-                            name="email" 
-                            className="form-control form-control-user" 
-                            id="Email"
-                            placeholder="Enter Email Address"
-                            // value={employee.email}
-                            // onChange={handleInputs} 
-                            />
-                        </div>
-                 
-                        <div className="form-group col-sm-8">
+                        <div className="form-group col-sm-8 ">
                                 <input 
-                                type="text" 
-                                name="empid"
-                                className="form-control form-control-user"
-                                id="employeeId" 
-                                placeholder="Enter Employee Id "
-                                // value={employee.empid}
-                                // onChange={handleInputs} 
-                                />
-                            </div>
-                            <div className="form-group col-sm-8">
-                                <input 
-                                type="text" 
-                                name="phone"
-                                className="form-control form-control-user"
-                                id="phone" 
-                                maxLength={10}
-                                placeholder="Enter Phone Number"
-                                // value={employee.phone}
-                                // onChange={handleInputs} 
-                                />
-                            </div>
+                                type="file"
+                                name="file3"
+                                className="form-control input-lg  form-control-user"
+                                id="File3"
+                                placeholder="Upload File "
+                                value={employeeinfo.file3}
+                                onChange={handleInputs}
+                                />                        
+                        </div>  
 
 
                 <div className="mt-4 mb-0">
-                <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup" value="register" onClick={PostData}>Add Information</NavLink></div>
-                 </div>
+                <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup" value="register" onClick={PostData}>Upload Files</NavLink></div>
+                 </div> 
                        
                        
                         
