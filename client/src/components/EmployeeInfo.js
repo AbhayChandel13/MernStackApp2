@@ -20,7 +20,6 @@ const EmployeeInfo = () => {
     });
  //   const [role, setRole] = useState("");
 
-
  const getEmployees = async (e) => {
     try {
       const res = await fetch("/employeedata");

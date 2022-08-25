@@ -62,7 +62,6 @@ const authenticate = require("../middleware/authenticate");
     }
   });
 
-
  //Creating new employee
 
  router.post('/employee', async (req, res) => {
