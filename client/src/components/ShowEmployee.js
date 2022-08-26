@@ -114,8 +114,7 @@ const ShowEmployee = () => {
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
-                    <div
-                      id="dataTable_wrapper"
+                    <div id="dataTable_wrapper"
                       className="dataTables_wrapper dt-bootstrap4"
                     >
                       <div className="row">
@@ -187,17 +186,7 @@ const ShowEmployee = () => {
                               <th>Delete</th>
                             </tr>
                           </thead>
-                          {/* <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Work</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                            
-                                        </tr>
-                                    </tfoot>           */}
+                         
                           <tbody>
                             {data.map((employeedata, i) => (
                               <tr key={employeedata._id}>
@@ -230,8 +219,53 @@ const ShowEmployee = () => {
                                 </td>
                               </tr>
                             ))}
+
+                  
                           </tbody>
-                        </table>
+                        </table>                        
+                      </div>
+                    <div className="row">
+                      <div className="col-sm-12 col-md-6">
+                        <div className="dataTables_length" id="dataTable_length">
+                    <div className="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Show11 to 20 of 57 entries
+                    </div>
+                          </div>
+                        </div>
+
+                       
+        <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-end align-items-end">
+          <div className="col-sm-12 col-md-9">
+      <div className="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+        <ul className="pagination">
+        <li className="paginate_button page-item previous" id="dataTable_previous">
+        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+        </li>
+        <li className="paginate_button page-item ">
+          <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" className="page-link">1</a>
+          </li>
+          <li className="paginate_button page-item">
+            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" className="page-link">2</a>
+            </li>
+            <li className="paginate_button page-item ">
+              <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" className="page-link">3</a>
+              </li>
+              <li className="paginate_button page-item ">
+                <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" className="page-link">4</a>
+                </li>
+                <li className="paginate_button page-item ">                  
+                  <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" className="page-link">5</a>
+                  </li>
+                  <li className="paginate_button page-item ">
+                    <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" className="page-link">6</a>
+                    </li>
+                    <li className="paginate_button page-item next" id="dataTable_next">
+                      <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" className="page-link">Next</a>
+                      </li>
+                      </ul>
+                      </div>
+                      </div>
+                   </div>
+                        
                       </div>
                     </div>
                   </div>

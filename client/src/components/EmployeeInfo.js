@@ -189,9 +189,7 @@ const EmployeeInfo = () => {
                 <div className="d-grid"><NavLink className="btn btn-primary btn-user btn-block" to="/" name="signup" id="signup" value="register" onClick={PostData}>Upload Files</NavLink></div>
                  </div> 
                        
-                       
-                        
-                        
+                     
          </form>
          </div>
          </div>
