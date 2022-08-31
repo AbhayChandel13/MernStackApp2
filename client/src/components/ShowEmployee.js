@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -13,6 +14,7 @@ import Pagination from "./pagination";
 
 
 // Check out TEST   
+//Check out test branch in third 
   
 const ShowEmployee = () => {
   // const getInitialState = () => {
@@ -22,14 +24,24 @@ const ShowEmployee = () => {
 
   let [searchQuery, setSearchQuery] = useState("");
   let [employeedata, setEmployeedata] = useState([]);
-  // const [value, setValue] = useState(getInitialState);
+  // let [value, setValue] = useState(5);
   //const { state, dispatch } = useContext(UserContext);
   const [showPerPage, setShowPerPage] = useState(5);
   const [pagination, setPagination] = useState({
     start: 0,
-    end: showPerPage,
+    end: showPerPage
   });
-  console.log(pagination);
+   
+  const handleChange = (e) => {
+    // setValue(e.target.value);
+     setShowPerPage(e.target.value);
+    //  setPagination({ start: 0,  end: showPerPage });
+    // setShowPerPage(value);
+    
+  };
+  console.log("Showperpage",showPerPage);
+  console.log("pagination",pagination);
+  
   const onPaginationChange = (start, end) => {
     setPagination({ start: start, end: end });
   };
@@ -45,10 +57,10 @@ const ShowEmployee = () => {
       //   },
       //   credentials: "include"
       // }
-      const data = await res.json();
+      const data = await res.json();  
 
       setEmployeedata(data);
-      console.log("tableshowEmloyeeData :", data);
+      //console.log("tableshowEmloyeeData :", data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -80,7 +92,7 @@ const ShowEmployee = () => {
 
       getEmployees();
     }
-  };
+    };
 
   if (searchQuery) {
     employeedata = employeedata.filter(
@@ -92,15 +104,13 @@ const ShowEmployee = () => {
     );
   }
 
-  // const handleChange = (e) => {
-  //   setValue(e.target.value);
-  // };
+  
   //   console.log(value);
 
   //const size = 3;
   // const data = employeedata.slice(0, value);
-  const data = employeedata;
-  console.log(" selected data length  :", data.length);
+   const data = employeedata; 
+  //console.log(" selected data length  :", data.length);
 
   return (
     <>
@@ -133,7 +143,7 @@ const ShowEmployee = () => {
                       className="dataTables_wrapper dt-bootstrap4"
                     >
                       <div className="row">
-                        {/* <div className="col-sm-12 col-md-6">
+                        <div className="col-sm-12 col-md-6">
                           <div
                             className="dataTables_length"
                             id="dataTable_length"
@@ -145,7 +155,7 @@ const ShowEmployee = () => {
                                 name="dataTable_length"
                                 aria-controls="dataTable"
                                 className="custom-select custom-select-sm form-control form-control-sm"
-                                value={value}
+                                value={showPerPage}
                                 onChange={handleChange}
                               >
                                 <option value="5">5</option>
@@ -155,7 +165,7 @@ const ShowEmployee = () => {
                               </select>
                             </label>
                           </div>
-                        </div> */}
+                        </div>
 
                         {/* text-right */}
                         <div className="col-sm-12 col-md-12 d-flex flex-column justify-content-end align-items-end">
@@ -241,7 +251,7 @@ const ShowEmployee = () => {
                       </div>
                       <div className="col-sm-12 col-md-12 d-flex flex-column justify-content-end align-items-end">
                         <Pagination
-                          showPerPage={showPerPage}
+                          showPerPage={showPerPage}                          
                           onPaginationChange={onPaginationChange}
                           total={data.length}
                         />
