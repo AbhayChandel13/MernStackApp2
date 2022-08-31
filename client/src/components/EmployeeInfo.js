@@ -50,17 +50,6 @@ const EmployeeInfo = () => {
         setEmployeeinfo({ ...employeeinfo, [name]: value })
     }
 
-    // const handleChange = (e) => {
-    //     // e.target.value
-    //    //setDesignation({...designation,[name]: value});
-    //   // setRole(e.target.value);
-    //   name = e.target.name;
-    //   value = e.target.value;
-
-    //   setRole({...role,[name]: value});
-    //   };
-    //   console.log(role);
-
     const PostData = async (e) => {
         e.preventDefault();
 
