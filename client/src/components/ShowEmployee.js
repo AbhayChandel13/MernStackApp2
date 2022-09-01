@@ -16,31 +16,22 @@ import Pagination from "./pagination";
 // Check out TEST   
 //Check out test branch in third 
   
-const ShowEmployee = () => {
-  // const getInitialState = () => {
-  //   const value = "5";
-  //   return value;
-  // };
+const ShowEmployee = () => { 
 
   let [searchQuery, setSearchQuery] = useState("");
   let [employeedata, setEmployeedata] = useState([]);
-  // let [value, setValue] = useState(5);
-  //const { state, dispatch } = useContext(UserContext);
+  
   const [showPerPage, setShowPerPage] = useState(5);
   const [pagination, setPagination] = useState({
     start: 0,
     end: showPerPage
   });
    
-  const handleChange = (e) => {
-    // setValue(e.target.value);
-     setShowPerPage(e.target.value);
-    //  setPagination({ start: 0,  end: showPerPage });
-    // setShowPerPage(value);
-    
-  };
-  console.log("Showperpage",showPerPage);
-  console.log("pagination",pagination);
+  // const handleChange = (e) => {    
+  //    setShowPerPage(e.target.value);
+  //   console.log(showPerPage);
+  // };
+  
   
   const onPaginationChange = (start, end) => {
     setPagination({ start: start, end: end });
@@ -49,14 +40,7 @@ const ShowEmployee = () => {
   const getEmployees = async (e) => {
     try {
       const res = await fetch("/employeedata");
-      // , {
-      //   method: "GET",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json"
-      //   },
-      //   credentials: "include"
-      // }
+      
       const data = await res.json();  
 
       setEmployeedata(data);
@@ -104,14 +88,8 @@ const ShowEmployee = () => {
     );
   }
 
-  
-  //   console.log(value);
-
-  //const size = 3;
-  // const data = employeedata.slice(0, value);
    const data = employeedata; 
-  //console.log(" selected data length  :", data.length);
-
+  
   return (
     <>
       <div id="wrapper">
@@ -143,7 +121,7 @@ const ShowEmployee = () => {
                       className="dataTables_wrapper dt-bootstrap4"
                     >
                       <div className="row">
-                        <div className="col-sm-12 col-md-6">
+                        {/* <div className="col-sm-12 col-md-6">
                           <div
                             className="dataTables_length"
                             id="dataTable_length"
@@ -165,7 +143,7 @@ const ShowEmployee = () => {
                               </select>
                             </label>
                           </div>
-                        </div>
+                        </div> */}
 
                         {/* text-right */}
                         <div className="col-sm-12 col-md-12 d-flex flex-column justify-content-end align-items-end">
