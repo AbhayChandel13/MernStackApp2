@@ -23,7 +23,7 @@ const Pagination = ({ showPerPage, onPaginationChange, total }) => {
     if (type === "prev") {
       if (counter === 1) {
         setCounter(1);
-      } else {
+      } else {  
         setCounter(counter - 1);
       }
     } else if (type === "next") {
