@@ -13,9 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Pagination from "./pagination";
 
 
-// Check out TEST   
-//Check out test branch in third 
-  
 const ShowEmployee = () => { 
 
   let [searchQuery, setSearchQuery] = useState("");
