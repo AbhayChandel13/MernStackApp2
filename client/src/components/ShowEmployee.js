@@ -245,5 +245,4 @@ const ShowEmployee = () => {
   );
 };
 
-//minor test commit for the activty of  git log 
 export default ShowEmployee;
