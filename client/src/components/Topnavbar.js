@@ -7,13 +7,12 @@ const Topnavbar = () => {
 
   const userHomePage = async () => {
     try {
-      const res = await fetch("/getdata");
-      // , {
-      //     method: "GET",
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //     },
-      // }
+      const res = await fetch("/api/v1/employees/getdata", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await res.json();
       console.log(data);
       setUserName(data.name);

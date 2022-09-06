@@ -305,8 +305,8 @@ router.post("/signin", async (req, res) => {
     }
   });
 });
-//read the data of registered  Users :
 
+//read the data of registered  Users :
 router.get("/users", async (req, res) => {
   try {
     const usersdata = await User.find();
@@ -317,7 +317,6 @@ router.get("/users", async (req, res) => {
 });
 
 //Get data of Roles table :
-
 router.get("/roles", async (req, res) => {
   try {
     const usersroles = await Designation.find();
@@ -326,6 +325,7 @@ router.get("/roles", async (req, res) => {
     res.send(err);
   }
 });
+
 //POST ROUTE ONLY FOR TEST STILL
 router.post("/newrole", async (req, res) => {
   const { Role_id, Role } = req.body;

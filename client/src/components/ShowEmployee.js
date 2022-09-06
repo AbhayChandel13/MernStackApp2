@@ -58,7 +58,7 @@ const ShowEmployee = () => {
   const deleteEmployee = async (id) => {
     if (window.confirm("Are You Sure, You want to delete?")) {
       try {
-        const response = await fetch(`/employee/${id}`, {
+        const response = await fetch(`/api/v1/employees/employee/${id}`, {
           method: "DELETE",
         });
         const jsonData = await response.json();

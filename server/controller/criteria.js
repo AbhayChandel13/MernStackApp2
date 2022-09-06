@@ -63,7 +63,7 @@ exports.login = async (req, res) => {
 
 // get User data for homepage and contact page
 
-exports.getdata =  async ( req, res) => {
+exports.getdata =   async ( req, res) => {
   try {
     // console.log("Hello ");
     res.send(req.rootUser);
@@ -253,6 +253,7 @@ exports.assignProject = async (req, res) => {
     console.log(err);
   }
 };
+
 //Getting the data for assignedProject table :
 exports.getassignedprojects = async (req, res) => {
   try {
@@ -281,5 +282,21 @@ exports.getassignedprojects = async (req, res) => {
     res.send(assignedprojects);
   } catch (err) {
     res.send(err);
+  }
+};
+
+
+//Delete Employee :
+
+exports.deleteEmployee = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const deleteEmployee = await Employee.findByIdAndDelete(_id);
+    if (!req.params.id) {
+      return res.status(404).send();
+    }
+    res.send(deleteEmployee);
+  } catch (e) {
+    res.status(500).send(e);
   }
 };
