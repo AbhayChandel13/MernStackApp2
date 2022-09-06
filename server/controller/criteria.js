@@ -9,57 +9,58 @@ const AssignedProjects = require("../model/assigndSchema");
 const Designation = require("../model/rolesSchema");
 
 //login route:--
-exports.login = async (req, res) => {
-  try {
-    let token;
-    const { email, password } = req.body;
+// exports.login = async (req, res) => {
+//   try {
+//     let token;
+//     const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res
-        .status(400)
-        .json({ error: "Please fill data in both the field " });
-    }
+//     if (!email || !password) {
+//       return res
+//         .status(400)
+//         .json({ error: "Please fill data in both the field " });
+//     }
 
-    const userLogin = await User.findOne({ email: email });
+//     const userLogin = await User.findOne({ email: email });
 
-    //    console.log(userLogin);
-    if (userLogin) {
-      // const isMatch = await bcrypt.compare(password, userLogin.password);
+//     //    console.log(userLogin);
+//     if (userLogin) {
+//       // const isMatch = await bcrypt.compare(password, userLogin.password);
 
-      token = await userLogin.generateAuthToken();
-      console.log(token);
+//       token = await userLogin.generateAuthToken();
+//       console.log(token);
 
-      res.cookie("jwtoken", token, {
-        expires: new Date(Date.now() + 25892000000),
-        httpOnly: true,
-      });
+//       res.cookie("jwtoken", token, {
+//         expires: new Date(Date.now() + 25892000000),
+//         httpOnly: true,
+//       });
 
-      if (!userLogin) {
-        res.status(400).json({ error: "Invalid Credentials pass" });
-      } else {
-        res.json({ message: "User Signin Successfully" });
-      }
-    } else {
-      res.status(400).json({ error: "Invalid Credentials" });
-    }
+//       if (!userLogin) {
+//         res.status(400).json({ error: "Invalid Credentials pass" });
+//       } else {
+//         res.json({ message: "User Signin Successfully" });
+//       }
+//     } else {
+//       res.status(400).json({ error: "Invalid Credentials" });
+//     }
 
-  } catch (err) {
-    console.log(err);
-  }
+//   } catch (err) {
+//     console.log(err);
+//   }
 
-}
+// }
 
   //Logout route:--
 
-  exports.logout= async (req, res) => {
-    try {
-      res.clearCookie("jwtoken", { path: "/" });
-      // await req.user.save()
-      res.status(200).send("User logout");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // exports.logout= async (req, res) => {
+  //   try {
+  //     res.clearCookie("jwtoken", { path: "/" });
+  //     // await req.user.save()
+  //     res.status(200).send("User logout");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
 
 // get User data for homepage and contact page
 
@@ -84,6 +85,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+
 //Create User 
 exports.createUser = async (req, res) => {
     const { name, email, role, phone, password, cpassword } = req.body;
@@ -107,6 +109,7 @@ exports.createUser = async (req, res) => {
       console.log(err);
     }
   };
+
 
 //Delete User :
 exports.deleteUser = async (req, res) => {
@@ -152,6 +155,7 @@ exports.getEmployee = async (req, res) => {
   }
 };
 
+
 //Creating new employee
   exports.createEmployee= async (req, res) => {
   const { firstname, lastname, email, empid, phone, roleid } = req.body;
@@ -176,6 +180,7 @@ exports.getEmployee = async (req, res) => {
   }
 };
 
+
 //Get data of Roles table :
 exports.getRoles= async (req, res) => {
   try {
@@ -186,8 +191,8 @@ exports.getRoles= async (req, res) => {
   }
 };
 
-//Creating new project
 
+//Creating new project
 exports.createProject= async (req, res) => {
   const {
     projectname,
@@ -220,8 +225,8 @@ exports.createProject= async (req, res) => {
   }
 };
 
-//Get Project data from project collection
 
+//Get Project data from project collection
 exports.getProjects=async (req, res) => {
   try {
     const projectsdata = await Projects.find();
@@ -254,6 +259,7 @@ exports.assignProject = async (req, res) => {
   }
 };
 
+
 //Getting the data for assignedProject table :
 exports.getassignedprojects = async (req, res) => {
   try {
@@ -285,9 +291,40 @@ exports.getassignedprojects = async (req, res) => {
   }
 };
 
+//get Single Employee For update :
+exports.getSingleEmployee= async (req, res) => {
+  // console.log("Hello ");
+  // res.send(req.rootUser);
+  try {
+    const _id = req.params.id;
+    const employeedata = await Employee.findById(_id);
+    if (!employeedata) {
+      return res.status(404).send();
+    } else {
+      res.send(employeedata);
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
+};
+
+ //Update the Employee data :
+ exports.updateEmployee = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const updateEmployee = await Employee.findByIdAndUpdate(_id, req.body, {
+      new: true,
+    });
+
+    res.send(updateEmployee);
+  } catch (e) {
+    res.status(404).send(e);
+  }
+};
+
+
 
 //Delete Employee :
-
 exports.deleteEmployee = async (req, res) => {
   try {
     const _id = req.params.id;
@@ -300,6 +337,7 @@ exports.deleteEmployee = async (req, res) => {
     res.status(500).send(e);
   }
 };
+
 
  //Delete Project :
  exports.deleteProject = async (req, res) => {

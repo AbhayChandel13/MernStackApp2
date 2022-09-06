@@ -62,24 +62,13 @@ const AddEmployee = () => {
         setEmployee({ ...employee, [name]: value })
     }
 
-    // const handleChange = (e) => {
-    //     // e.target.value
-    //    //setDesignation({...designation,[name]: value});
-    //   // setRole(e.target.value);
-    //   name = e.target.name;
-    //   value = e.target.value;
-
-    //   setRole({...role,[name]: value});
-    //   };
-    //   console.log(role);
-
     const PostData = async (e) => {
         e.preventDefault();
 
         const {firstname,lastname, email, empid, phone,roleid} = employee;
         //const {roleid} = role;
         
-        let res = await fetch("/api/v1/employees", {
+        let res = await fetch("/api/v1/employees/createEmployee", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
             body: JSON.stringify({firstname,lastname, email, empid, phone, roleid}),
@@ -110,8 +99,7 @@ const AddEmployee = () => {
 
     }
 
-   
-
+  
   return (
     <>
       <div id="wrapper">

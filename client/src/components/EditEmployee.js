@@ -30,7 +30,7 @@ const EditEmployee = () => {
 
   const getRoles = async (e) => {
     try {
-      const res = await fetch("/roles");
+      const res = await fetch("/api/v1/employees/getRoles");
 
       const data = await res.json();
 
@@ -51,7 +51,7 @@ const EditEmployee = () => {
 
   const getSingleEmployee = async () => {
     try {
-      const response = await fetch(`/getemployee/${id}`, {
+      const response = await fetch(`/api/v1/employees/getemployee/${id}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -86,7 +86,7 @@ const EditEmployee = () => {
         roleid,
       };
 
-      const response = await fetch(`/employee/${id}`, {
+      const response = await fetch(`/api/v1/employees/employee/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
