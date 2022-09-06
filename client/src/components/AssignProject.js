@@ -48,7 +48,7 @@ const AssignProject = () => {
 
   const getProjects = async (e) => {
     try {
-      const res = await fetch("/projectsdata");
+      const res = await fetch("/api/v1/employees/projectsdata");
       // , {
       //   method: "GET",
       //   headers: {
@@ -76,7 +76,7 @@ const AssignProject = () => {
 
   const getEmployees = async (e) => {
     try {
-      const res = await fetch("/employeedata");
+      const res = await fetch("/api/v1/employees/getEmployee");
 
       const data = await res.json();
 
@@ -101,7 +101,7 @@ const AssignProject = () => {
     const { projectname, Empid, startdate, enddate } = assignedproject;
     //const {projectname} = role;
 
-    let res = await fetch("/assignedproject", {
+    let res = await fetch("/api/v1/employees/assignproject", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectname, Empid, startdate, enddate }),

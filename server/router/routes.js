@@ -1,18 +1,26 @@
-// const express = require('express');
+const express = require('express');
 // const Authenticate = require('../middleware/authenticate');
-// const router = express.Router();
-// const controller = require("./controller");
-// //const express = require('express');
-// // const router = Router();
+const router = express.Router();
+const {login,getUsers, createUser,createEmployee,deleteUser, logout,getdata, getRoles, getEmployee,assignProject,createProject,getProjects,getassignedprojects} = require("../controller/criteria");
+
+
+router.route("/signin").post(login);
+router.route("/logout").get(logout);
+router.route("/getdata").get(getdata);
+router.route("/getEmployee").get(getEmployee);
+router.route("/getRoles").get(getRoles);
+router.route("/getUsers").get(getUsers); 
+router.route("/projectsdata").get(getProjects);
+ router.route("/assignedprojects").get(getassignedprojects); 
+router.route("/createUser").post(createUser);
+router.route("/createEmployee").post(createEmployee);
+router.route("/createproject").post(createProject);
+router.route("/assignproject").post(assignProject);
+
+router.route("/:id").delete(deleteUser);
 
 
 
-// router.post('/',controller.adduser);
-// router.post('/signin',controller.login);
-// router.post('/addemployee',controller.addEmployee);
-// router.get('/getdata', Authenticate,controller.getdata);
 
 
-
-
-// module.exports = router;
+module.exports = router;

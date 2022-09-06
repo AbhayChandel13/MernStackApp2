@@ -1,15 +1,16 @@
+const express  = require('express');
 const dotenv = require('dotenv');
 const cors = require("cors");
 const mongoose = require('mongoose'); 
-const express  = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
-//const mernDataRoutes = require("./router/routes");
+const connectDatabase = require("./db/conn");
+const employees = require("./router/routes");
 
 
 app.use(cookieParser());
 dotenv.config({path: './config.env'});
-require('./db/conn');
+connectDatabase();
 app.use(cors());
 app.use(express.json());
 
@@ -20,10 +21,9 @@ const PORT = process.env.PORT;
 //     res.send(`Hello Form the server `);
 
 //  })
-app.use(require('./router/auth'));
+app.use("/api/v1/employees", employees);
+// app.use(require('./router/auth'));
 //app.use("/api/mernstack",  mernDataRoutes);
-
-
 
 
 app.listen(PORT,()=>{

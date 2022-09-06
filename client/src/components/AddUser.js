@@ -49,7 +49,7 @@ const AddUser = () => {
             const {name, email, phone,password,cpassword} = user;
             const {role} = userrole;
             
-            let res = await fetch("/adduser", { 
+            let res = await fetch("/api/v1/employees/createUser", { 
                 method: "POST",
                 headers: { "Content-Type": "application/json", },
                 body: JSON.stringify({name,email,phone,password,cpassword,role }),

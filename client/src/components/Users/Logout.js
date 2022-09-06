@@ -8,7 +8,7 @@ const Logout = () => {
     const { state, dispatch } = useContext(UserContext);
 
     useEffect(() => {
-        fetch('/logout', {
+        fetch('/api/v1/employees/logout', {
             method: "GET",
             headers: {
                 Accept: "appllication/json",

@@ -64,7 +64,7 @@ const AddProject = () => {
       } = project;
       //const {roleid} = role;
 
-      let res = await fetch("/project", {
+      let res = await fetch("/api/v1/employees/createproject", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

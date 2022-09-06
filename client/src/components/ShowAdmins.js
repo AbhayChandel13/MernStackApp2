@@ -22,7 +22,7 @@ const Showadmins = () => {
 
         try {
 
-            const res = await fetch('/users', {
+            const res = await fetch('/api/v1/employees/getUsers', {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
@@ -64,7 +64,7 @@ const Showadmins = () => {
     const deleteEmployee = async (id) => {
         if (window.confirm("Are You Sure, You want to delete?")) {
           try {
-            const response = await fetch(`/user/${id}`,
+            const response = await fetch(`/api/v1/employees/${id}`,
               {
                 method: "DELETE",
               }

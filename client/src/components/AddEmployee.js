@@ -33,7 +33,7 @@ const AddEmployee = () => {
 
         try {
     
-          const res = await fetch('/roles');
+          const res = await fetch('/api/v1/employees/getRoles');
           
           const data = await res.json();
     
@@ -79,7 +79,7 @@ const AddEmployee = () => {
         const {firstname,lastname, email, empid, phone,roleid} = employee;
         //const {roleid} = role;
         
-        let res = await fetch("/employee", {
+        let res = await fetch("/api/v1/employees", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
             body: JSON.stringify({firstname,lastname, email, empid, phone, roleid}),

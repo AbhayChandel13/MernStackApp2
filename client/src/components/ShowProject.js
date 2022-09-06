@@ -23,7 +23,7 @@ const ShowProject = () => {
 
   const getProjects = async (e) => {
     try {
-      const res = await fetch("/projectsdata");
+      const res = await fetch("/api/v1/employees/projectsdata");
       // , {
       //   method: "GET",
       //   headers: {

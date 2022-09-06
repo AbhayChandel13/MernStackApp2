@@ -36,7 +36,7 @@ const ShowEmployee = () => {
 
   const getEmployees = async (e) => {
     try {
-      const res = await fetch("/employeedata");
+      const res = await fetch("/api/v1/employees/getEmployee");
       
       const data = await res.json();  
 
