@@ -22,7 +22,7 @@ const EmployeeInfo = () => {
 
  const getEmployees = async (e) => {
     try {
-      const res = await fetch("/employeedata");
+      const res = await fetch("/api/v1/employees/getEmployee");
 
       const data = await res.json();
 
@@ -125,7 +125,7 @@ const EmployeeInfo = () => {
 
                         {employeedata.map((employeedataa) => (
                           <option
-                            key={employeedataa.firstname}
+                            key={employeedataa._id}
                             value={employeedataa.empid}
                           >
                             {employeedataa.firstname} {employeedataa.lastname} (
