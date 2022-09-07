@@ -14,14 +14,14 @@ const Dashboard = () => {
 
   const userHomePage = async () => {
     try {
-      const res = await fetch("/getdata", {
+      const res = await fetch("/api/v1/employees/getdata", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await res.json();
-      console.log(data);
+      console.log("dataa : ",data);
       setUserName(data.name);
       setShow(true);
 
