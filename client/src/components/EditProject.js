@@ -31,7 +31,7 @@ const EditEmployee = () => {
 
   const getSingleProject = async () => {
     try {
-      const response = await fetch(`/getproject/${id}`, {
+      const response = await fetch(`/api/v1/employees/getproject/${id}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -71,7 +71,7 @@ const EditEmployee = () => {
          solution,
          };
 
-      const response = await fetch(`/project/${id}`, {
+      const response = await fetch(`/api/v1/employees/project/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

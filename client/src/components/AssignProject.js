@@ -186,7 +186,7 @@ const AssignProject = () => {
 
                         {employeedata.map((employeedataa) => (
                           <option
-                            key={employeedataa.firstname}
+                            key={employeedataa._id}
                             value={employeedataa.empid}
                           >
                             {employeedataa.firstname} {employeedataa.lastname} (

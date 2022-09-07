@@ -1,7 +1,7 @@
 const express = require('express');
 // const Authenticate = require('../middleware/authenticate');
 const router = express.Router();
-const {login,getUsers, createUser,createEmployee,deleteUser, logout,getdata, getRoles, getEmployee,assignProject,createProject,getProjects,getassignedprojects,deleteEmployee, deleteProject, getSingleEmployee, updateEmployee} = require("../controller/criteria");
+const {login,logout,getUsers, createUser,createEmployee,deleteUser,getdata, getRoles, getEmployee,assignProject,createProject,getProjects,getassignedprojects,deleteEmployee, deleteProject, getSingleEmployee, updateEmployee, getSingleproject, updateProject} = require("../controller/criteria");
 
 
 // router.route("/signin").post(login);
@@ -20,6 +20,8 @@ router.route("/assignproject").post(assignProject);
 
 router.route("/getemployee/:id").get(getSingleEmployee);
 router.route("/employee/:id").put(updateEmployee);
+router.route("/getproject/:id").get(getSingleproject);
+router.route("/project/:id").put(updateProject);
 
 router.route("/employee/:id").delete(deleteEmployee);
 router.route("/:id").delete(deleteUser);

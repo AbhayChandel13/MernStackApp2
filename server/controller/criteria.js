@@ -323,6 +323,35 @@ exports.getSingleEmployee= async (req, res) => {
 };
 
 
+//get Single Project For update :
+exports.getSingleproject = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const projectdata = await Projects.findById(_id);
+    if (!projectdata) {
+      return res.status(404).send();
+    } else {
+      res.send(projectdata);
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
+};
+
+//Update the Project data :
+  exports.updateProject = async (req, res) => {
+    try {
+      const _id = req.params.id;
+      const updateProject = await Projects.findByIdAndUpdate(_id, req.body, {
+        new: true,
+      });
+
+      res.send(updateProject);
+    } catch (e) {
+      res.status(404).send(e);
+    }
+  };
+
 
 //Delete Employee :
 exports.deleteEmployee = async (req, res) => {
