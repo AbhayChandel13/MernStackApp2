@@ -8,65 +8,64 @@ const Projects = require("../model/projectSchema");
 const AssignedProjects = require("../model/assigndSchema");
 const Designation = require("../model/rolesSchema");
 
+
 //login route:--
-// exports.login = async (req, res) => {
-//   try {
-//     let token;
-//     const { email, password } = req.body;
 
-//     if (!email || !password) {
-//       return res
-//         .status(400)
-//         .json({ error: "Please fill data in both the field " });
-//     }
+exports.login = async (req, res) => {
+  try {
+    let token;
+    const { email, password } = req.body;
 
-//     const userLogin = await User.findOne({ email: email });
+    if (!email || !password) {
+      return res
+        .status(400)  
+        .json({ error: "Please fill data in both the field " });
+    }
 
-//     //    console.log(userLogin);
-//     if (userLogin) {
-//       // const isMatch = await bcrypt.compare(password, userLogin.password);
+    const userLogin = await User.findOne({ email: email });
 
-//       token = await userLogin.generateAuthToken();
-//       console.log(token);
+       console.log(userLogin);
+    if (userLogin) {
+      //  const isMatch = await bcrypt.compare(password, userLogin.password);
 
-//       res.cookie("jwtoken", token, {
-//         expires: new Date(Date.now() + 25892000000),
-//         httpOnly: true,
-//       });
+      token = await userLogin.generateAuthToken();
+      console.log(token);
 
-//       if (!userLogin) {
-//         res.status(400).json({ error: "Invalid Credentials pass" });
-//       } else {
-//         res.json({ message: "User Signin Successfully" });
-//       }
-//     } else {
-//       res.status(400).json({ error: "Invalid Credentials" });
-//     }
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
 
-//   } catch (err) {
-//     console.log(err);
-//   }
+      res.json({ message: "User Signin Successfully" });
+    } else {
+      res.status(400).json({ error: "Invalid Credentials" });
+    }
 
-// }
+  } catch (err) {
+    console.log(err);
+  }
 
-  //Logout route:--
+}
 
-  // exports.logout= async (req, res) => {
-  //   try {
-  //     res.clearCookie("jwtoken", { path: "/" });
-  //     // await req.user.save()
-  //     res.status(200).send("User logout");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  // Logout route:--
+
+  exports.logout= async (req, res) => {
+    try {
+      res.clearCookie("jwtoken", { path: "/" });
+      // await req.user.save()
+      res.status(200).send("User logout");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 // get User data for homepage and contact page
 
-exports.getdata =   async ( req, res) => {
+exports.getdata = async ( req, res) => {
+ 
   try {
-    // console.log("Hello ");
+    console.log("Hello ");
     res.send(req.rootUser);
   } catch (error) {
     console.log(error);

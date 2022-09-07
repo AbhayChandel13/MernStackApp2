@@ -8,22 +8,20 @@ const Login = () => {
 
     const { state, dispatch } = useContext(UserContext);
 
-
-
     let navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const loginUser = async (e) => {
         e.preventDefault();
-
-        const res = await fetch('/api/v1/employees/signin', {
+    
+        const res = await fetch('http://localhost:8000/api/v1/employees/signin', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         });
 
-        const data = res.json();
+        const data = await res.json();
         if (res.status === 400 || !data) {
             toast.error(" Invalid  Credentials", {
                 position: "top-center",
@@ -41,9 +39,6 @@ const Login = () => {
             }, 2000);
         }
     }
-
-
-
 
 
     return (
