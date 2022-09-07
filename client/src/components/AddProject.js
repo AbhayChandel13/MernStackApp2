@@ -49,25 +49,11 @@ const AddProject = () => {
     };
     console.log(role);
 
-    const PostData = async (e) => {
+    const PostData = async (e) => {      
       e.preventDefault();
 
-      const {
-        projectname,
-        industrysegment,
-        techstack,
-        thirdpartyapi,
-        paymentgateway,
-        githuburl,
-        projectscope,
-        solution,
-      } = project;
-      //const {roleid} = role;
-
-      let res = await fetch("/api/v1/employees/createproject", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      try {
+        const {
           projectname,
           industrysegment,
           techstack,
@@ -76,27 +62,52 @@ const AddProject = () => {
           githuburl,
           projectscope,
           solution,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (res.status === 422 || !data) {
-        //window.alert("Invalid Registration");
-        toast.error(" Invalid Project Data", {
-          position: "top-center",
+        } = project;
+        //const {roleid} = role;
+  
+        let res = await fetch("/api/v1/employees/createproject", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            projectname,
+            industrysegment,
+            techstack,
+            thirdpartyapi,
+            paymentgateway,
+            githuburl,
+            projectscope,
+            solution,
+          }),
         });
-        console.log("Invalid Project Data");
-      } else {
+  
+        const data = await res.json();
+        console.log(data);
+
         toast.success("Project Added Successfully!", {
           position: "top-center",
         });
-        //window.alert("Registration Successful");
-        console.log("Project Added Successful");
+        
+        setTimeout(function () {
+          navigate("/showproject", { replace: true });
+        }, 1000);
+         
+      } catch (err) {
+        console.error(err.message);
 
-        // history.push("/login");
-        navigate("/showproject", { replace: true });
+        toast.error(" Invalid Project Data", {
+          position: "top-center",
+        });
       }
+      // if (res.status === 422 || !data) {
+      //   //window.alert("Invalid Registration");
+       
+      //   console.log("Invalid Project Data");
+      // } 
+      // else {
+       
+      //   //window.alert("Registration Successful");
+        
+      // }
     };
 
    
