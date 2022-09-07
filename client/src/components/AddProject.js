@@ -7,15 +7,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 const AddProject = () => {
     let navigate = useNavigate();
-
-    // const getInitialState = () => {
-    //     const value = "";
-    //     return value;
-    //   };
 
     const [project, setProject] = useState({
       projectname: "",
@@ -38,10 +31,7 @@ const AddProject = () => {
       setProject({ ...project, [name]: value });
     };
 
-    const handleChange = (e) => {
-      // e.target.value
-      //setDesignation({...designation,[name]: value});
-      // setRole(e.target.value);
+    const handleChange = (e) => {    
       name = e.target.name;
       value = e.target.value;
 
@@ -62,8 +52,7 @@ const AddProject = () => {
           githuburl,
           projectscope,
           solution,
-        } = project;
-        //const {roleid} = role;
+        } = project;    
   
         let res = await fetch("/api/v1/employees/createproject", {
           method: "POST",
@@ -97,17 +86,7 @@ const AddProject = () => {
         toast.error(" Invalid Project Data", {
           position: "top-center",
         });
-      }
-      // if (res.status === 422 || !data) {
-      //   //window.alert("Invalid Registration");
-       
-      //   console.log("Invalid Project Data");
-      // } 
-      // else {
-       
-      //   //window.alert("Registration Successful");
-        
-      // }
+      }      
     };
 
    
@@ -135,29 +114,7 @@ const AddProject = () => {
                         <div className="card-body">
         <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
 
-        {/* <div className="form-group col-sm-8" id="roleid">
-                       
-                        <select id="currvalue"
-                          name="roleid"  
-                          style={{ borderRadius: '30px'}}                                       
-                          className="custom-select custom-select-lg col-lg-12"
-                          value={role.roleid} 
-                          onChange={handleChange} 
-                          >
-                        <option value="">--Select Designation--</option>
-                        <option value="101">Manager</option>
-                        <option value="102">Team Leader</option>
-                        <option value="103">Sr. frontend Developer</option>
-                        <option value="104">Sr. Backend Developer</option>
-                        <option value="105">Designer</option>                      
-                        <option value="106">Traniee</option>
-                        <option value="107">Hr</option>
-                        <option value="108">Backend Developer</option>
-                        <option value="109">frontend Developer</option>
-                        </select> 
-                  
-                        </div> */}
-                        
+     
                       
                         <div className="form-group col-sm-8 ">
                                 <input 
