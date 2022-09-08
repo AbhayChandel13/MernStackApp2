@@ -16,14 +16,8 @@ app.use(express.json());
 
 const PORT = process.env.PORT;
 
-// we link the router files to make our  route easy 
-// app.get('/', (req, res) => {
-//     res.send(`Hello Form the server `);
-
-//  })
 app.use("/api/v1/employees", employees);
-// app.use(require('./router/auth'));
-//app.use("/api/mernstack",  mernDataRoutes);
+
 
 
 app.listen(PORT,()=>{

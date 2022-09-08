@@ -1,5 +1,6 @@
 const path = require("path");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
 
 const Employee = require("../model/empSchema");
@@ -11,6 +12,42 @@ const Designation = require("../model/rolesSchema");
 
 //login route:--
 
+// exports.login = async (req, res) => {
+//   try {
+//     let token;
+//     const { email, password } = req.body;
+
+//     if (!email || !password) {
+//       return res
+//         .status(400)  
+//         .json({ error: "Please fill data in both the field " });
+//     }
+
+//     const userLogin = await User.findOne({ email: email });
+
+//        console.log(userLogin);
+//     if (userLogin) {
+//       //  const isMatch = await bcrypt.compare(password, userLogin.password);
+
+//       token = await userLogin.generateAuthToken();
+//       console.log(token);
+
+//       res.cookie("jwtoken", token, {
+//         expires: new Date(Date.now() + 25892000000),
+//         httpOnly: true,
+//       });
+
+//       res.json({ message: "User Signin Successfully" });
+//     } else {
+//       res.status(400).json({ error: "Invalid Credentials" });
+//     }
+
+//   } catch (err) {
+//     console.log(err);
+//   }
+
+// }
+
 exports.login = async (req, res) => {
   try {
     let token;
@@ -18,34 +55,48 @@ exports.login = async (req, res) => {
 
     if (!email || !password) {
       return res
-        .status(400)  
+        .status(400)
         .json({ error: "Please fill data in both the field " });
     }
 
-    const userLogin = await User.findOne({ email: email });
-
-       console.log(userLogin);
-    if (userLogin) {
-      //  const isMatch = await bcrypt.compare(password, userLogin.password);
-
-      token = await userLogin.generateAuthToken();
+      // Check for existing user
+      const user = await User.findOne({ email : email, password: password });
+      if (!user) throw Error('User does not exist or Invalid credentials ');
+    //  console.log(user);
+  
+      // const isMatch = User.findOne(password, user.password);
+      // if (!isMatch) throw Error('Invalid credentials');
+  
+      token = await user.generateAuthToken();
       console.log(token);
 
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 25892000000),
-        httpOnly: true,
-      });
+        httpOnly: false,
+      }).send({user, token});
 
-      res.json({ message: "User Signin Successfully" });
-    } else {
-      res.status(400).json({ error: "Invalid Credentials" });
-    }
 
+      // res.cookie('token', jwt.token,
+      //  {expires: new Date(Date.now() + 9999999), httpOnly: false})
+      // .send({user, token: jwt.token});
+  
+      // res.status(200).json({
+      //   token,
+      //   user: {
+      //     id: user._id,
+      //     name: user.name,
+      //     email: user.email
+      //   }
+      // });  
+      
+    
   } catch (err) {
     console.log(err);
+    res.status(400).json({ msg: err.message });
   }
 
-}
+};
+
 
   // Logout route:--
 
@@ -54,6 +105,7 @@ exports.login = async (req, res) => {
       res.clearCookie("jwtoken", { path: "/" });
       // await req.user.save()
       res.status(200).send("User logout");
+      console.log("User logout ");
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +117,20 @@ exports.login = async (req, res) => {
 exports.getdata = async ( req, res) => {
  
   try {
-    console.log("Hello ");
+    //console.log("Hello ");
+    // const  token = req.cookies.jwtoken;
+    // const verifyToken = jwt.verify(token,process.env.SECRET_KEY );
+
+    // const rootUser = await User.findOne({id: verifyToken._id,"tokens.token":token});
+
+    // if(!rootUser) { throw new Error('User not found')}
+
+    // req.token = token;
+    // req.rootUser = rootUser;
+    // req.userID = rootUser._id;
+    
+    // next();
+
     res.send(req.rootUser);
   } catch (error) {
     console.log(error);
