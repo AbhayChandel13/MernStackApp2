@@ -13,26 +13,34 @@ const Dashboard = () => {
   const [show, setShow] = useState(false);
 
   const userHomePage = async () => {
-    try {
-      const res = await fetch("http://localhost:8000/api/v1/employees/getdata", {
-        method: "GET",
-        headers: {
-          // "Content-Type": "application/json",
-         "Authorization":JSON.parse(localStorage.getItem('token'))
-        },
-      });
-      const data = await res.json();
-      console.log("dataa : ",data);
-      setUserName(data.name);
-      setShow(true);
+    // try {
+    //   const res = await fetch("http://localhost:8000/api/v1/employees/getdata", {
+    //     method: "GET",
+    //     headers: {
+    //       // "Content-Type": "application/json",
+    //      "Authorization":JSON.parse(localStorage.getItem('token'))
+    //     },
+    //   });
+    //   const data = await res.json();
+    //   console.log("dataa : ",data);
+    //   setUserName(data.name);
+    //   setShow(true);
 
-      // if(!res.status===200){
-      //     const error = new Error(res.error)
-      //     throw error;
-      // }
-    } catch (error) {
-      console.log(error);
-    }
+    //   // if(!res.status===200){
+    //   //     const error = new Error(res.error)
+    //   //     throw error;
+    //   // }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    const items = JSON.parse(localStorage.getItem("user"));
+      console.log("Username : ",items);
+      if (items) {
+        setUserName(items);
+        
+      }
+
   };
   useEffect(() => {
     userHomePage();
@@ -49,7 +57,7 @@ const Dashboard = () => {
 
             <div className="container-fluid">
               <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 className="h3 mb-0 text-gray-800">Welcome Back {userName.name} ({userName.role}) </h1>
                 {/* <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                     className="fas fa-download fa-sm text-white-50"></i> Generate Report</a> */}
               </div>

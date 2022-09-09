@@ -13,15 +13,17 @@ const Topnavbar = () => {
           "Content-Type": "application/json",
         },
       });
-      const data = await res.json();
-      console.log(data);
-      setUserName(data.name);
-      setShow(true);
+      //const data = await res.json();
+      //console.log(data);
+      //  setUserName(data.name);
+      //setShow(true);
 
-      // if(!res.status===200){
-      //     const error = new Error(res.error)
-      //     throw error;
-      // }
+      const items = JSON.parse(localStorage.getItem("user"));
+      console.log("Username : ",items);
+      if (items) {
+        setUserName(items);
+        
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +31,7 @@ const Topnavbar = () => {
   useEffect(() => {
     userHomePage();
   }, []);
+
   return (
     <>
       <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -271,7 +274,7 @@ const Topnavbar = () => {
               aria-expanded="false"
             >
               <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                {userName}
+                {userName.name}
               </span>
               <img
                 className="img-profile rounded-circle"
