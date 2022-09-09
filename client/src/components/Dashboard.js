@@ -14,10 +14,11 @@ const Dashboard = () => {
 
   const userHomePage = async () => {
     try {
-      const res = await fetch("/api/v1/employees/getdata", {
+      const res = await fetch("http://localhost:8000/api/v1/employees/getdata", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
+         "Authorization":JSON.parse(localStorage.getItem('token'))
         },
       });
       const data = await res.json();

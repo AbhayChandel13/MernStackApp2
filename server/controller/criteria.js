@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
 
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 25892000000),
-        httpOnly: false,
+        httpOnly: true,
       }).send({user, token});
 
 
@@ -114,23 +114,9 @@ exports.login = async (req, res) => {
 
 // get User data for homepage and contact page
 
-exports.getdata = async ( req, res) => {
+exports.getdata = async ( req, res,next) => {
  
-  try {
-    //console.log("Hello ");
-    // const  token = req.cookies.jwtoken;
-    // const verifyToken = jwt.verify(token,process.env.SECRET_KEY );
-
-    // const rootUser = await User.findOne({id: verifyToken._id,"tokens.token":token});
-
-    // if(!rootUser) { throw new Error('User not found')}
-
-    // req.token = token;
-    // req.rootUser = rootUser;
-    // req.userID = rootUser._id;
-    
-    // next();
-
+  try {    
     res.send(req.rootUser);
   } catch (error) {
     console.log(error);

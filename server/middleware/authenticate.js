@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
 
 const Authenticate = async (req,res,next) =>{
+
   try {
     const token = req.cookies.jwtoken;
     const verifyToken = jwt.verify(token,process.env.SECRET_KEY );
@@ -16,6 +17,11 @@ const Authenticate = async (req,res,next) =>{
     
     next();
 
+
+    // console.warn(req.headers['authorization']);
+    //let token = req.headers['authorization'];
+
+    next();
   } catch (error) {
     res.status(401).send('Unauthorized : No token provided')
     console.log(error);

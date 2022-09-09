@@ -34,7 +34,8 @@ const Login = () => {
             toast.success("Login Successfully!", {
                 position: "top-center",
             });
-
+            localStorage.setItem("user",JSON.stringify(data.user));
+            localStorage.setItem("token",JSON.stringify(data.token));
             setTimeout(function () {
                 navigate("/dashboard", { replace: true });
             }, 2000);
