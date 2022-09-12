@@ -1,5 +1,5 @@
 const express = require('express');
-// const Authenticate = require('../middleware/authenticate');
+const authenticate = require('../middleware/authenticate');
 const router = express.Router();
 const {login,logout,getUsers, createUser,createEmployee,deleteUser,getdata, getRoles, getEmployee,assignProject,createProject,getProjects,getassignedprojects,deleteEmployee, deleteProject, getSingleEmployee, updateEmployee, getSingleproject, updateProject} = require("../controller/criteria");
 
