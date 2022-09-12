@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaEdit, } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Sidenavbar from  './Sidenavbar';
@@ -7,7 +7,7 @@ import { HiUserAdd } from 'react-icons/hi';
 import Topnavbar from './Topnavbar';
 import { UserContext } from '../App';
 import Footer from './Footer';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 const Showadmins = () => {
     let [searchQuery, setSearchQuery] = useState("");
     let [usersdata, setUserdata] = useState([]);
+  const  [deletekrdo, setDeletekrdo] = useState(false);
+    let navigate = useNavigate();
     const { state, dispatch } = useContext(UserContext);
 
     const getUsers = async (e) => {
@@ -61,8 +63,19 @@ const Showadmins = () => {
         );
     }
 
+    // const Takeidtodelete = (id)=>{
+    //     const Ihaveid = id;
+    //     console.log(Ihaveid);
+    //     return Ihaveid;
+    // }
+    
+   
+    
     const deleteEmployee = async (id) => {
-        if (window.confirm("Are You Sure, You want to delete?")) {
+        
+        // console.log("clickeed :",id)
+        // console.log("deletekrdo ",deletekrdo);
+        // if (window.confirm("Are You Sure, You want to delete?")) {
           try {
             const response = await fetch(`/api/v1/employees/${id}`,
               {
@@ -73,137 +86,214 @@ const Showadmins = () => {
             console.log(jsonData);
 
             setTimeout(function () {    
-            // navigate("/admins", { replace: true });
+              navigate("/admins", { replace: true });
                toast.success("User Deleted Successfully!", {
                 position: "top-center",
               });
-              }, 2000);
+              }, 1000);
     
           } catch (err) {
             console.error(err.message);
           }
-    
-          getUsers();
-        }
+          getUsers();         
       };
+      
 
     return (
-        <>
-      <div id="wrapper">
-           <Sidenavbar />
+      <>
+        <div id="wrapper">
+          <Sidenavbar />
 
           <div id="content-wrapper" className="d-flex flex-column">
-
-
             <div id="content">
-                <ToastContainer />
+              <ToastContainer />
 
               <Topnavbar />
-         
-                <div className="container-fluid">
-                                      <div className="card shadow mb-4">
-                        <div className="card-header py-3">
-                     
-                        <h6 className="font-weight-bold text-primary">Users Table</h6>
-                  <NavLink className="float-right font-weight-bold text-success" to="/adduser"><HiUserAdd /> Add Users  </NavLink>
-                        
-                        
-                           
-                        </div>
-                        <div className="card-body">
-                            <div className="table-responsive">
-                            <div id="dataTable_wrapper" className="dataTables_wrapper dt-bootstrap4">
-                            <div className="row">
-<div className="col-sm-12 col-md-6">
-<div className="dataTables_length" id="dataTable_length">
-<label>Show entries
-<select name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm">
-<option value="10">10</option>
-<option value="25">25</option>
-<option value="50">50</option>
-<option value="100">100</option>
-</select> 
-</label>
-</div>
-</div>
 
-{/* text-right */}
-<div className="col-sm-12 col-md-6 d-flex flex-column justify-content-end align-items-end">
-<div id="dataTable_filter" className="dataTables_filter">
-       <label>Search:
-       <div>
-                <input
-                type="text"
-                className="form-control form-control-sm"
-                name="name"
-                id="name"
-                placeholder={"Search by Name"}
-                value={searchQuery}
-                onChange={(e) =>setSearchQuery(e.target.value)}
-           />
-           </div>
-           </label>
-</div>
-</div>
-</div>
-<div className="row">
-         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="5%">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Phone</th>
-                                            <th>Password</th>
-                                            {/* <th>Edit</th> */}
-                                            <th>Delete</th>
-                                        </tr>
-                                    </thead>                                    
-                                    {usersdata.map((usersdata, i) => (
-                                                <tbody key={usersdata._id}>
-                                                    <tr>
-                                                        <td>{usersdata.name}</td>
-                                                        <td>{usersdata.email}</td>
-                                                        <td>{usersdata.role}</td>
-                                                        <td>{usersdata.phone}</td>
-                                                        <td>{usersdata.password}</td>
-                                                        {/* <td>
+              <div className="container-fluid">
+                <div className="card shadow mb-4">
+                  <div className="card-header py-3">
+                    <h6 className="font-weight-bold text-primary">
+                      Users Table
+                    </h6>
+                    <NavLink
+                      className="float-right font-weight-bold text-success"
+                      to="/adduser"
+                    >
+                      <HiUserAdd /> Add Users{" "}
+                    </NavLink>
+
+                    <div
+                      className="modal fade"
+                      id="exampleModalCenter"
+                      tabIndex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalCenterTitle"
+                      aria-hidden="true"
+                    >
+                      <div
+                        className="modal-dialog modal-dialog-centered"
+                        role="document"
+                      >
+                        
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title text-danger" id="exampleModalLongTitle">
+                             Confirm Delete  
+                            </h5>
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div className="modal-body">Are You Sure, You want to delete?</div>
+                          <div className="modal-footer">
+                            <button
+                              type="button"
+                              className="btn btn-secondary"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                            {usersdata.slice(0, 1).map((usersdata) => (                            
+                            <button type="button"  
+                            key={usersdata.email}                           
+                             className="btn btn-primary"
+                             data-dismiss="modal"
+                             onClick={() =>deleteEmployee(usersdata._id)}
+                             >
+                              Yes
+                            </button>                           
+                            
+                           ))} 
+                          </div>
+                        </div>
+                       
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                  <div className="card-body">
+                    <div className="table-responsive">
+                      <div
+                        id="dataTable_wrapper"
+                        className="dataTables_wrapper dt-bootstrap4"
+                      >
+                        <div className="row">
+                          <div className="col-sm-12 col-md-6">
+                            <div
+                              className="dataTables_length"
+                              id="dataTable_length"
+                            >
+                              <label>
+                                Show entries
+                                <select
+                                  name="dataTable_length"
+                                  aria-controls="dataTable"
+                                  className="custom-select custom-select-sm form-control form-control-sm"
+                                >
+                                  <option value="10">10</option>
+                                  <option value="25">25</option>
+                                  <option value="50">50</option>
+                                  <option value="100">100</option>
+                                </select>
+                              </label>
+                            </div>
+                          </div>
+
+                          {/* text-right */}
+                          <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-end align-items-end">
+                            <div
+                              id="dataTable_filter"
+                              className="dataTables_filter"
+                            >
+                              <label>
+                                Search:
+                                <div>
+                                  <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    name="name"
+                                    id="name"
+                                    placeholder={"Search by Name"}
+                                    value={searchQuery}
+                                    onChange={(e) =>
+                                      setSearchQuery(e.target.value)
+                                    }
+                                  />
+                                </div>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <table
+                            className="table table-bordered"
+                            id="dataTable"
+                            width="100%"
+                            cellSpacing="5%"
+                          >
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Phone</th>
+                                <th>Password</th>
+                                {/* <th>Edit</th> */}
+                                <th>Delete</th>
+                              </tr>
+                            </thead>
+                            {usersdata.map((usersdata, i) => (
+                              <tbody key={usersdata._id}>
+                                <tr>
+                                  <td>{usersdata.name}</td>
+                                  <td>{usersdata.email}</td>
+                                  <td>{usersdata.role}</td>
+                                  <td>{usersdata.phone}</td>
+                                  <td>{usersdata.password}</td>
+                                  {/* <td>
                                                         <NavLink className="text-success btn-lg" to={`/edituser/${usersdata._id}`} ><FaEdit />  </NavLink>
                                                         </td> */}
 
-                                                        <td>                                               
-                                                         <NavLink onClick={() =>
-                                    deleteEmployee(usersdata._id)
-                                  } className="text-danger btn-lg" to=""><MdDelete />
-                                  </NavLink>
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
-                                            ))}
-                                       
-                                </table>
-                                </div>
-                            </div>
-                            </div>
+                                  <td>
+                                    <NavLink
+                                    //   onClick={() =>
+                                    //     deleteEmployee(usersdata._id)
+                                    //   }
+                                      //className="text-danger btn-lg"
+                                     
+                                      className="text-danger btn-md btn btn"
+                                      data-toggle="modal"
+                                      data-target="#exampleModalCenter"
+                                      to=""
+                                    >
+                                      <MdDelete />
+                                    </NavLink>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            ))}
+                          </table>
                         </div>
+                      </div>
                     </div>
-
+                  </div>
                 </div>
+              </div>
+            </div>
 
-
-             </div>
-
-
-          <Footer />
-     
-         </div>
-
-
+            <Footer />
+          </div>
         </div>
-
-        </>
-    )
+      </>
+    );
 }
 
 export default Showadmins;

@@ -6,13 +6,18 @@ import { UserContext } from "../App";
 // import { BsInfoLg } from 'react-icons/bs';
 import Sidenavbar from "./Sidenavbar";
 import Topnavbar from "./Topnavbar";
+import ImageSlider from "./ImageSlider";
 import Footer from "./Footer";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
   const [show, setShow] = useState(false);
+  const [index, setIndex] = React.useState(0);
+
+  
 
   const userHomePage = async () => {
+    
     // try {
     //   const res = await fetch("http://localhost:8000/api/v1/employees/getdata", {
     //     method: "GET",
@@ -45,6 +50,34 @@ const Dashboard = () => {
   useEffect(() => {
     userHomePage();
   }, []);
+
+
+  const slides = [
+    { url: "http://localhost:3000/image-1.jpg", title: "beach" },
+    { url: "http://localhost:3000/image-2.jpg", title: "boat" },
+    { url: "http://localhost:3000/image-3.jpg", title: "forest" },
+    { url: "http://localhost:3000/image-4.jpg", title: "city" },
+    { url: "http://localhost:3000/image-5.jpg", title: "italy" },
+  ];
+  const containerStyles = {
+    width: "1000px",
+    height: "400px",
+    margin: "30px",
+    transition: "1000ms",    
+    // transform: `translate3d(${-index * 100}%, 0, 0)`
+  };
+  const delay = 2500;
+  React.useEffect(() => {
+    setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+
+    return () => {};
+  }, [index]);
 
   return (
     <>
@@ -157,9 +190,22 @@ const Dashboard = () => {
                       </div>
                       Name
                     </div>
+                    
+                  
                   </div>
+                  
                 </div>
               </div>
+
+              <div>
+              <h1>Hello Here is the Slide show</h1>
+            
+                 <div  style={containerStyles}>              
+                   <ImageSlider slides={slides} />                  
+                 </div>
+             
+              </div>
+
             </div>
           </div>
           <Footer />
