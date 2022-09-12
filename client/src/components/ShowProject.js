@@ -50,7 +50,7 @@ const ShowProject = () => {
   }, []);
 
   const deleteProject = async (id) => {
-    if (window.confirm("Are You Sure, You want to delete?")) {
+    // if (window.confirm("Are You Sure, You want to delete?")) {
       try {
         const response = await fetch(`/api/v1/employees/project/${id}`, {
           method: "DELETE",
@@ -66,7 +66,7 @@ const ShowProject = () => {
       }
 
       getProjects();
-    }
+    // }
   };
 
   if (searchQuery) {
@@ -111,6 +111,65 @@ const ShowProject = () => {
                   >
                     <AiFillProject /> Add Project{" "}
                   </NavLink>
+
+                  <div
+                    className="modal fade"
+                    id="exampleModalCenter"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5
+                            className="modal-title text-danger"
+                            id="exampleModalLongTitle"
+                          >
+                            Confirm Delete
+                          </h5>
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          Are You Sure, You want to delete?
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            No
+                          </button>
+                          {data.slice(0, 1).map((data) => (
+                            <button
+                              type="button"
+                              key={data.email}
+                              className="btn btn-primary"
+                              data-dismiss="modal"
+                              onClick={() => deleteProject(data._id)}
+                            >
+                              Yes
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
@@ -213,10 +272,12 @@ const ShowProject = () => {
 
                                 <td>
                                   <NavLink
-                                    onClick={() =>
-                                      deleteProject(projectdata._id)
-                                    }
-                                    className="text-danger btn-lg"
+                                    // onClick={() =>
+                                    //   deleteProject(projectdata._id)
+                                    // }
+                                    className="text-danger btn-md btn btn"
+                                    data-toggle="modal"
+                                    data-target="#exampleModalCenter"
                                     to=""
                                   >
                                     <MdDelete />
