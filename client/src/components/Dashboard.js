@@ -8,11 +8,13 @@ import Sidenavbar from "./Sidenavbar";
 import Topnavbar from "./Topnavbar";
 import ImageSlider from "./ImageSlider";
 import Footer from "./Footer";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
   const [show, setShow] = useState(false);
   const [index, setIndex] = React.useState(0);
+  const [countOfProgess, setCountOfProgess] = React.useState(0);
 
   
 
@@ -78,6 +80,20 @@ const Dashboard = () => {
 
     return () => {};
   }, [index]);
+
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCountOfProgess((oldProgress) => {
+        if (100 == oldProgress) return 0;
+        return Math.min(oldProgress + Math.random() * 10, 100);
+      });
+    }, 499);
+ 
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <>
@@ -197,6 +213,15 @@ const Dashboard = () => {
                 </div>
               </div>
 
+              <hr />
+
+            <div style={{ display: 'block',
+          width: 1000, padding: 30 }}>
+        <h4>React-Bootstrap ProgressBar Component</h4>
+          Current Progress is: {parseInt(countOfProgess)} %
+         <ProgressBar now={countOfProgess} />
+        </div>
+
               <div>
               <h1>Hello Here is the Slide show</h1>
             
@@ -205,6 +230,7 @@ const Dashboard = () => {
                  </div>
              
               </div>
+              
 
             </div>
           </div>
@@ -215,7 +241,13 @@ const Dashboard = () => {
       <a className="scroll-to-top rounded" href="#page-top">
         <i className="fas fa-angle-up"></i>
       </a>
+
+
+    
+
     </>
+
+    
   );
 };
 
