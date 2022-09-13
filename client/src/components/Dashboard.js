@@ -8,7 +8,7 @@ import Sidenavbar from "./Sidenavbar";
 import Topnavbar from "./Topnavbar";
 import ImageSlider from "./ImageSlider";
 import Footer from "./Footer";
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
@@ -16,10 +16,7 @@ const Dashboard = () => {
   const [index, setIndex] = React.useState(0);
   const [countOfProgess, setCountOfProgess] = React.useState(0);
 
-  
-
   const userHomePage = async () => {
-    
     // try {
     //   const res = await fetch("http://localhost:8000/api/v1/employees/getdata", {
     //     method: "GET",
@@ -42,17 +39,14 @@ const Dashboard = () => {
     // }
 
     const items = JSON.parse(localStorage.getItem("user"));
-      console.log("Username : ",items);
-      if (items) {
-        setUserName(items);
-        
-      }
-
+    console.log("Username : ", items);
+    if (items) {
+      setUserName(items);
+    }
   };
   useEffect(() => {
     userHomePage();
   }, []);
-
 
   const slides = [
     { url: "http://localhost:3000/image-1.jpg", title: "beach" },
@@ -65,7 +59,7 @@ const Dashboard = () => {
     width: "1000px",
     height: "400px",
     margin: "30px",
-    transition: "1000ms",    
+    transition: "1000ms",
     // transform: `translate3d(${-index * 100}%, 0, 0)`
   };
   const delay = 2500;
@@ -81,7 +75,6 @@ const Dashboard = () => {
     return () => {};
   }, [index]);
 
-
   React.useEffect(() => {
     const timer = setInterval(() => {
       setCountOfProgess((oldProgress) => {
@@ -89,7 +82,7 @@ const Dashboard = () => {
         return Math.min(oldProgress + Math.random() * 10, 100);
       });
     }, 499);
- 
+
     return () => {
       clearInterval(timer);
     };
@@ -106,7 +99,9 @@ const Dashboard = () => {
 
             <div className="container-fluid">
               <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Welcome Back {userName.name} </h1>
+                <h1 className="h3 mb-0 text-gray-800">
+                  Welcome Back {userName.name}{" "}
+                </h1>
                 {/* <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                     className="fas fa-download fa-sm text-white-50"></i> Generate Report</a> */}
               </div>
@@ -206,32 +201,25 @@ const Dashboard = () => {
                       </div>
                       Name
                     </div>
-                    
-                  
                   </div>
-                  
                 </div>
               </div>
 
               <hr />
 
-            <div style={{ display: 'block',
-          width: 1000, padding: 30 }}>
-        <h4>React-Bootstrap ProgressBar Component</h4>
-          Current Progress is: {parseInt(countOfProgess)} %
-         <ProgressBar now={countOfProgess} />
-        </div>
+              <div style={{ display: "block", width: 1000, padding: 30 }}>
+                <h4>React-Bootstrap ProgressBar Component</h4>
+                Current Progress is: {parseInt(countOfProgess)} %
+                <ProgressBar now={countOfProgess} />
+              </div>
 
               <div>
-              <h1>Hello Here is the Slide show</h1>
-            
-                 <div  style={containerStyles}>              
-                   <ImageSlider slides={slides} />                  
-                 </div>
-             
-              </div>
-              
+                <h1>Hello Here is the Slide show</h1>
 
+                <div style={containerStyles}>
+                  <ImageSlider slides={slides} />
+                </div>
+              </div>
             </div>
           </div>
           <Footer />
@@ -241,13 +229,7 @@ const Dashboard = () => {
       <a className="scroll-to-top rounded" href="#page-top">
         <i className="fas fa-angle-up"></i>
       </a>
-
-
-    
-
     </>
-
-    
   );
 };
 
