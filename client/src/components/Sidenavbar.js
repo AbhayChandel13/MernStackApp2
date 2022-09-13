@@ -1,10 +1,18 @@
-import React from "react";
+import {React,useState} from "react";
 import { NavLink } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import { BsInfoLg } from "react-icons/bs";
 import { HiUserAdd } from "react-icons/hi";
 import { AiFillProject } from "react-icons/ai";
+
 const Sidenavbar = () => {
+  // const values = [
+  //   { id: 1 },
+  //   { id: 2 },
+  //   { id: 3 },
+  //   { id: 4 }
+  // ];
+   const [activeId, setActiveId] = useState(false);
   return (
     <>
       <ul
@@ -22,19 +30,21 @@ const Sidenavbar = () => {
         </a>
 
         <hr className="sidebar-divider my-0" />
-
-        <li className="nav-item active">
-          <NavLink className="nav-link" to="/dashboard">
+       
+        <li className={activeId === true ? "nav-item active" : "nav-item inactive"} onClick={()=> setActiveId(true)}>
+       {/* {activeId === val.id ? "active" : "inactive"} */}
+          <NavLink className="nav-link" to="/dashboard">  
             <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </NavLink>
         </li>
+       
 
         <hr className="sidebar-divider" />
 
         <div className="sidebar-heading">Members</div>
 
-        <li className="nav-item">
+        <li className="nav-item">      
           <a
             className="nav-link collapsed"
             href="#"

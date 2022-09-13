@@ -278,7 +278,7 @@ const Topnavbar = () => {
               </span>
               <img
                 className="img-profile rounded-circle"
-                src="img/undraw_profile.svg"
+                src="img/profile2.jfif"
               />
             </a>
 
