@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const slideStyles = {
   width: "100%",
@@ -48,6 +48,9 @@ const dotStyle = {
 };
 
 const ImageSlider = ({ slides }) => {
+  const autoscroll = true;
+  let slideInterval;
+  let intervalTime = 2000;
   const [currentIndex, setCurrentIndex] = useState(0);
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -62,6 +65,19 @@ const ImageSlider = ({ slides }) => {
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
+  const auto=()=>{
+    slideInterval = setInterval(goToNext,intervalTime)
+  }
+  
+
+  useEffect(()=>{
+    if(autoscroll){
+      auto()
+    }
+    return()=>{clearInterval(slideInterval); }
+  },[currentIndex]);
+
+
   const slideStylesWidthBackground = {
     ...slideStyles,
     backgroundImage: `url(${slides[currentIndex].url})`,

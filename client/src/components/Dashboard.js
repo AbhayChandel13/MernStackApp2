@@ -16,6 +16,7 @@ const Dashboard = () => {
   const [index, setIndex] = React.useState(0);
   const [countOfProgess, setCountOfProgess] = React.useState(0);
 
+
   const userHomePage = async () => {
     // try {
     //   const res = await fetch("http://localhost:8000/api/v1/employees/getdata", {
@@ -75,6 +76,7 @@ const Dashboard = () => {
     return () => {};
   }, [index]);
 
+ 
   React.useEffect(() => {
     const timer = setInterval(() => {
       setCountOfProgess((oldProgress) => {
@@ -84,9 +86,10 @@ const Dashboard = () => {
     }, 499);
 
     return () => {
-      clearInterval(timer);
+      clearInterval(timer); 
     };
   }, []);
+
 
   return (
     <>

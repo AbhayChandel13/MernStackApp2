@@ -91,7 +91,7 @@ const Topnavbar = () => {
                       <i className="fas fa-search fa-sm"></i>
                     </button>
                   </div>
-                </div>
+                </div>  
               </form>
             </div>
           </li>
@@ -185,7 +185,7 @@ const Topnavbar = () => {
                 <div className="dropdown-list-image mr-3">
                   <img
                     className="rounded-circle"
-                    src="img/undraw_profile_1.svg"
+                    src="img/profile.jpg"
                     alt="..."
                   />
                   <div className="status-indicator bg-success"></div>
@@ -202,7 +202,7 @@ const Topnavbar = () => {
                 <div className="dropdown-list-image mr-3">
                   <img
                     className="rounded-circle"
-                    src="img/undraw_profile_2.svg"
+                    src="img/profile.jpg"
                     alt="..."
                   />
                   <div className="status-indicator"></div>
@@ -219,7 +219,7 @@ const Topnavbar = () => {
                 <div className="dropdown-list-image mr-3">
                   <img
                     className="rounded-circle"
-                    src="img/undraw_profile_3.svg"
+                    src="img/profile1.jpg"
                     alt="..."
                   />
                   <div className="status-indicator bg-warning"></div>
