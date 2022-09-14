@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const slideStyles = {
   width: "100%",
@@ -65,18 +65,18 @@ const ImageSlider = ({ slides }) => {
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
-  const auto=()=>{
-    slideInterval = setInterval(goToNext,intervalTime)
-  }
-  
+  const auto = () => {
+    slideInterval = setInterval(goToNext, intervalTime);
+  };
 
-  useEffect(()=>{
-    if(autoscroll){
-      auto()
+  useEffect(() => {
+    if (autoscroll) {
+      auto();
     }
-    return()=>{clearInterval(slideInterval); }
-  },[currentIndex]);
-
+    return () => {
+      clearInterval(slideInterval);
+    };
+  }, [currentIndex]);
 
   const slideStylesWidthBackground = {
     ...slideStyles,
@@ -101,7 +101,7 @@ const ImageSlider = ({ slides }) => {
             key={slideIndex}
             onClick={() => goToSlide(slideIndex)}
           >
-            ●  
+            ●
           </div>
         ))}
       </div>
