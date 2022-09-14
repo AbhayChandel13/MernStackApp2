@@ -40,7 +40,7 @@ const EmployeeInfo = () => {
     getEmployees();
   }, []);
 
-  let name, value;
+  let name, value;  
   const handleInputs = (e) => {
     console.log(e);
     name = e.target.name;
