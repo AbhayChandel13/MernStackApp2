@@ -9,6 +9,8 @@ import Topnavbar from "./Topnavbar";
 import ImageSlider from "./ImageSlider";
 import Footer from "./Footer";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import Carousel from "react-elastic-carousel";
+import Item from "./Item";
 //import { Carousel } from  "react-carousel-minimal";
 
 const Dashboard = () => {
@@ -140,6 +142,13 @@ const Dashboard = () => {
     fontSize: '20px',
     fontWeight: 'bold',
   }
+
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2 },
+    { width: 768, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 },
+  ];
 
   return (
     <>
@@ -308,6 +317,24 @@ const Dashboard = () => {
                      />
                   </div>
                   </div> */}
+
+<h1 style={{ textAlign: "center" }}>Example to setup your carousel in react</h1>
+      <div className="App">
+        <Carousel breakPoints={breakPoints}>
+          {/* {data.map(data=><div key={data.title}>{data.image}</div>)} */}
+          {/* <div style={containerStyles}>
+                  <ImageSlider slides={slides} />
+                </div> */}
+          <Item><ImageSlider slides={slides}></ImageSlider></Item>
+          <Item><ImageSlider slides={slides}></ImageSlider></Item>
+          <Item><ImageSlider slides={slides}></ImageSlider></Item>
+          <Item>Four</Item>
+          <Item>Five</Item>
+          <Item>Six</Item>
+          <Item>Seven</Item>
+          <Item>Eight</Item> 
+        </Carousel>
+      </div>
 
 
             </div>
