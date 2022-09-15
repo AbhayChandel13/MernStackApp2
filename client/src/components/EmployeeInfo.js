@@ -6,27 +6,28 @@ import { HiUserAdd } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FileBase64 from 'react-file-base64';
 
 const EmployeeInfo = () => {
   let navigate = useNavigate();
   let [employeedata, setEmployeedata] = useState([]);
 
   const [employeeinfo, setEmployeeinfo] = useState({
-    empid: "",
-    file1: "",
-    file2: "",
-    file3: "",
+    title: "",
+    image: "",
+    
   });
+
   //   const [role, setRole] = useState("");
 
-  const getEmployees = async (e) => {
+  const getitems = async (e) => {
     try {
-      const res = await fetch("/api/v1/employees/getEmployee");
+      const res = await fetch("/api/v1/employees/getitems");
 
       const data = await res.json();
 
       setEmployeedata(data);
-      console.log("tableshowEmloyeeData :", data);
+      console.log("getfiles :", data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -37,7 +38,7 @@ const EmployeeInfo = () => {
     }
   };
   useEffect(() => {
-    getEmployees();
+    getitems();
   }, []);
 
   let name, value;  
@@ -52,13 +53,13 @@ const EmployeeInfo = () => {
   const PostData = async (e) => {
     e.preventDefault();
 
-    const { empid, file1, file2, file3 } = employeeinfo;
+    const { title, image } = employeeinfo;
     //const {roleid} = role;
 
-    let res = await fetch("/employee", {
+    let res = await fetch("/api/v1/employees/createitem", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ empid, file1, file2, file3 }),
+      body: JSON.stringify({ title,image }),
     });
 
     const data = await res.json();
@@ -76,7 +77,7 @@ const EmployeeInfo = () => {
       console.log("Employee Added Successful");
 
       setTimeout(function () {
-        navigate("/showemployee", { replace: true });
+        navigate("/employeeinfo", { replace: true });
       }, 2000);
     }
   };
@@ -126,6 +127,18 @@ const EmployeeInfo = () => {
 
                     <div className="form-group col-sm-8 ">
                       <input
+                        type="text"
+                        name="title"
+                        className="form-control input-lg  form-control-user "
+                        id="title"
+                        placeholder="Title "
+                        value={employeeinfo.title}
+                        onChange={handleInputs}
+                      />
+                    </div>
+
+                    <div className="form-group col-sm-8 ">
+                      <input
                         type="file"
                         name="file1"
                         className="form-control input-lg  form-control-user "
@@ -135,30 +148,13 @@ const EmployeeInfo = () => {
                         onChange={handleInputs}
                       />
                     </div>
+                    <FileBase64
+                      type="file"
+                      multiple={false}
+                      onDone={({ base64 }) => setEmployeeinfo({ ...employeeinfo, image: base64 })}
+                        />
 
-                    <div className="form-group col-sm-8 ">
-                      <input
-                        type="file"
-                        name="file2"
-                        className="form-control input-lg  form-control-user "
-                        id="File2"
-                        placeholder="Upload File "
-                        value={employeeinfo.file2}
-                        onChange={handleInputs}
-                      />
-                    </div>
-
-                    <div className="form-group col-sm-8 ">
-                      <input
-                        type="file"
-                        name="file3"
-                        className="form-control input-lg  form-control-user"
-                        id="File3"
-                        placeholder="Upload File "
-                        value={employeeinfo.file3}
-                        onChange={handleInputs}
-                      />
-                    </div>
+                    
 
                     <div className="mt-4 mb-0">
                       <div className="d-grid">
@@ -175,6 +171,31 @@ const EmployeeInfo = () => {
                       </div>
                     </div>
                   </form>
+                  {/* <form action="" onSubmit={onSubmitHandler}>
+<input type="text" className="input-field"
+onChange={e => setItem({ ...item, title: e.target.value })}
+/>
+<FileBase64
+type="file"
+multiple={false}
+onDone={({ base64 }) => setItem({ ...item, image: base64 })}
+/>
+<div className="right-align">
+<button className="btn">submit</button>
+</div>
+                  </form> */}
+
+
+{employeedata?.map(item => (
+<div className="card" key={item._id}>
+<div className="card-image waves-effect waves-block waves-light">
+<img className="activator" style={{ width: '100%', height: 300 }} src={item.image} />
+</div>
+<div className="card-content">
+<span className="card-title activator grey-text text-darken-4">{item.title}</span>
+</div>
+</div>
+))}
                 </div>
               </div>
             </div>

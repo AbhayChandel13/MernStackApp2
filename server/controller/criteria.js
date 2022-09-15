@@ -8,7 +8,7 @@ const User = require("../model/userSchema");
 const Projects = require("../model/projectSchema");
 const AssignedProjects = require("../model/assigndSchema");
 const Designation = require("../model/rolesSchema");
-
+const Item = require("../model/items")
 
 //login route:--
 
@@ -431,3 +431,25 @@ exports.deleteEmployee = async (req, res) => {
     res.status(500).send(e);
   }
 };
+
+//get Uploaded File :
+exports.getItems = async(req,res)=>{
+  // console.log('get items')
+  try {
+  const item =await Item.find()
+  res.status(200).json(item);
+  } catch (error) {
+  res.status(404).json({ message: error.message });
+  }
+  }
+
+
+//Upload  File :
+  exports.createItem = async(req,res)=>{
+  const item = new Item(req.body);
+  try {
+  await item.save();
+  res.status(201).json(item);
+  } catch (error) {
+  }
+  }
