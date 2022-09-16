@@ -19,7 +19,8 @@ const AddUser = () => {
         email: "",
         phone: "",
         password: "",
-        cpassword: ""
+        cpassword: "",
+        status:"Active"
     });
         
     
@@ -46,13 +47,13 @@ const AddUser = () => {
     const PostData = async (e) => {
         e.preventDefault();
         try {
-            const {name, email, phone,password,cpassword} = user;
+            const {name, email, phone,password,cpassword,status} = user;
             const {role} = userrole;
             
             let res = await fetch("/api/v1/employees/createUser", { 
                 method: "POST",
                 headers: { "Content-Type": "application/json", },
-                body: JSON.stringify({name,email,phone,password,cpassword,role }),
+                body: JSON.stringify({name,email,phone,password,cpassword,role,status }),
             });
     
             const data = await res.json(); 
@@ -164,6 +165,20 @@ const AddUser = () => {
                                 />
                             </div>
 
+                           
+                            {/* <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+  <label class="form-check-label" for="flexRadioDefault1">
+   Active
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+  <label class="form-check-label" for="flexRadioDefault2">
+    Inactive
+  </label>
+</div> */}
+
                         <div className="form-group col-sm-8">
                                 <input 
                                 type="password" 
@@ -185,7 +200,43 @@ const AddUser = () => {
                                 value={user.cpassword}
                                 onChange={handleInputs}  
                                 />
-                        </div> 
+                        </div>
+                        Status:{user.status }
+                        <div className="form-group col-sm-4">
+                           
+                                <input 
+                                type="radio" 
+                                name="status"
+                                className="form-control form-control-user form-check-input test nohover"
+                                id="flexRadioDefault1"                                 
+                                value="Active"                                               
+                               // value={user.phone}
+                                 onChange={handleInputs} 
+                                
+                                />
+                                 <label className="form-check-label" htmlFor="flexRadioDefault1"><b>Active</b></label>
+                            </div>
+                            <div className="form-group col-sm-4 m-2">
+                                <input 
+                                type="radio" 
+                                name="status"
+                                className="form-control form-control-user form-check-input"
+                                id="flexRadioDefault2"
+                                value="InActive"                                                       
+                                // value={user.phone}
+                                 onChange={handleInputs} 
+                                />
+                                 <label className="form-check-label" htmlFor="flexRadioDefault2"><b>InActive</b></label>
+                            </div>
+                            {/* <div class="custom-control custom-radio">
+      <input type="radio" className="custom-control-input" id="customRadio1" name="example1"  />
+      <label class="custom-control-label" for="customRadio1">Active</label>
+    </div>  
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="customRadio2" name="example2"  />
+      <label class="custom-control-label" for="customRadio2">InActive</label>
+    </div>   */}
+
                         
                         
 
