@@ -11,23 +11,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Pagination from "./pagination";
 
-
-const ShowEmployee = () => { 
-
+const ShowEmployee = () => {
   let [searchQuery, setSearchQuery] = useState("");
   let [employeedata, setEmployeedata] = useState([]);
   const [deleteId, setDeleteId] = useState("");
   const [showPerPage, setShowPerPage] = useState(5);
   const [pagination, setPagination] = useState({
     start: 0,
-    end: showPerPage
+    end: showPerPage,
   });
-   
-  // const handleChange = (e) => {    
+
+  // const handleChange = (e) => {
   //    setShowPerPage(e.target.value);
   //   console.log(showPerPage);
   // };
-  
+
   const onPaginationChange = (start, end) => {
     setPagination({ start: start, end: end });
   };
@@ -35,8 +33,8 @@ const ShowEmployee = () => {
   const getEmployees = async (e) => {
     try {
       const res = await fetch("/api/v1/employees/getEmployee");
-      
-      const data = await res.json();  
+
+      const data = await res.json();
 
       setEmployeedata(data);
       //console.log("tableshowEmloyeeData :", data);
@@ -54,29 +52,29 @@ const ShowEmployee = () => {
   }, []);
 
   const handleClickDelete = (id) => {
-    setDeleteId(id);  
+    setDeleteId(id);
     console.log(id);
   };
-  
+
   const deleteEmployee = async (id) => {
     // if (window.confirm("Are You Sure, You want to delete?")) {
-      try {
-        const response = await fetch(`/api/v1/employees/employee/${deleteId}`, {
-          method: "DELETE",
-        });
-        const jsonData = await response.json();
-        console.log(jsonData);
+    try {
+      const response = await fetch(`/api/v1/employees/employee/${deleteId}`, {
+        method: "DELETE",
+      });
+      const jsonData = await response.json();
+      console.log(jsonData);
 
-        toast.success("Employee Deleted Successfully!", {
-          position: "top-center",
-        });
-      } catch (err) {
-        console.error(err.message);
-      }
+      toast.success("Employee Deleted Successfully!", {
+        position: "top-center",
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
 
-      getEmployees();
+    getEmployees();
     // }
-    };
+  };
 
   if (searchQuery) {
     employeedata = employeedata.filter(
@@ -88,8 +86,8 @@ const ShowEmployee = () => {
     );
   }
 
-   const data = employeedata; 
-  
+  const data = employeedata;
+
   return (
     <>
       <div id="wrapper">
@@ -154,22 +152,19 @@ const ShowEmployee = () => {
                           >
                             No
                           </button>
-                          
-                            <button
-                              type="button"                            
-                              className="btn btn-primary"
-                              data-dismiss="modal"   
-                              onClick={() => deleteEmployee()}                           
-                            >
-                              Yes
-                            </button>
-                          
+
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            data-dismiss="modal"
+                            onClick={() => deleteEmployee()}
+                          >
+                            Yes
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-
-
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
@@ -270,13 +265,12 @@ const ShowEmployee = () => {
 
                                   <td>
                                     <NavLink
-                                       onClick={() =>
+                                      onClick={() =>
                                         handleClickDelete(employeedata._id)
-                                      }                                  
-                                    className="text-danger btn-md btn btn"
-                                    data-toggle="modal"
-                                    data-target="#exampleModalCenter"
-                                    
+                                      }
+                                      className="text-danger btn-md btn btn"
+                                      data-toggle="modal"
+                                      data-target="#exampleModalCenter"
                                       to=""
                                     >
                                       <MdDelete />
@@ -289,7 +283,7 @@ const ShowEmployee = () => {
                       </div>
                       <div className="col-sm-12 col-md-12 d-flex flex-column justify-content-end align-items-end">
                         <Pagination
-                          showPerPage={showPerPage}                          
+                          showPerPage={showPerPage}
                           onPaginationChange={onPaginationChange}
                           total={data.length}
                         />
