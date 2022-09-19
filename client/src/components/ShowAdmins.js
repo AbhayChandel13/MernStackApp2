@@ -55,14 +55,14 @@ const Showadmins = () => {
     );
   }
 
-  const handleClickDelete = (id)=>{
-    setDeleteId(id)
-    console.log(id)
-  }
+  const handleClickDelete = (id) => {
+    setDeleteId(id);
+    console.log(id);
+  };
 
   const deleteEmployee = async (id) => {
     // if (window.confirm("Are You Sure, You want to delete?")) {
-      console.log("id selected  from  main delete:",deleteId);
+    console.log("id selected  from  main delete:", deleteId);
     try {
       const response = await fetch(`/api/v1/employees/${deleteId}`, {
         method: "DELETE",
@@ -143,20 +143,19 @@ const Showadmins = () => {
                             data-dismiss="modal"
                           >
                             No
-                          </button>                    
-                            <button
-                              type="button"                            
-                              className="btn btn-danger"
-                              data-dismiss="modal"                             
-                              onClick={() => deleteEmployee(usersdata._id)}
-                            >
-                              Yes
-                            </button>                         
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            data-dismiss="modal"
+                            onClick={() => deleteEmployee(usersdata._id)}
+                          >
+                            Yes
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                   
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
@@ -245,10 +244,10 @@ const Showadmins = () => {
                                                         </td> */}
 
                                 <td>
-                                  <NavLink  
-                                      onClick={() =>
-                                        handleClickDelete(usersdata._id)
-                                      }
+                                  <NavLink
+                                    onClick={() =>
+                                      handleClickDelete(usersdata._id)
+                                    }
                                     //className="text-danger btn-lg"
 
                                     className="text-danger btn-md btn btn"
