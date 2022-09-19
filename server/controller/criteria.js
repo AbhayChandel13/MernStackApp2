@@ -8,7 +8,7 @@ const User = require("../model/userSchema");
 const Projects = require("../model/projectSchema");
 const AssignedProjects = require("../model/assigndSchema");
 const Designation = require("../model/rolesSchema");
-
+const Item = require("../model/items")
 
 //login route:--
 
@@ -138,9 +138,9 @@ exports.getUsers = async (req, res) => {
 
 //Create User 
 exports.createUser = async (req, res) => {
-    const { name, email, role, phone, password, cpassword } = req.body;
+    const { name, email, role, phone, password, cpassword,status } = req.body;
   
-    if (!name || !email || !role || !phone || !password || !cpassword) {
+    if (!name || !email || !role || !phone || !password || !cpassword || !status) {
       return res.status(422).json({ error: "Please Filled the correct data " });
     }
   
@@ -151,7 +151,7 @@ exports.createUser = async (req, res) => {
       } else if (password != cpassword) {
         return res.status(422).json({ error: "Password are not matching" });
       } else {
-        const user = new User({ name, email, role, phone, password, cpassword });
+        const user = new User({ name, email, role, phone, password, cpassword ,status});
         await user.save();
         res.status(201).json({ message: "User Registered Successfully " });
       }
@@ -431,3 +431,25 @@ exports.deleteEmployee = async (req, res) => {
     res.status(500).send(e);
   }
 };
+
+//get Uploaded File :
+exports.getItems = async(req,res)=>{
+  // console.log('get items')
+  try {
+  const item =await Item.find()
+  res.status(200).json(item);
+  } catch (error) {
+  res.status(404).json({ message: error.message });
+  }
+  }
+
+
+//Upload  File :
+  exports.createItem = async(req,res)=>{
+  const item = new Item(req.body);
+  try {
+  await item.save();
+  res.status(201).json(item);
+  } catch (error) {
+  }
+  }

@@ -19,6 +19,7 @@ const ShowProject = () => {
   let [searchQuery, setSearchQuery] = useState("");
   let [projectdata, setProjectdata] = useState([]);
   const [value, setValue] = useState(getInitialState);
+  const [deleteId, setDeleteId] = useState("");
   //const { state, dispatch } = useContext(UserContext);
 
   const getProjects = async (e) => {
@@ -49,23 +50,27 @@ const ShowProject = () => {
     getProjects();
   }, []);
 
+  const handleClickDelete = (id) => {
+    setDeleteId(id);
+    //  console.log(id);
+  };
   const deleteProject = async (id) => {
     // if (window.confirm("Are You Sure, You want to delete?")) {
-      try {
-        const response = await fetch(`/api/v1/employees/project/${id}`, {
-          method: "DELETE",
-        });
-        const jsonData = await response.json();
-        console.log(jsonData);
+    try {
+      const response = await fetch(`/api/v1/employees/project/${deleteId}`, {
+        method: "DELETE",
+      });
+      const jsonData = await response.json();
+      console.log(jsonData);
 
-        toast.success("Project Deleted Successfully!", {
-          position: "top-center",
-        });
-      } catch (err) {
-        console.error(err.message);
-      }
+      toast.success("Project Deleted Successfully!", {
+        position: "top-center",
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
 
-      getProjects();
+    getProjects();
     // }
   };
 
@@ -152,24 +157,18 @@ const ShowProject = () => {
                           >
                             No
                           </button>
-                          {data.slice(0, 1).map((data) => (
-                            <button
-                              type="button"
-                              key={data.email}
-                              className="btn btn-primary"
-                              data-dismiss="modal"
-                              onClick={() => deleteProject(data._id)}
-                            >
-                              Yes
-                            </button>
-                          ))}
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            data-dismiss="modal"
+                            onClick={() => deleteProject()}
+                          >
+                            Yes
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-
-
-
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
@@ -272,9 +271,9 @@ const ShowProject = () => {
 
                                 <td>
                                   <NavLink
-                                    // onClick={() =>
-                                    //   deleteProject(projectdata._id)
-                                    // }
+                                    onClick={() =>
+                                      handleClickDelete(projectdata._id)
+                                    }
                                     className="text-danger btn-md btn btn"
                                     data-toggle="modal"
                                     data-target="#exampleModalCenter"

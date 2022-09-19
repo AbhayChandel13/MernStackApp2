@@ -6,27 +6,28 @@ import { HiUserAdd } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FileBase64 from 'react-file-base64';
 
 const EmployeeInfo = () => {
   let navigate = useNavigate();
   let [employeedata, setEmployeedata] = useState([]);
 
   const [employeeinfo, setEmployeeinfo] = useState({
-    empid: "",
-    file1: "",
-    file2: "",
-    file3: "",
+    title: "",
+    image: "",
+    
   });
+
   //   const [role, setRole] = useState("");
 
-  const getEmployees = async (e) => {
+  const getitems = async (e) => {
     try {
-      const res = await fetch("/api/v1/employees/getEmployee");
+      const res = await fetch("/api/v1/employees/getitems");
 
       const data = await res.json();
 
       setEmployeedata(data);
-      console.log("tableshowEmloyeeData :", data);
+      console.log("getfiles :", data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -37,7 +38,7 @@ const EmployeeInfo = () => {
     }
   };
   useEffect(() => {
-    getEmployees();
+    getitems();
   }, []);
 
   let name, value;  
@@ -52,13 +53,13 @@ const EmployeeInfo = () => {
   const PostData = async (e) => {
     e.preventDefault();
 
-    const { empid, file1, file2, file3 } = employeeinfo;
+    const { title, image } = employeeinfo;
     //const {roleid} = role;
 
-    let res = await fetch("/employee", {
+    let res = await fetch("/api/v1/employees/createitem", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ empid, file1, file2, file3 }),
+      body: JSON.stringify({ title,image }),
     });
 
     const data = await res.json();
@@ -76,7 +77,7 @@ const EmployeeInfo = () => {
       console.log("Employee Added Successful");
 
       setTimeout(function () {
-        navigate("/showemployee", { replace: true });
+        navigate("/employeeinfo", { replace: true });
       }, 2000);
     }
   };
@@ -101,7 +102,7 @@ const EmployeeInfo = () => {
                 </div>
                 <div className="card-body">
                   <form className="user mt-2 p-3 d-flex flex-column justify-content-center align-items-center">
-                    <div className="form-group col-sm-8" id="empname">
+                    {/* <div className="form-group col-sm-8" id="empname">
                       <select
                         id="empid"
                         name="empid"
@@ -122,9 +123,21 @@ const EmployeeInfo = () => {
                           </option>
                         ))}
                       </select>
-                    </div>
+                    </div> */}
 
                     <div className="form-group col-sm-8 ">
+                      <input
+                        type="text"
+                        name="title"
+                        className="form-control input-lg  form-control-user "
+                        id="title"
+                        placeholder="Title "
+                        value={employeeinfo.title}
+                        onChange={handleInputs}
+                      />
+                    </div>
+
+                    {/* <div className="form-group col-sm-8 ">
                       <input
                         type="file"
                         name="file1"
@@ -134,31 +147,17 @@ const EmployeeInfo = () => {
                         value={employeeinfo.file1}
                         onChange={handleInputs}
                       />
-                    </div>
+                    </div> */}
+                    <div className="form-group col-sm-8 ">          
+                     <FileBase64
+                      type="file"
+                      multiple={false}
+                      onDone={({ base64 }) => setEmployeeinfo({ ...employeeinfo, image: base64 })}
+                        />
 
-                    <div className="form-group col-sm-8 ">
-                      <input
-                        type="file"
-                        name="file2"
-                        className="form-control input-lg  form-control-user "
-                        id="File2"
-                        placeholder="Upload File "
-                        value={employeeinfo.file2}
-                        onChange={handleInputs}
-                      />
-                    </div>
+                      </div>
 
-                    <div className="form-group col-sm-8 ">
-                      <input
-                        type="file"
-                        name="file3"
-                        className="form-control input-lg  form-control-user"
-                        id="File3"
-                        placeholder="Upload File "
-                        value={employeeinfo.file3}
-                        onChange={handleInputs}
-                      />
-                    </div>
+                    
 
                     <div className="mt-4 mb-0">
                       <div className="d-grid">
@@ -175,6 +174,85 @@ const EmployeeInfo = () => {
                       </div>
                     </div>
                   </form>
+                  {/* <form action="" onSubmit={onSubmitHandler}>
+<input type="text" className="input-field"
+onChange={e => setItem({ ...item, title: e.target.value })}
+/>
+<FileBase64
+type="file"
+multiple={false}
+onDone={({ base64 }) => setItem({ ...item, image: base64 })}
+/>
+<div className="right-align">
+<button className="btn">submit</button>
+</div>
+                  </form> */}
+
+
+{employeedata?.map(item => (
+  <div className="container d-flex justify-content-center mt-50 mb-50" key={item._id}>
+<div className="card" >
+<div className="card-header header-elements-inline">
+						<h6 className="card-title">{item.title}</h6>
+						<div className="header-elements">
+							<div className="list-icons mb-2">
+												<a className="fa fa-close" data-action="collapse" data-abc="true"></a>
+
+											</div>
+										</div>
+									</div>
+<div className="card-image waves-effect waves-block waves-light mt-0 mb-3">
+<img className="activator" style={{ width: '100%', height: 300 }} src={item.image} />
+</div>
+
+<div className="card-content">
+{/* <span className="card-title activator grey-text text-darken-4">{item.title}</span> */}
+</div>
+</div>
+</div>
+))}
+{/* <div class="container d-flex justify-content-center mt-50 mb-50">
+					<div class="card">
+					<div class="card-header header-elements-inline">
+						<h6 class="card-title">Latest posts - BBBootstrap.com</h6>
+						<div class="header-elements">
+							<div class="list-icons mb-2">
+												<a class="fa fa-close" data-action="collapse" data-abc="true"></a>
+
+											</div>
+										</div>
+									</div>
+
+					<div class="card-body pb-0">
+						<div class="row">
+							<div class="col-xl-6">
+								<div class="media flex-column flex-sm-row mt-0 mb-3">
+											<div class="mr-sm-3 mb-2 mb-sm-0">
+										<div class="card-img-actions">
+											<a href="#" data-abc="true">
+												<img src="https://i.imgur.com/H0SJA0j.jpg" class="img-fluid img-preview rounded" alt="" />
+
+											</a>
+										</div>
+									</div>
+
+											<div class="media-body">
+										<h6 class="media-title"><a href="#" data-abc="true">Java Developer 5th Editions</a></h6>
+															<ul class="list-inline list-inline-dotted text-muted mb-2">
+																<li class="list-inline-item"><i class="fa fa-book mr-2"></i> Book tutorials</li>
+															</ul>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+									</div>
+								</div>
+
+							
+
+							
+						</div>
+					</div>
+				</div>
+				</div>
+    </div> */}
                 </div>
               </div>
             </div>
@@ -191,3 +269,5 @@ const EmployeeInfo = () => {
 };
 
 export default EmployeeInfo;
+
+
