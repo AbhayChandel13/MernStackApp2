@@ -52,25 +52,25 @@ const ShowProject = () => {
 
   const handleClickDelete = (id) => {
     setDeleteId(id);
-  //  console.log(id);
-  }; 
+    //  console.log(id);
+  };
   const deleteProject = async (id) => {
     // if (window.confirm("Are You Sure, You want to delete?")) {
-      try {
-        const response = await fetch(`/api/v1/employees/project/${deleteId}`, {
-          method: "DELETE",
-        });
-        const jsonData = await response.json();
-        console.log(jsonData);
+    try {
+      const response = await fetch(`/api/v1/employees/project/${deleteId}`, {
+        method: "DELETE",
+      });
+      const jsonData = await response.json();
+      console.log(jsonData);
 
-        toast.success("Project Deleted Successfully!", {
-          position: "top-center",
-        });
-      } catch (err) {
-        console.error(err.message);
-      }
+      toast.success("Project Deleted Successfully!", {
+        position: "top-center",
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
 
-      getProjects();
+    getProjects();
     // }
   };
 
@@ -156,22 +156,19 @@ const ShowProject = () => {
                             data-dismiss="modal"
                           >
                             No
-                          </button>                          
-                            <button
-                              type="button"                            
-                              className="btn btn-primary"
-                              data-dismiss="modal"
-                              onClick={() => deleteProject()}
-                            >
-                              Yes
-                            </button>                          
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            data-dismiss="modal"
+                            onClick={() => deleteProject()}
+                          >
+                            Yes
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-
-
-
                 </div>
                 <div className="card-body">
                   <div className="table-responsive">
