@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -17,7 +16,7 @@ const ShowEmployee = () => {
 
   let [searchQuery, setSearchQuery] = useState("");
   let [employeedata, setEmployeedata] = useState([]);
-  
+  const [deleteId, setDeleteId] = useState("");
   const [showPerPage, setShowPerPage] = useState(5);
   const [pagination, setPagination] = useState({
     start: 0,
@@ -28,7 +27,6 @@ const ShowEmployee = () => {
   //    setShowPerPage(e.target.value);
   //   console.log(showPerPage);
   // };
-  
   
   const onPaginationChange = (start, end) => {
     setPagination({ start: start, end: end });
@@ -55,10 +53,15 @@ const ShowEmployee = () => {
     getEmployees();
   }, []);
 
+  const handleClickDelete = (id) => {
+    setDeleteId(id);  
+    console.log(id);
+  };
+  
   const deleteEmployee = async (id) => {
     // if (window.confirm("Are You Sure, You want to delete?")) {
       try {
-        const response = await fetch(`/api/v1/employees/employee/${id}`, {
+        const response = await fetch(`/api/v1/employees/employee/${deleteId}`, {
           method: "DELETE",
         });
         const jsonData = await response.json();
@@ -151,17 +154,16 @@ const ShowEmployee = () => {
                           >
                             No
                           </button>
-                          {data.slice(0, 1).map((data) => (
+                          
                             <button
-                              type="button"
-                              key={data.email}
+                              type="button"                            
                               className="btn btn-primary"
-                              data-dismiss="modal"
-                              onClick={() => deleteEmployee(data._id)}
+                              data-dismiss="modal"   
+                              onClick={() => deleteEmployee()}                           
                             >
                               Yes
                             </button>
-                          ))}
+                          
                         </div>
                       </div>
                     </div>
@@ -268,9 +270,9 @@ const ShowEmployee = () => {
 
                                   <td>
                                     <NavLink
-                                      // onClick={() =>
-                                      //   deleteEmployee(employeedata._id)
-                                      // }                                     
+                                       onClick={() =>
+                                        handleClickDelete(employeedata._id)
+                                      }                                  
                                     className="text-danger btn-md btn btn"
                                     data-toggle="modal"
                                     data-target="#exampleModalCenter"
