@@ -155,7 +155,7 @@ const ShowEmployee = () => {
 
                           <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-danger"
                             data-dismiss="modal"
                             onClick={() => deleteEmployee()}
                           >

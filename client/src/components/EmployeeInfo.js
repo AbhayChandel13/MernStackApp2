@@ -77,11 +77,10 @@ const EmployeeInfo = () => {
 
       setTimeout(function () {
         navigate("/employeeinfo", { replace: true });
-      }, 2000);
+        window.location = "/employeeinfo";
+      }, 1000);
     }
-    useEffect(() => {
       getitems();
-    }, []);
   };
 
   return (
@@ -166,41 +165,18 @@ const EmployeeInfo = () => {
                   </form>
 
                   {employeedata?.map((item) => (
-                    <table>
-                      <tr>
-                        <td>
-                          <div
-                            className="container d-flex justify-content-center mt-30 mb-50"
-                            key={item._id}
-                          >
-                            <div className="card">
-                              <div className="card-header header-elements-inline">
-                                <h6 className="card-title">{item.title}</h6>
-                                <div className="header-elements">
-                                  <div className="list-icons mb-2">
-                                    <a
-                                      className="fa fa-close"
-                                      data-action="collapse"
-                                      data-abc="true"
-                                    ></a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="card-image waves-effect waves-block waves-light mt-0 mb-3">
-                                <img
-                                  className="activator"
-                                  style={{ width: "100%", height: "50vh" }}
-                                  src={item.image}
+                    <table key={item._id}>
+                      <tbody>
+                      <tr>  
+                        <td>                      
+                        <img
+                            style={{ width: "100%", height: "70vh" }}
+                            src={item.image}
                                 />
-                              </div>
-
-                              {/* <div className="card-content"> */}
-                              {/* <span className="card-title activator grey-text text-darken-4">{item.title}</span> */}
-                              {/* </div> */}
-                            </div>
-                          </div>
+                          
                         </td>
                       </tr>
+                      </tbody>
                     </table>
                   ))}
                 </div>
