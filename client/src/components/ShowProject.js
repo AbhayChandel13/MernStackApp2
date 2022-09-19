@@ -19,6 +19,7 @@ const ShowProject = () => {
   let [searchQuery, setSearchQuery] = useState("");
   let [projectdata, setProjectdata] = useState([]);
   const [value, setValue] = useState(getInitialState);
+  const [deleteId, setDeleteId] = useState("");
   //const { state, dispatch } = useContext(UserContext);
 
   const getProjects = async (e) => {
@@ -49,10 +50,14 @@ const ShowProject = () => {
     getProjects();
   }, []);
 
+  const handleClickDelete = (id) => {
+    setDeleteId(id);
+  //  console.log(id);
+  }; 
   const deleteProject = async (id) => {
     // if (window.confirm("Are You Sure, You want to delete?")) {
       try {
-        const response = await fetch(`/api/v1/employees/project/${id}`, {
+        const response = await fetch(`/api/v1/employees/project/${deleteId}`, {
           method: "DELETE",
         });
         const jsonData = await response.json();
@@ -151,18 +156,15 @@ const ShowProject = () => {
                             data-dismiss="modal"
                           >
                             No
-                          </button>
-                          {data.slice(0, 1).map((data) => (
+                          </button>                          
                             <button
-                              type="button"
-                              key={data.email}
+                              type="button"                            
                               className="btn btn-primary"
                               data-dismiss="modal"
-                              onClick={() => deleteProject(data._id)}
+                              onClick={() => deleteProject()}
                             >
                               Yes
-                            </button>
-                          ))}
+                            </button>                          
                         </div>
                       </div>
                     </div>
@@ -272,9 +274,9 @@ const ShowProject = () => {
 
                                 <td>
                                   <NavLink
-                                    // onClick={() =>
-                                    //   deleteProject(projectdata._id)
-                                    // }
+                                    onClick={() =>
+                                      handleClickDelete(projectdata._id)
+                                    }
                                     className="text-danger btn-md btn btn"
                                     data-toggle="modal"
                                     data-target="#exampleModalCenter"
