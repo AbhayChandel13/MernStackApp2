@@ -6,7 +6,7 @@ import { HiUserAdd } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import FileBase64 from 'react-file-base64';
+import FileBase64 from "react-file-base64";
 
 const EmployeeInfo = () => {
   let navigate = useNavigate();
@@ -15,7 +15,6 @@ const EmployeeInfo = () => {
   const [employeeinfo, setEmployeeinfo] = useState({
     title: "",
     image: "",
-    
   });
 
   //   const [role, setRole] = useState("");
@@ -41,7 +40,7 @@ const EmployeeInfo = () => {
     getitems();
   }, []);
 
-  let name, value;  
+  let name, value;
   const handleInputs = (e) => {
     console.log(e);
     name = e.target.name;
@@ -59,7 +58,7 @@ const EmployeeInfo = () => {
     let res = await fetch("/api/v1/employees/createitem", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title,image }),
+      body: JSON.stringify({ title, image }),
     });
 
     const data = await res.json();
@@ -83,7 +82,6 @@ const EmployeeInfo = () => {
     useEffect(() => {
       getitems();
     }, []);
-  
   };
 
   return (
@@ -140,17 +138,16 @@ const EmployeeInfo = () => {
                         onChange={handleInputs}
                       />
                     </div>
-                    
-                    <div className="form-group col-sm-8 ">          
-                     <FileBase64
-                      type="file"
-                      multiple={false}
-                      onDone={({ base64 }) => setEmployeeinfo({ ...employeeinfo, image: base64 })}
+
+                    <div className="form-group col-sm-8 ">
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) =>
+                          setEmployeeinfo({ ...employeeinfo, image: base64 })
+                        }
                       />
-
-                      </div>
-
-                    
+                    </div>
 
                     <div className="mt-4 mb-0">
                       <div className="d-grid">
@@ -167,37 +164,45 @@ const EmployeeInfo = () => {
                       </div>
                     </div>
                   </form>
-                  
-                    {employeedata?.map(item => (    
-                      <table>
-                      <tr>                 
-                    <td>                  
-                
-            <div className="container d-flex justify-content-center mt-30 mb-50" key={item._id}>
-              <div className="card">
-                  <div className="card-header header-elements-inline">
-					             	<h6 className="card-title">{item.title}</h6>
-						             <div className="header-elements">
-						               	<div className="list-icons mb-2">
-							 		            			<a className="fa fa-close" data-action="collapse" data-abc="true"></a>
 
-											      </div>
-										      </div>
-									</div>
-              <div className="card-image waves-effect waves-block waves-light mt-0 mb-3">
-               <img className="activator" style={{ width: '100%', height: "50vh" }} src={item.image} />
-              </div>
+                  {employeedata?.map((item) => (
+                    <table>
+                      <tr>
+                        <td>
+                          <div
+                            className="container d-flex justify-content-center mt-30 mb-50"
+                            key={item._id}
+                          >
+                            <div className="card">
+                              <div className="card-header header-elements-inline">
+                                <h6 className="card-title">{item.title}</h6>
+                                <div className="header-elements">
+                                  <div className="list-icons mb-2">
+                                    <a
+                                      className="fa fa-close"
+                                      data-action="collapse"
+                                      data-abc="true"
+                                    ></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="card-image waves-effect waves-block waves-light mt-0 mb-3">
+                                <img
+                                  className="activator"
+                                  style={{ width: "100%", height: "50vh" }}
+                                  src={item.image}
+                                />
+                              </div>
 
-             {/* <div className="card-content"> */}
-                   {/* <span className="card-title activator grey-text text-darken-4">{item.title}</span> */}
-                  {/* </div> */}
-              </div>
-           </div>
-           </td>
-           </tr>
-          </table>
-         ))}
-
+                              {/* <div className="card-content"> */}
+                              {/* <span className="card-title activator grey-text text-darken-4">{item.title}</span> */}
+                              {/* </div> */}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  ))}
                 </div>
               </div>
             </div>
@@ -214,5 +219,3 @@ const EmployeeInfo = () => {
 };
 
 export default EmployeeInfo;
-
-
