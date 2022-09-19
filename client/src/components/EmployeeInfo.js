@@ -66,20 +66,24 @@ const EmployeeInfo = () => {
 
     if (res.status === 422 || !data) {
       //window.alert("Invalid Registration");
-      toast.error(" Invalid Employee Data", {
+      toast.error(" Error In Uploading ", {
         position: "top-center",
       });
-      console.log("Invalid Employee Data");
+      console.log("Error In Uploading");
     } else {
-      toast.success("Employee Added Successfully!", {
+      toast.success("Image Uploaded Successfully!", {
         position: "top-center",
       });
-      console.log("Employee Added Successful");
+      console.log("Image Uploaded Added Successful");
 
       setTimeout(function () {
         navigate("/employeeinfo", { replace: true });
       }, 2000);
     }
+    useEffect(() => {
+      getitems();
+    }, []);
+  
   };
 
   return (
@@ -136,24 +140,13 @@ const EmployeeInfo = () => {
                         onChange={handleInputs}
                       />
                     </div>
-
-                    {/* <div className="form-group col-sm-8 ">
-                      <input
-                        type="file"
-                        name="file1"
-                        className="form-control input-lg  form-control-user "
-                        id="File1"
-                        placeholder="Upload File "
-                        value={employeeinfo.file1}
-                        onChange={handleInputs}
-                      />
-                    </div> */}
+                    
                     <div className="form-group col-sm-8 ">          
                      <FileBase64
                       type="file"
                       multiple={false}
                       onDone={({ base64 }) => setEmployeeinfo({ ...employeeinfo, image: base64 })}
-                        />
+                      />
 
                       </div>
 
@@ -174,85 +167,37 @@ const EmployeeInfo = () => {
                       </div>
                     </div>
                   </form>
-                  {/* <form action="" onSubmit={onSubmitHandler}>
-<input type="text" className="input-field"
-onChange={e => setItem({ ...item, title: e.target.value })}
-/>
-<FileBase64
-type="file"
-multiple={false}
-onDone={({ base64 }) => setItem({ ...item, image: base64 })}
-/>
-<div className="right-align">
-<button className="btn">submit</button>
-</div>
-                  </form> */}
+                  
+                    {employeedata?.map(item => (    
+                      <table>
+                      <tr>                 
+                    <td>                  
+                
+            <div className="container d-flex justify-content-center mt-30 mb-50" key={item._id}>
+              <div className="card">
+                  <div className="card-header header-elements-inline">
+					             	<h6 className="card-title">{item.title}</h6>
+						             <div className="header-elements">
+						               	<div className="list-icons mb-2">
+							 		            			<a className="fa fa-close" data-action="collapse" data-abc="true"></a>
 
-
-{employeedata?.map(item => (
-  <div className="container d-flex justify-content-center mt-50 mb-50" key={item._id}>
-<div className="card" >
-<div className="card-header header-elements-inline">
-						<h6 className="card-title">{item.title}</h6>
-						<div className="header-elements">
-							<div className="list-icons mb-2">
-												<a className="fa fa-close" data-action="collapse" data-abc="true"></a>
-
-											</div>
-										</div>
+											      </div>
+										      </div>
 									</div>
-<div className="card-image waves-effect waves-block waves-light mt-0 mb-3">
-<img className="activator" style={{ width: '100%', height: 300 }} src={item.image} />
-</div>
+              <div className="card-image waves-effect waves-block waves-light mt-0 mb-3">
+               <img className="activator" style={{ width: '100%', height: "50vh" }} src={item.image} />
+              </div>
 
-<div className="card-content">
-{/* <span className="card-title activator grey-text text-darken-4">{item.title}</span> */}
-</div>
-</div>
-</div>
-))}
-{/* <div class="container d-flex justify-content-center mt-50 mb-50">
-					<div class="card">
-					<div class="card-header header-elements-inline">
-						<h6 class="card-title">Latest posts - BBBootstrap.com</h6>
-						<div class="header-elements">
-							<div class="list-icons mb-2">
-												<a class="fa fa-close" data-action="collapse" data-abc="true"></a>
+             {/* <div className="card-content"> */}
+                   {/* <span className="card-title activator grey-text text-darken-4">{item.title}</span> */}
+                  {/* </div> */}
+              </div>
+           </div>
+           </td>
+           </tr>
+          </table>
+         ))}
 
-											</div>
-										</div>
-									</div>
-
-					<div class="card-body pb-0">
-						<div class="row">
-							<div class="col-xl-6">
-								<div class="media flex-column flex-sm-row mt-0 mb-3">
-											<div class="mr-sm-3 mb-2 mb-sm-0">
-										<div class="card-img-actions">
-											<a href="#" data-abc="true">
-												<img src="https://i.imgur.com/H0SJA0j.jpg" class="img-fluid img-preview rounded" alt="" />
-
-											</a>
-										</div>
-									</div>
-
-											<div class="media-body">
-										<h6 class="media-title"><a href="#" data-abc="true">Java Developer 5th Editions</a></h6>
-															<ul class="list-inline list-inline-dotted text-muted mb-2">
-																<li class="list-inline-item"><i class="fa fa-book mr-2"></i> Book tutorials</li>
-															</ul>
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-									</div>
-								</div>
-
-							
-
-							
-						</div>
-					</div>
-				</div>
-				</div>
-    </div> */}
                 </div>
               </div>
             </div>
