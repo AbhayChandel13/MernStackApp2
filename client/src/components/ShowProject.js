@@ -4,7 +4,6 @@ import { MdDelete } from "react-icons/md";
 import Sidenavbar from "./Sidenavbar";
 import { AiFillProject } from "react-icons/ai";
 import Topnavbar from "./Topnavbar";
-import { UserContext } from "../App";
 import Footer from "./Footer";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -25,14 +24,7 @@ const ShowProject = () => {
   const getProjects = async (e) => {
     try {
       const res = await fetch("/api/v1/employees/projectsdata");
-      // , {
-      //   method: "GET",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json"
-      //   },
-      //   credentials: "include"
-      // }
+
       const data = await res.json();
 
       setProjectdata(data);
@@ -79,17 +71,13 @@ const ShowProject = () => {
       (m) =>
         m.projectname.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
         m.industrysegment.toLowerCase().startsWith(searchQuery.toLowerCase())
-      // m.Role.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-      // m.empid.toString().startsWith(searchQuery.toString())
     );
   }
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-  //   console.log(value);
 
-  //const size = 3;
   const data = projectdata.slice(0, value);
   // console.log(" selected data :",data);
 
