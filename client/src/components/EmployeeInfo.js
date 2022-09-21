@@ -76,10 +76,10 @@ const EmployeeInfo = () => {
       console.log("Image Uploaded Added Successful");
 
       setTimeout(function () {
-        navigate("/employeeinfo", { replace: true });
-        window.location = "/employeeinfo";
-      }, 1000);
+        navigate("/showemployee", { replace: true });       
+      }, 1000); 
     }
+      // window.location = "/employeeinfo";
       getitems();
   };
 
@@ -127,10 +127,10 @@ const EmployeeInfo = () => {
                     </div> */}
 
                     <div className="form-group col-sm-8 ">
-                      <input
+                      <input  
                         type="text"
                         name="title"
-                        className="form-control input-lg  form-control-user "
+                        className="form-control input-lg  form-control-user"
                         id="title"
                         placeholder="Title "
                         value={employeeinfo.title}
@@ -170,7 +170,7 @@ const EmployeeInfo = () => {
                       <tr>  
                         <td>                      
                         <img
-                            style={{ width: "100%", height: "70vh" }}
+                            style={{ width: "100%", height: "60vh" }}
                             src={item.image}
                                 />
                           
