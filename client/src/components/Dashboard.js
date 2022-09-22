@@ -47,9 +47,9 @@ const Dashboard = () => {
       setUserName(items);
     }
   };
-  useEffect(() => {
-    userHomePage();
-  }, []);
+  // useEffect(() => {
+  //   userHomePage();
+  // }, []);
 
   const slides = [
     { url: "http://localhost:3000/image-1.jpg", title: "beach" },
