@@ -17,6 +17,8 @@ import AddUser from "./components/AddUser";
 import AssignProject from "./components/AssignProject";
 import ShowAssignedproject from "./components/ShowAssignedproject";
 import EmployeeInfo from "./components/EmployeeInfo";
+// import Sidenavbar from "./components/Sidenavbar";
+// import Topnavbar from "./components/Topnavbar";
 
 export const UserContext = createContext();
 
@@ -27,6 +29,8 @@ const App = () => {
     <>
       <UserContext.Provider value={{ state, dispatch }}>
         <Router>
+        {/* <Topnavbar />
+         <Sidenavbar /> */}
           <Routes>
             <Route path="/" element={<Login />}></Route>
             <Route path="/register" element={<Signup />}></Route>

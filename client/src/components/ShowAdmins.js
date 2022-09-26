@@ -209,7 +209,7 @@ const Showadmins = () => {
                             </label>
                           </div>
                         </div>
-                      </div>
+                      </div>  
                       <div className="row">
                         <table
                           className="table table-bordered"
