@@ -12,15 +12,13 @@ import "react-toastify/dist/ReactToastify.css";
 const AddUser = () => {
     let navigate = useNavigate();
 
-  
-
     const [user, setUser] = useState({
         name: "",
         email: "",
         phone: "",
         password: "",
         cpassword: "",
-        status:"Active"
+        status:""
     });
         
     
