@@ -126,11 +126,7 @@ const AddEmployee = () => {
                         <option value="102">Team Leader</option>
                         <option value="103">Sr. frontend Developer</option>
                         <option value="104">Sr. Backend Developer</option>
-                        <option value="105">Designer</option>                      
-                        <option value="106">Traniee</option>
-                        <option value="107">Hr</option>
-                        <option value="108">Backend Developer</option>
-                        <option value="109">frontend Developer</option>
+                        <option value="105">Designer</option>            
                         </select> 
                        
                         </div> */}
