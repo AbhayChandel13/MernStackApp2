@@ -23,7 +23,6 @@ const AddEmployee = () => {
     empid: "",
     phone: "",
   });
-  //   const [role, setRole] = useState("");
 
   const getRoles = async (e) => {
     try {
