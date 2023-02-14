@@ -5,7 +5,6 @@ import { MdDelete } from "react-icons/md";
 import Sidenavbar from "./Sidenavbar";
 import { HiUserAdd } from "react-icons/hi";
 import Topnavbar from "./Topnavbar";
-//import { UserContext } from "../App";
 import Footer from "./Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +14,6 @@ const Showadmins = () => {
   let [usersdata, setUserdata] = useState([]);
   const [deleteId, setDeleteId] = useState("");
   let navigate = useNavigate();
-  //const { state, dispatch } = useContext(UserContext);
 
   const getUsers = async (e) => {
     try {
