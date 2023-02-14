@@ -41,11 +41,15 @@ const Showadmins = () => {
     getUsers();
   }, []);
 
+
+  //check local storage
   // useEffect(() => {
   //   // const data = window.localStorage.getItem('MY_APP_STATE');
   //   // if ( data !== null ) state(JSON.parse(data));
   //   dispatch({ type: "USER", payload: true });
   // }, []);
+
+
 
   if (searchQuery) {
     usersdata = usersdata.filter((m) =>
