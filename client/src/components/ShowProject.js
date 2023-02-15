@@ -47,7 +47,6 @@ const ShowProject = () => {
     //  console.log(id);
   };
   const deleteProject = async (id) => {
-    // if (window.confirm("Are You Sure, You want to delete?")) {
     try {
       const response = await fetch(`/api/v1/employees/project/${deleteId}`, {
         method: "DELETE",
