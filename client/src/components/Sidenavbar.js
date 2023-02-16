@@ -6,12 +6,6 @@ import { HiUserAdd } from "react-icons/hi";
 import { AiFillProject } from "react-icons/ai";
 
 const Sidenavbar = () => {
-  // const values = [
-  //   { id: 1 },
-  //   { id: 2 },
-  //   { id: 3 },
-  //   { id: 4 }
-  // ];
   const [activeId, setActiveId] = useState(false);
   return (
     <>
