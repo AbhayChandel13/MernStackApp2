@@ -21,11 +21,7 @@ const ShowEmployee = () => {
     end: showPerPage,
   });
 
-  // const handleChange = (e) => {
-  //    setShowPerPage(e.target.value);
-  //   console.log(showPerPage);
-  // };
-
+  
   const onPaginationChange = (start, end) => {
     setPagination({ start: start, end: end });
   };
