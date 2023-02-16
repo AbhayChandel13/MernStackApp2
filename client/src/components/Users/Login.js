@@ -1,52 +1,49 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UserContext } from '../../App';
+import { UserContext } from "../../App";
 
 const Login = () => {
+  const { state, dispatch } = useContext(UserContext);
 
-    const { state, dispatch } = useContext(UserContext);
+  let navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    let navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const loginUser = async (e) => {
+    e.preventDefault();
 
-    const loginUser = async (e) => {
-        e.preventDefault();
-    
-        const res = await fetch('http://localhost:8000/api/v1/employees/signin', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+    const res = await fetch("http://localhost:8000/api/v1/employees/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-        const data = await res.json();
-        console.log(data);
-        if (res.status === 400 || !data) {
-            toast.error(" Invalid  Credentials", {
-                position: "top-center",
-            });
-
-        } else {
-            dispatch({ type: "USER", payload: true })
-            //dispatch({type:"USER"})
-            toast.success("Login Successfully!", {
-                position: "top-center",
-            });
-            localStorage.setItem("user",JSON.stringify(data.user));
-            localStorage.setItem("token",JSON.stringify(data.token));
-            setTimeout(function () {
-                navigate("/dashboard", { replace: true });
-            }, 2000);
-        }
+    const data = await res.json();
+    console.log(data);
+    if (res.status === 400 || !data) {
+      toast.error(" Invalid  Credentials", {
+        position: "top-center",
+      });
+    } else {
+      dispatch({ type: "USER", payload: true });
+      //dispatch({type:"USER"})
+      toast.success("Login Successfully!", {
+        position: "top-center",
+      });
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", JSON.stringify(data.token));
+      setTimeout(function () {
+        navigate("/dashboard", { replace: true });
+      }, 2000);
     }
+  };
 
-
-    return (
-        <>
-            <ToastContainer />
-            {/* <div id="layoutAuthentication">
+  return (
+    <>
+      <ToastContainer />
+      {/* <div id="layoutAuthentication">
                 <div id="layoutAuthentication_content">
                     <main>
                         <div classNameName="container">
@@ -108,90 +105,100 @@ const Login = () => {
                 </div>
             </div> */}
 
-
-<div className="container">
-
-
-<div className="row justify-content-center">
-
-    <div className="col-xl-10 col-lg-12 col-md-9">
-
-        <div className="card o-hidden border-0 shadow-lg my-5">
-            <div className="card-body p-0">
-               
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-xl-10 col-lg-12 col-md-9">
+            <div className="card o-hidden border-0 shadow-lg my-5">
+              <div className="card-body p-0">
                 <div className="row">
-                    <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                    <div className="col-lg-6">
-                        <div className="p-5">
-                            <div className="text-center">
-                                <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                            </div>
-                            <form className="user" method='POST' >
-                                <div className="form-group">
-                                    <input 
-                                    className="form-control form-control-user"
-                                    name='email'
-                                    type="email"                                    
-                                    id="inputEmail"                                    
-                                    placeholder="Enter Email Address..."
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                    name='password'
-                                    type="password" 
-                                    className="form-control form-control-user"                                    
-                                    id="inputPassword"
-                                    placeholder="Password"
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <div className="custom-control custom-checkbox small">
-                                        <input
-                                        type="checkbox" 
-                                        className="custom-control-input" 
-                                        id="customCheck" />
-                                        <label 
-                                        className="custom-control-label" 
-                                        htmlFor="customCheck">Remember
-                                        Me</label>
-                                    </div>
-                                </div>
-                                <NavLink to="/dashboard" className="btn btn-primary btn-user btn-block" name="login" id="login" value="login" onClick={loginUser}>
-                                    Login
-                                </NavLink>
-                               
-                               
-                                <hr />
-                                <a href="index.html" className="btn btn-google btn-user btn-block">
-                                    <i className="fab fa-google fa-fw"></i> Login with Google
-                                </a>
-                                <a href="index.html" className="btn btn-facebook btn-user btn-block">
-                                    <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                </a>
-                            </form>
-                            <hr />
-                            <div className="text-center">
-                                <a className="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            {/* <div className="text-center">
+                  <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                  <div className="col-lg-6">
+                    <div className="p-5">
+                      <div className="text-center">
+                        <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                      </div>
+                      <form className="user" method="POST">
+                        <div className="form-group">
+                          <input
+                            className="form-control form-control-user"
+                            name="email"
+                            type="email"
+                            id="inputEmail"
+                            placeholder="Enter Email Address..."
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            name="password"
+                            type="password"
+                            className="form-control form-control-user"
+                            id="inputPassword"
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <div className="custom-control custom-checkbox small">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input"
+                              id="customCheck"
+                            />
+                            <label
+                              className="custom-control-label"
+                              htmlFor="customCheck"
+                            >
+                              Remember Me
+                            </label>
+                          </div>
+                        </div>
+                        <NavLink
+                          to="/dashboard"
+                          className="btn btn-primary btn-user btn-block"
+                          name="login"
+                          id="login"
+                          value="login"
+                          onClick={loginUser}
+                        >
+                          Login
+                        </NavLink>
+
+                        <hr />
+                        <a
+                          href="index.html"
+                          className="btn btn-google btn-user btn-block"
+                        >
+                          <i className="fab fa-google fa-fw"></i> Login with
+                          Google
+                        </a>
+                        <a
+                          href="index.html"
+                          className="btn btn-facebook btn-user btn-block"
+                        >
+                          <i className="fab fa-facebook-f fa-fw"></i> Login with
+                          Facebook
+                        </a>
+                      </form>
+                      <hr />
+                      <div className="text-center">
+                        <a className="small" href="forgot-password.html">
+                          Forgot Password?
+                        </a>
+                      </div>
+                      {/* <div className="text-center">
                                 <a className="small" href="register.html">Create an Account!</a>
                             </div> */}
-                        </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </>
+  );
+};
 
-    </div>
-
-</div>
-
-</div>
-        </>
-    )
-}
-
-export default Login
+export default Login;
