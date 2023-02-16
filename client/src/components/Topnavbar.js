@@ -15,7 +15,7 @@ const Topnavbar = () => {
       });
       //const data = await res.json();
       //console.log(data);
-      //  setUserName(data.name);
+      //setUserName(data.name);
       //setShow(true);
 
       const items = JSON.parse(localStorage.getItem("user"));
