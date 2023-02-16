@@ -21,7 +21,6 @@ const ShowEmployee = () => {
     end: showPerPage,
   });
 
-  
   const onPaginationChange = (start, end) => {
     setPagination({ start: start, end: end });
   };
