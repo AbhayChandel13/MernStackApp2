@@ -41,8 +41,6 @@ const Showadmins = () => {
     getUsers();
   }, []);
 
-  //comment 1 
-  //comment 2
     
   //check local storage
   // useEffect(() => {
